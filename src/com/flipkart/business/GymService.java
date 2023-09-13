@@ -5,17 +5,18 @@ import java.util.ArrayList;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.TimeSlot;
 
-public class GymService {
-	
-	public Gym viewGym(){
+public class GymService implements GymServiceInterface {
+
+	@Override
+	public Gym viewGym() {
+		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public ArrayList<TimeSlot> viewAvailableSlots(){
+
+	@Override
+	public ArrayList<Gym> viewGymList() {
+		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public ArrayList<Gym> viewGymList(){
-		return null;
-	}
+
 }
