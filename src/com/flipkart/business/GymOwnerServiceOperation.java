@@ -20,6 +20,5 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+		
 }

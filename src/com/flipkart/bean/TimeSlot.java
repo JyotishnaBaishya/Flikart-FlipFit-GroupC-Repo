@@ -32,7 +32,4 @@ public class TimeSlot {
 	public void setDay(Date day) {
 		this.day = day;
 	}
-	
-	
-	
 }
