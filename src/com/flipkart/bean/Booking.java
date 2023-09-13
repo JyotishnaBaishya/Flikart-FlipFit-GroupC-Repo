@@ -2,32 +2,33 @@ package com.flipkart.bean;
 
 public class Booking {
 	private String bookingID;
-	private String customerID;
-	private String gymID;
-	private String slotID;
+	private Customer customer;
+	private Gym gym;
+	private TimeSlot slot;
+	
 	public String getBookingID() {
 		return bookingID;
 	}
 	public void setBookingID(String bookingID) {
 		this.bookingID = bookingID;
 	}
-	public String getCustomerID() {
-		return customerID;
+	public Customer getCustomer() {
+		return customer;
 	}
-	public void setCustomerID(String customerID) {
-		this.customerID = customerID;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
-	public String getGymID() {
-		return gymID;
+	public Gym getGym() {
+		return gym;
 	}
-	public void setGymID(String gymID) {
-		this.gymID = gymID;
+	public void setGym(Gym gym) {
+		this.gym = gym;
 	}
-	public String getSlotID() {
-		return slotID;
+	public TimeSlot getSlot() {
+		return slot;
 	}
-	public void setSlotID(String slotID) {
-		this.slotID = slotID;
+	public void setSlot(TimeSlot slot) {
+		this.slot = slot;
 	}
 	
 }
