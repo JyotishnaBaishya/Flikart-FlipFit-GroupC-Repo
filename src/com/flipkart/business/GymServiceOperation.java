@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.TimeSlot;
 
-public class GymService implements GymServiceInterface {
+public class GymServiceOperation implements GymServiceInterface {
 
 	@Override
 	public Gym viewGym() {
