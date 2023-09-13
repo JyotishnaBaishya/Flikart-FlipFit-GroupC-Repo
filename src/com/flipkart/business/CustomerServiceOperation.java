@@ -4,20 +4,26 @@ import java.util.ArrayList;
 
 import com.flipkart.bean.Booking;
 
-public class CustomerService {
-	
+/**
+ * @author karan.k2
+**/
+public class CustomerServiceOperation implements CustomerServiceInterface{
+
+	@Override
 	public boolean bookSlot(String gymID, String slotID) {
-		System.out.println("Booking confirmed");
-		return true;
+		// TODO Auto-generated method stub
+		return false;
 	}
-	
+
+	@Override
 	public boolean cancelSlot(String gymID, String slotID) {
-		System.out.println("Booking cancelled");
-		return true;
+		// TODO Auto-generated method stub
+		return false;
 	}
-	
+
+	@Override
 	public ArrayList<Booking> viewMyBookings() {
-		System.out.println("Booking confirmed");
+		// TODO Auto-generated method stub
 		return null;
 	}
 	
