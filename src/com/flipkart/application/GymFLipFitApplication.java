@@ -5,6 +5,9 @@ package com.flipkart.application;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
+import com.flipkart.business.UserServiceInterface;
+import com.flipkart.business.UserServiceOperation;
+
 import java.util.Scanner;
 
 /**
@@ -46,6 +49,8 @@ public class GymFLipFitApplication {
 	    System.out.println("Please enter the type of user ");
 	    System.out.println("options are Admin, GymOwner, Customer");
 	    
+	    UserServiceInterface userService = new UserServiceOperation();
+	    
 	    String userRole = in.nextLine();  // Read user input
 	    switch(userRole) {
 	    	case "Admin":
@@ -54,6 +59,9 @@ public class GymFLipFitApplication {
 	    		System.out.println("Please Enter the password");
 	    		String password = in.nextLine();
 	    		
+	    		if(userService.login(userID, password)) {
+	    			new GymFlipFitAdminMenu().displayMenu(in);
+	    		}
 	    		
 	    		break;
 	    	case "GymOwner":

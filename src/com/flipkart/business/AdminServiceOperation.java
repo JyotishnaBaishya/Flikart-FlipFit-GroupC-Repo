@@ -11,23 +11,23 @@ public class AdminServiceOperation implements AdminServiceInterface{
 	@Override
 	public boolean approveGymOwner() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
-	public void getPendingOwnerApprovals() {
+	public void getPendingGymOwnerApprovals() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public boolean approveGymLocation(int gymId) {
+	public boolean approveGymRegistrationRequest(int gymId) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
-	public void getPendingGymLocationApproval() {
+	public void getPendingGymLocationRegistrationRequests() {
 		// TODO Auto-generated method stub
 		
 	}

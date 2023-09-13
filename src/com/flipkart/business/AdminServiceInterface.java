@@ -9,9 +9,9 @@ package com.flipkart.business;
 public interface AdminServiceInterface {
 	public boolean approveGymOwner();
 	
-	public void getPendingOwnerApprovals();
+	public void getPendingGymOwnerApprovals();
 	
-	public boolean approveGymLocation(int gymId);
+	public boolean approveGymRegistrationRequest(int gymId);
 	
-	public void getPendingGymLocationApproval();
+	public void getPendingGymLocationRegistrationRequests();
 }
