@@ -2,30 +2,35 @@ package com.flipkart.bean;
 
 import java.util.ArrayList;
 
-public class GymOwner {
-	private String gymOwnerID;
+public class GymOwner extends User {
 	private String gymOwnerName;
-	private String password;
 	private String aadharCard;
-	private ArrayList<Gym>	gymList;
-	public String getGymOwnerID() {
-		return gymOwnerID;
+	private String panCard;
+	private String gstIN;
+	private ArrayList<Gym> gymList;
+	public String getPanCard() {
+		return panCard;
 	}
-	public void setGymOwnerID(String gymOwnerID) {
-		this.gymOwnerID = gymOwnerID;
+
+	public void setPanCard(String panCard) {
+		this.panCard = panCard;
+	}
+
+	public String getGstIN() {
+		return gstIN;
+	}
+
+	public void setGstIN(String gstIN) {
+		this.gstIN = gstIN;
 	}
 	public String getGymOwnerName() {
 		return gymOwnerName;
 	}
+	
 	public void setGymOwnerName(String gymOwnerName) {
 		this.gymOwnerName = gymOwnerName;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	
 	public String getAadharCard() {
 		return aadharCard;
 	}
@@ -38,6 +43,4 @@ public class GymOwner {
 	public void setGymList(ArrayList<Gym> gymList) {
 		this.gymList = gymList;
 	}
-	
-	
 }
