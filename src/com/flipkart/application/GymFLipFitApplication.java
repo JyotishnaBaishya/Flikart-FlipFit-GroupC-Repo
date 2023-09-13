@@ -53,8 +53,8 @@ public class GymFLipFitApplication {
 	}
 	
 	void login(Scanner in) {
-		System.out.println("Please enter the type of user ");
-	    System.out.println("\n1. Admin \n2. GymOwner \n3. Customer" + "\n Enter number between 1-3");
+		System.out.println("\n\n ---------- Please enter the type of user ---------- ");
+	    System.out.println("1. Admin \n2. GymOwner \n3. Customer" + "\nEnter number between 1-3");
 	    
 	    UserServiceInterface userService = new UserServiceOperation();
 	    
