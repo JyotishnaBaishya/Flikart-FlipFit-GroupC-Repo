@@ -16,12 +16,11 @@ public class GymFlipFitAdminMenu {
 	AdminServiceInterface adminService = new AdminServiceOperation();
 
 	public void displayMenu(Scanner in) {
-		int menuOption = -1;
-
+		int menuOption = 1;
 		do {
 			System.out.println("Admin Menu Options: " + "\n1. Approve Gym Owner Registration"
 					+ "\n2. View Pending Gym Owner Registration Request" + "\n3. Approve Gem Registeration(s)"
-					+ "\n4. View Pending Gem Registeration(s)" + "\n5. Quit" + "\n Enter number");
+					+ "\n4. View Pending Gem Registeration(s)" + "\n5. Quit" + "\n Enter number between 1-5");
 			menuOption = in.nextInt();
 			switch (menuOption) {
 			case 1:
@@ -30,7 +29,6 @@ public class GymFlipFitAdminMenu {
 			case 2:
 				adminService.getPendingGymOwnerApprovals();
 				break;
-
 			case 3:
 				adminService.approveGymRegistrationRequest(0);
 				break;
@@ -39,6 +37,7 @@ public class GymFlipFitAdminMenu {
 				break;
 
 			}
-		} while (menuOption != 5);
+		} while (menuOption > 0 && menuOption < 5);
+		System.out.println("Exiting Admin Menu..");
 	}
 }

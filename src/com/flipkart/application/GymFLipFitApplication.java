@@ -19,61 +19,29 @@ public class GymFLipFitApplication {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		System.out.println("Welcome to FlipFit Gym Slot Booking Application");
-		System.out.println("Menu Options: Login, Register, Update Password, Exit");
-		System.out.println("Please enter a option: ");
 		Scanner in = new Scanner(System.in); 
-		String menuOption = "";
-		boolean menuOpen = true;
+		int menuOption = 1;
 		do {
-			menuOption = in.next();
+			System.out.println("\n\n***************** Welcome to FlipFit Gym Slot Booking Application *****************");
+			System.out.println("Menu Options: \n1. Login \n2. Register \n3. Update Password \n4. Exit");
+			System.out.println("\nEnter number between 1-4");
+			menuOption = in.nextInt();
 			switch(menuOption) {
-				case "Login":
+				case 1:
+					new GymFLipFitApplication().login(in);
 					break;
-				case "Register":
+				case 2:
 					break;
-				case "Update Password":
-					break;
-				case "Exit":
-					menuOpen = false;
-					System.out.println("You have exited the application!!");
+				case 3:
 					break;
 				default:
-					System.out.println("Invalid Menu Option please try again!!");
+					System.out.println("Exiting Application");
+					break;
 					
 			}
-		}while(menuOpen);
+		}while(menuOption > 0 && menuOption < 4);
 		 // Create a Scanner object
-	    System.out.println("Please enter the type of user ");
-	    System.out.println("options are Admin, GymOwner, Customer");
 	    
-	    UserServiceInterface userService = new UserServiceOperation();
-	    
-	    String userRole = in.nextLine();  // Read user input
-	    switch(userRole) {
-	    	case "Admin":
-	    		System.out.println("Please Enter the username");
-	    		String userID = in.nextLine();
-	    		System.out.println("Please Enter the password");
-	    		String password = in.nextLine();
-	    		
-	    		if(userService.login(userID, password)) {
-	    			new GymFlipFitAdminMenu().displayMenu(in);
-	    		}
-	    		
-	    		break;
-	    	case "GymOwner":
-	    		
-	    		break;
-	    	case "Customer":
-	    		
-	    		
-	    		break;
-	    	default:
-	    		System.out.println("Please Enter a valid Role!!!");
-	    }
 		
 		GymOwner owner = new GymOwner();
 		owner.setUserID("owner1");
@@ -82,6 +50,38 @@ public class GymFLipFitApplication {
 		owner.setPassword("strongPassword");
 		
 
+	}
+	
+	void login(Scanner in) {
+		System.out.println("Please enter the type of user ");
+	    System.out.println("\n1. Admin \n2. GymOwner \n3. Customer" + "\n Enter number between 1-3");
+	    
+	    UserServiceInterface userService = new UserServiceOperation();
+	    
+	    int userRole = in.nextInt();  // Read user input
+	    switch(userRole) {
+	    	case 1:
+	    		System.out.println("Please Enter the username");
+	    		String userID = in.next();
+	    		System.out.println("Please Enter the password");
+	    		String password = in.next();
+	    		
+	    		if(userService.login(userID, password)) {
+	    			new GymFlipFitAdminMenu().displayMenu(in);
+	    		}
+	    		
+	    		break;
+	    	case 2:
+	    		
+	    		break;
+	    	case 3:
+	    		
+	    		
+	    		break;
+	    	default:
+	    		System.out.println("");
+	    }
+	    System.out.println("Exiting login Menu..");
 	}
 
 }

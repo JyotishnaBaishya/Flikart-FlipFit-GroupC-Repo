@@ -10,25 +10,25 @@ public class AdminServiceOperation implements AdminServiceInterface{
 
 	@Override
 	public boolean approveGymOwner() {
-		// TODO Auto-generated method stub
+		System.out.println("Gym membership approved");
 		return true;
 	}
 
 	@Override
 	public void getPendingGymOwnerApprovals() {
-		// TODO Auto-generated method stub
+		System.out.println("Pending Gym Owner Approvals");
 		
 	}
 
 	@Override
 	public boolean approveGymRegistrationRequest(int gymId) {
-		// TODO Auto-generated method stub
+		System.out.println("Gym Registration Requests approved");
 		return true;
 	}
 
 	@Override
 	public void getPendingGymLocationRegistrationRequests() {
-		// TODO Auto-generated method stub
+		System.out.println("Pending Gym Location Registration List");
 		
 	}
 	
