@@ -23,11 +23,11 @@ public class AdminServiceOperation implements AdminServiceInterface{
 	}
 	@Override
 	public boolean approveGymOwner() {
-		System.out.println("Gym Owner approval started");
 		for(GymOwner owner: pendingGymOwnerApprovals) {
 			owner.setApproved(true);
 		}
 		pendingGymOwnerApprovals.clear();
+		System.out.println("Gym Owner approval completed!");
 		return true;
 	}
 
@@ -42,11 +42,11 @@ public class AdminServiceOperation implements AdminServiceInterface{
 
 	@Override
 	public boolean approveGymRegistrationRequest() {
-		System.out.println("Gym approval started");
 		for(Gym gym: pendingGymApprovals) {
 			gym.setApproved(true);
 		}
 		pendingGymApprovals.clear();
+		System.out.println("Gym approval completed!");
 		return true;
 	}
 
