@@ -3,7 +3,6 @@ package com.flipkart.bean;
 import java.util.ArrayList;
 
 public class GymOwner extends User {
-	private String gymOwnerName;
 	private String aadharCard;
 	private String panCard;
 	private String gstIN;
@@ -23,15 +22,7 @@ public class GymOwner extends User {
 
 	public void setGstIN(String gstIN) {
 		this.gstIN = gstIN;
-	}
-	public String getGymOwnerName() {
-		return gymOwnerName;
-	}
-	
-	public void setGymOwnerName(String gymOwnerName) {
-		this.gymOwnerName = gymOwnerName;
-	}
-	
+	}	
 	public String getAadharCard() {
 		return aadharCard;
 	}

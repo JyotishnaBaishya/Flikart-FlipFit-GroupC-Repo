@@ -10,7 +10,7 @@ import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 
 /**
- * 
+ * @author avantika.kala
  */
 public class AdminServiceOperation implements AdminServiceInterface{
 	
@@ -35,7 +35,7 @@ public class AdminServiceOperation implements AdminServiceInterface{
 	public void getPendingGymOwnerApprovals() {
 		System.out.println("Pending Gym Owner Approvals:");
 		for(GymOwner owner: pendingGymOwnerApprovals) {
-			System.out.println("Gym Owner Name: "+owner.getGymOwnerName());
+			System.out.println("Gym Owner Name: "+owner.getUserName());
 		}
 		
 	}
@@ -62,19 +62,19 @@ public class AdminServiceOperation implements AdminServiceInterface{
 		GymOwner owner = new GymOwner();
 		owner.setUserID("owner1");
 		owner.setAadharCard("Aadhaar Proof");
-		owner.setGymOwnerName("First Owner");
+		owner.setUserName("First Owner");
 		owner.setPassword("strongPassword");
 		
 		GymOwner owner1 = new GymOwner();
 		owner1.setUserID("owner2");
 		owner1.setAadharCard("Aadhaar Proof");
-		owner1.setGymOwnerName("First Owner");
+		owner1.setUserName("First Owner");
 		owner1.setPassword("strongPassword");
 		
 		GymOwner owner2 = new GymOwner();
 		owner2.setUserID("owner3");
 		owner2.setAadharCard("Aadhaar Proof");
-		owner2.setGymOwnerName("First Owner");
+		owner2.setUserName("First Owner");
 		owner2.setPassword("strongPassword");
 		
 		pendingGymOwnerApprovals.add(owner);

@@ -19,7 +19,7 @@ public class GymFLipFitApplication {
 		Scanner in = new Scanner(System.in); 
 		int menuOption = 1;
 		do {
-			System.out.println("\n\n***************** Welcome to FlipFit Gym Slot Booking Application *****************");
+			System.out.println("\n\n\033[1m***************** Welcome to FlipFit Gym Slot Booking Application *****************\033[0m");
 			System.out.println("Menu Options: \n1. Login \n2. Register \n3. Update Password \n4. Exit");
 			System.out.println("\nEnter number between 1-4");
 			menuOption = in.nextInt();
