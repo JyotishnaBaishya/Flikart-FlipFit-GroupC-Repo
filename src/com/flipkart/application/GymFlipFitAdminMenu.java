@@ -23,21 +23,26 @@ public class GymFlipFitAdminMenu {
 					+ "\n4. View Pending Gem Registeration(s)" + "\n5. Quit" + "\nEnter number between 1-5");
 			menuOption = in.nextInt();
 			switch (menuOption) {
-			case 1:
-				adminService.approveGymOwner();
-				break;
-			case 2:
-				adminService.getPendingGymOwnerApprovals();
-				break;
-			case 3:
-				adminService.approveGymRegistrationRequest(0);
-				break;
-			case 4:
-				adminService.getPendingGymLocationRegistrationRequests();
-				break;
-
+				case 1:
+					adminService.approveGymOwner();
+					break;
+				case 2:
+					adminService.getPendingGymOwnerApprovals();
+					break;
+				case 3:
+					adminService.approveGymRegistrationRequest("gymid");
+					break;
+				case 4:
+					adminService.getPendingGymLocationRegistrationRequests();
+					break;
+				case 5:
+					System.out.println("Exiting Admin Menu..");
+					break;
+				default:
+					System.out.println("You have selected invalid option please try again!!");
+					break;
 			}
-		} while (menuOption > 0 && menuOption < 5);
-		System.out.println("Exiting Admin Menu..");
+		} while (menuOption != 5);
+		
 	}
 }

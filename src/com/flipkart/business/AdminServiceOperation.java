@@ -21,7 +21,7 @@ public class AdminServiceOperation implements AdminServiceInterface{
 	}
 
 	@Override
-	public boolean approveGymRegistrationRequest(int gymId) {
+	public boolean approveGymRegistrationRequest(String gymId) {
 		System.out.println("Gym Registration Requests approved");
 		return true;
 	}

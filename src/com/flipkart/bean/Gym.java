@@ -5,6 +5,7 @@ public class Gym {
 	private String gymOwnerID;
 	private String location;
 	private int noOfSeats;
+	private boolean isApproved = false;
 	
 	public String getGymID() {
 		return gymID;
@@ -29,6 +30,12 @@ public class Gym {
 	}
 	public void setNoOfSeats(int noOfSeats) {
 		this.noOfSeats = noOfSeats;
+	}
+	public boolean isApproved() {
+		return isApproved;
+	}
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
 	}
 	
 	

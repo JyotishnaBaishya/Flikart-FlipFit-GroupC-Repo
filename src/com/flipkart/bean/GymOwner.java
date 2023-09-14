@@ -7,6 +7,7 @@ public class GymOwner extends User {
 	private String aadharCard;
 	private String panCard;
 	private String gstIN;
+	private boolean isApproved = false;
 	private ArrayList<Gym> gymList;
 	public String getPanCard() {
 		return panCard;
@@ -43,4 +44,11 @@ public class GymOwner extends User {
 	public void setGymList(ArrayList<Gym> gymList) {
 		this.gymList = gymList;
 	}
+	public boolean isApproved() {
+		return isApproved;
+	}
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
+	}
+
 }
