@@ -11,7 +11,7 @@ public interface AdminServiceInterface {
 	
 	public void getPendingGymOwnerApprovals();
 	
-	public boolean approveGymRegistrationRequest(String gymId);
+	public boolean approveGymRegistrationRequest();
 	
 	public void getPendingGymLocationRegistrationRequests();
 }

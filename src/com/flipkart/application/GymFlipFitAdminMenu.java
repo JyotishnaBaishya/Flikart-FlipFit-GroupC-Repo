@@ -3,8 +3,10 @@
  */
 package com.flipkart.application;
 
+import java.util.*;
 import java.util.Scanner;
 
+import com.flipkart.bean.GymOwner;
 import com.flipkart.business.AdminServiceInterface;
 import com.flipkart.business.AdminServiceOperation;
 
@@ -14,6 +16,7 @@ import com.flipkart.business.AdminServiceOperation;
 public class GymFlipFitAdminMenu {
 
 	AdminServiceInterface adminService = new AdminServiceOperation();
+	List<GymOwner> pendingGymOwnerApprovals = new ArrayList<GymOwner>();
 
 	public void displayMenu(Scanner in) {
 		int menuOption = 1;
@@ -22,6 +25,7 @@ public class GymFlipFitAdminMenu {
 					+ "\n2. View Pending Gym Owner Registration Request" + "\n3. Approve Gem Registeration(s)"
 					+ "\n4. View Pending Gem Registeration(s)" + "\n5. Quit" + "\nEnter number between 1-5");
 			menuOption = in.nextInt();
+			
 			switch (menuOption) {
 				case 1:
 					adminService.approveGymOwner();
@@ -30,7 +34,7 @@ public class GymFlipFitAdminMenu {
 					adminService.getPendingGymOwnerApprovals();
 					break;
 				case 3:
-					adminService.approveGymRegistrationRequest("gymid");
+					adminService.approveGymRegistrationRequest();
 					break;
 				case 4:
 					adminService.getPendingGymLocationRegistrationRequests();
@@ -45,4 +49,7 @@ public class GymFlipFitAdminMenu {
 		} while (menuOption != 5);
 		
 	}
+	
+	
+	
 }

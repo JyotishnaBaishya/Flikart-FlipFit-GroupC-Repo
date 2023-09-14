@@ -43,11 +43,7 @@ public class GymFLipFitApplication {
 		 // Create a Scanner object
 	    
 		in.close();
-//		GymOwner owner = new GymOwner();
-//		owner.setUserID("owner1");
-//		owner.setAadharCard("Aadhaar Proof");
-//		owner.setGymOwnerName("First Owner");
-//		owner.setPassword("strongPassword");
+
 		
 
 	}
