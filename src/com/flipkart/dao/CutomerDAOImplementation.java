@@ -22,7 +22,7 @@ public class CutomerDAOImplementation implements CustomerDAOInterface {
 			try {
 				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER);
 				prepareStatement(preparedStatement, customer);
-				rowsUpdated = DBConnection.executeDMLQuery(connection, preparedStatement);
+				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

@@ -3,6 +3,7 @@ package com.flipkart.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBConnection {
@@ -13,7 +14,7 @@ public class DBConnection {
 	static final String PASS = "password";
 
 	
-	public static int executeDMLQuery(Connection connection, PreparedStatement statement) {
+	public static int executeDMLQuery(PreparedStatement statement) {
 		if(statement != null) {
 			try {
 				System.out.println("Executing Query " + statement);
@@ -24,6 +25,18 @@ public class DBConnection {
 			}
 		}
 		return 0;
+	}
+	
+	public static ResultSet executeQuery(PreparedStatement statement) {
+		ResultSet rs=null;
+		try {
+			rs = statement.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return rs;
 	}
 
 	public static Connection getConnection() {

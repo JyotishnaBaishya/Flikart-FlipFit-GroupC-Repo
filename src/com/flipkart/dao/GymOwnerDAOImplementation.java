@@ -5,17 +5,23 @@ package com.flipkart.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.flipkart.bean.GymOwner;
+import com.flipkart.constants.Constants;
+
 /**
  * 
  */
 public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 	static final String TABLE_GYM_OWNER = "GYMOWNER";
 
-	static final String INSERT_GYM_OWNER = "INSERT INTO " + TABLE_GYM_OWNER + " (username, password, aadharcard, gstin, isApproved) "
-			+ " VALUES (?, ?, ?, ?, ?)";
+	static final String INSERT_GYM_OWNER = "INSERT INTO " + TABLE_GYM_OWNER
+			+ " (username, password, aadharcard, gstin, isApproved) " + " VALUES (?, ?, ?, ?, ?)";
+	static final String SELECT_GYM_OWNER = "SELECT * FROM " + TABLE_GYM_OWNER;
+
 	@Override
 	public int insert(GymOwner gymOwner) {
 		int rowsUpdated = 0;
@@ -24,7 +30,7 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 			try {
 				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GYM_OWNER);
 				prepareStatement(preparedStatement, gymOwner);
-				rowsUpdated = DBConnection.executeDMLQuery(connection, preparedStatement);
+				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -57,25 +63,67 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 	@Override
 	public void delete(String id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void update(String id, GymOwner newGymOwner) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
+	@Override
+	public ArrayList<GymOwner> getPendingGymOwnerApprovals(String whereClause) {
+		ResultSet resultSet = null;
+		ArrayList<GymOwner> pendingGymOwnerList = new ArrayList<>();
+		Connection connection = DBConnection.getConnection();
+		if (connection != null) {
+			try {
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_GYM_OWNER + whereClause);
+				resultSet = DBConnection.executeQuery(preparedStatement);
+				if (resultSet != null) {
+
+					try {
+						while (resultSet.next()) {
+							GymOwner gymOwner = new GymOwner();
+							gymOwner.setUserID(new String(resultSet.getInt(1) + ""));
+							gymOwner.setUserName(resultSet.getString(2));
+							gymOwner.setPassword(resultSet.getString(3));
+							gymOwner.setAadharCard(resultSet.getString(4));
+							gymOwner.setGstIN(resultSet.getString(5));
+							gymOwner.setApproved(resultSet.getBoolean(6));
+							gymOwner.setRole(Constants.ROLE_GYMOWNER);
+							pendingGymOwnerList.add(gymOwner);
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					return pendingGymOwnerList;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return pendingGymOwnerList;
+	}
+
 	// Driver
 	public static void main(String args[]) {
-		GymOwnerDAOInterface custDAO = new GymOwnerDAOImplementation();
-		GymOwner gymOwner = new GymOwner();
-		gymOwner.setUserName("GymOwner1");
-		gymOwner.setPassword("pass");
-		gymOwner.setAadharCard("1234-2345-1234");
-		gymOwner.setGstIN("22AAAAA0000A1Z5");
-		
-		custDAO.insert(gymOwner);
+		GymOwnerDAOInterface gymDAO = new GymOwnerDAOImplementation();
+//		GymOwner gymOwner = new GymOwner();
+//		gymOwner.setUserName("GymOwner1");
+//		gymOwner.setPassword("pass");
+//		gymOwner.setAadharCard("1234-2345-1234");
+//		gymOwner.setGstIN("22AAAAA0000A1Z5");
+//		
+//		gymDAO.insert(gymOwner);
+
 	}
-	
+
 }

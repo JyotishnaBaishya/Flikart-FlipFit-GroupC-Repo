@@ -32,11 +32,12 @@ public class AdminServiceOperation implements AdminServiceInterface{
 	}
 
 	@Override
-	public void getPendingGymOwnerApprovals() {
+	public ArrayList<GymOwner> getPendingGymOwnerApprovals() {
 		System.out.println("Pending Gym Owner Approvals:");
 		for(GymOwner owner: pendingGymOwnerApprovals) {
 			System.out.println("Gym Owner Name: "+owner.getUserName());
 		}
+		return null;
 		
 	}
 
