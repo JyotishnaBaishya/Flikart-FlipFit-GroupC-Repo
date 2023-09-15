@@ -19,5 +19,5 @@ public interface AdminServiceInterface {
 	
 	public void getPendingGymLocationRegistrationRequests();
 
-	void approveGymOwner(String gymOwnerId);
+	void approveGymOwner(int gymOwnerId);
 }

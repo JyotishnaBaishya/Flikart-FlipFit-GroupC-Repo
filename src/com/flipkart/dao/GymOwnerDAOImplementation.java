@@ -73,13 +73,13 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 
 	}
 	
-	public static int approveGymOwner(String gymUserId) {
+	public static int approveGymOwner(int gymUserId) {
 		int rowsUpdated = 0;
 		Connection connection = DBConnection.getConnection();
 		if (connection != null) {
 			try {
 				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.UPDATE_APPROVE_GYM_OWNER);
-				preparedStatement.setString(1, gymUserId);
+				preparedStatement.setInt(1, gymUserId);
 				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -108,7 +108,7 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 					try {
 						while (resultSet.next()) {
 							GymOwner gymOwner = new GymOwner();
-							gymOwner.setUserID(new String(resultSet.getInt(1) + ""));
+							gymOwner.setUserID(resultSet.getInt(1));
 							gymOwner.setUserName(resultSet.getString(2));
 							gymOwner.setPassword(resultSet.getString(3));
 							gymOwner.setAadharCard(resultSet.getString(4));

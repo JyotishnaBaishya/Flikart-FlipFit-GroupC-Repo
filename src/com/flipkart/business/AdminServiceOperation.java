@@ -27,9 +27,9 @@ public class AdminServiceOperation implements AdminServiceInterface{
 		return false;
 	}
 	@Override
-	public void approveGymOwner(String gymOwnerId) {
+	public void approveGymOwner(int gymOwnerId) {
 		for(GymOwner owner: getPendingGymOwnerApprovals()) {
-			if(owner.getUserID().equals(gymOwnerId)){
+			if(owner.getUserID() == gymOwnerId){
 				int flag = GymOwnerDAOImplementation.approveGymOwner(gymOwnerId);
 				if(flag > 0) {
 					System.out.println("Gym Owner ID " + gymOwnerId + " approved");

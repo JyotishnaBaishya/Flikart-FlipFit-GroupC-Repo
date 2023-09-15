@@ -20,15 +20,15 @@ public class GymFlipFitAdminMenu {
 	public void displayMenu(Scanner in) {
 		int menuOption = 1;
 		do {
-			System.out.println("\n\n ------ Admin Menu Options ------ " + "\n1. Approve Gym Owner Registration"
-					+ "\n2. View Pending Gym Owner Registration Request" + "\n3. Approve Gem Registeration(s)"
-					+ "\n4. View Pending Gym Registeration(s)" + "\n5. Quit" + "\nEnter number between 1-5");
+			System.out.println("\n\n ------ Admin Menu Options ------ " + "\nGym Owner:\n\t1. Approve Registration"
+					+ "\n\t2. View Pending Registration Request" + "\nGym \n\t3. Approve Gym Registration"
+					+ "\n\t4. View Pending Gym Registration" + "\n\t5. Quit" + "\nEnter number between 1-5");
 			menuOption = in.nextInt();
 			
 			switch (menuOption) {
 				case 1:
 					System.out.println("Enter gym owner user id");					
-					adminService.approveGymOwner(in.next());
+					adminService.approveGymOwner(in.nextInt());
 					break;
 				case 2:
 					ArrayList<GymOwner> gymOwnerList = adminService.getPendingGymOwnerApprovals();
