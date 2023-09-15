@@ -20,7 +20,8 @@ public class AdminDAOImplementation implements AdminDAOInterface{
 
 	static final String INSERT_USER = "INSERT INTO " + TABLE_USER + " (username, password, role) "
 			+ " VALUES (?, ?, ?)";
-
+	
+	
 
 	@Override
 	public boolean approveGymOwner() {
@@ -43,6 +44,10 @@ public class AdminDAOImplementation implements AdminDAOInterface{
 	@Override
 	public void getPendingGymLocationRegistrationRequests() {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public void viewAllGymOwners() {
 		
 	}
 	

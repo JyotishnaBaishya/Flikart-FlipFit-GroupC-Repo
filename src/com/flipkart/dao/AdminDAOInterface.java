@@ -13,4 +13,6 @@ public interface AdminDAOInterface {
 	public boolean approveGymRegistrationRequest();
 	
 	public void getPendingGymLocationRegistrationRequests();
+	
+	public void viewAllGymOwners();
 }

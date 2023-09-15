@@ -24,6 +24,8 @@ public class GymDAOImplementation implements GymDAOInterface {
 	static final String SELECT_GYM = "SELECT * FROM " + TABLE_GYM;
 	
 	static final String VIEW_REGISTERED_GYM = SELECT_GYM + " WHERE gymOwnerID=(?)";
+	
+	static final String VIEW_GYM_BY_GYMID = SELECT_GYM + " WHERE ID=(?)";
 
 	@Override
 	public int insert(Gym gym) {
@@ -92,6 +94,31 @@ public class GymDAOImplementation implements GymDAOInterface {
 
 	}
 	
+	@Override
+	public Gym viewGym(int gymID) {
+		// TODO Auto-generated method stub
+		Connection connection = DBConnection.getConnection();
+			try {
+				PreparedStatement preparedStatement = connection.prepareStatement(VIEW_GYM_BY_GYMID);
+				preparedStatement.setInt(gymID, gymID);
+				System.out.println(preparedStatement);
+				ResultSet output = preparedStatement.executeQuery();
+				while(output.next()) {
+					System.out.println("\t"+output.getString(1) + "\t " + output.getString(2) + "\t " + output.getString(3) + "\t " + output.getString(4) + "\t " + output.getString(5));
+				}
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				connection.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+		return null;
+	}
+	
 	// Driver
 		public static void main(String args[]) {
 			GymDAOInterface gymDAO = new GymDAOImplementation();
@@ -103,7 +130,10 @@ public class GymDAOImplementation implements GymDAOInterface {
 //			gymDAO.insert(gym);
 			
 			gymDAO.viewRegisteredGyms(1);
+			gymDAO.viewGym(1);
 
 		}
+
+		
 	
 }
