@@ -11,8 +11,8 @@ public class DBConnection {
 	static final String DB_URL = "jdbc:mysql://localhost/Flipfit";
 
 	static final String USER = "root";
-	static final String PASS = "";
 
+	static final String PASS = "";
 	
 	public static int executeDMLQuery(PreparedStatement statement) {
 		if(statement != null) {

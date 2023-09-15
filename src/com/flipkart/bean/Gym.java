@@ -2,7 +2,7 @@ package com.flipkart.bean;
 
 public class Gym {
 	private String gymID;
-	private String gymOwnerID;
+	private int gymOwnerID;
 	private String location;
 	private int noOfSeats;
 	private boolean isApproved = false;
@@ -13,10 +13,10 @@ public class Gym {
 	public void setGymID(String gymID) {
 		this.gymID = gymID;
 	}
-	public String getGymOwnerID() {
+	public int getGymOwnerID() {
 		return gymOwnerID;
 	}
-	public void setGymOwnerID(String gymOwnerID) {
+	public void setGymOwnerID(int gymOwnerID) {
 		this.gymOwnerID = gymOwnerID;
 	}
 	public String getLocation() {

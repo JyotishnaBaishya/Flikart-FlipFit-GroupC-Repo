@@ -24,6 +24,7 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface{
 	public ArrayList<Gym> viewRegisteredGyms() {
 		// TODO Auto-generated method stub
 		System.out.println("List of registered gyms");
+		
 		return null;
 	}
 		
