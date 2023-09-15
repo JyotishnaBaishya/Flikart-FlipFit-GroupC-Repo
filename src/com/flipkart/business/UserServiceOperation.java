@@ -16,7 +16,7 @@ public class UserServiceOperation implements UserServiceInterface{
 	public boolean registration(String username, String password, int role) {
 		// TODO Auto-generated method stub
 		User user = new User();
-		user.setUserID(username);
+		user.setUserID(1);
 		user.setPassword(password);
 		return false;
 	}
