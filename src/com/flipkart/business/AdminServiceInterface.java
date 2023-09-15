@@ -5,6 +5,7 @@ package com.flipkart.business;
 
 import java.util.ArrayList;
 
+import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 
 /**
@@ -15,9 +16,9 @@ public interface AdminServiceInterface {
 	
 	public ArrayList<GymOwner> getPendingGymOwnerApprovals();
 	
-	public boolean approveGymRegistrationRequest();
+	public void approveGymRegistrationRequest(int gymId);
 	
-	public void getPendingGymLocationRegistrationRequests();
+	public ArrayList<Gym> getPendingGymRegistrationRequests();
 
 	void approveGymOwner(int gymOwnerId);
 }

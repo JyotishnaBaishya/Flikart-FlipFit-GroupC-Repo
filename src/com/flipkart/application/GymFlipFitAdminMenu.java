@@ -40,10 +40,11 @@ public class GymFlipFitAdminMenu {
 					
 					break;
 				case 3:
-					adminService.approveGymRegistrationRequest();
+					System.out.println("Enter gym owner user id");					
+					adminService.approveGymRegistrationRequest(in.nextInt());
 					break;
 				case 4:
-					adminService.getPendingGymLocationRegistrationRequests();
+					adminService.getPendingGymRegistrationRequests();
 					break;
 				case 5:
 					System.out.println("Exiting Admin Menu..");
