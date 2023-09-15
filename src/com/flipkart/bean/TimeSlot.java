@@ -1,23 +1,23 @@
 package com.flipkart.bean;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class TimeSlot {
-	private String slotID;
-	private String gymID;
+	private int slotID;
+	private int gymID;
 	private int availableSeats;
-	private Date day;
+	private LocalDate day;
 	
-	public String getSlotID() {
+	public int getSlotID() {
 		return slotID;
 	}
-	public void setSlotID(String slotID) {
+	public void setSlotID(int slotID) {
 		this.slotID = slotID;
 	}
-	public String getGymID() {
+	public int getGymID() {
 		return gymID;
 	}
-	public void setGymID(String gymID) {
+	public void setGymID(int gymID) {
 		this.gymID = gymID;
 	}
 	public int getAvailableSeats() {
@@ -26,10 +26,10 @@ public class TimeSlot {
 	public void setAvailableSeats(int availableSeats) {
 		this.availableSeats = availableSeats;
 	}
-	public Date getDay() {
+	public LocalDate getDay() {
 		return day;
 	}
-	public void setDay(Date day) {
+	public void setDay(LocalDate day) {
 		this.day = day;
 	}
 }
