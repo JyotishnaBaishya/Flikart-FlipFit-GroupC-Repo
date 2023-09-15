@@ -120,7 +120,6 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
-					return pendingGymOwnerList;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

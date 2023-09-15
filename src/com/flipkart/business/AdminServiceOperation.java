@@ -48,21 +48,27 @@ public class AdminServiceOperation implements AdminServiceInterface{
 	}
 
 	@Override
-	public boolean approveGymRegistrationRequest() {
-		for(Gym gym: pendingGymApprovals) {
-			gym.setApproved(true);
+	public void approveGymRegistrationRequest(int gymId) {
+		for(Gym gym: getPendingGymRegistrationRequests()) {
+			if(gym.getGymID() == gymId){
+				int flag = GymOwnerDAOImplementation.approveGymOwner(gymId);
+				if(flag > 0) {
+					System.out.println("Gym Owner ID " + gymId + " approved");
+				} else {
+					System.out.println("Gym Owner ID " + gymId + " could not be approved");
+				}
+				break;
+			}
 		}
-		pendingGymApprovals.clear();
-		System.out.println("Gym approval completed!");
-		return true;
 	}
 
 	@Override
-	public void getPendingGymLocationRegistrationRequests() {
+	public ArrayList<Gym> getPendingGymRegistrationRequests() {
 		System.out.println("Pending Gym Location Registration List");
 		for(Gym gym: pendingGymApprovals) {
 			System.out.println("Gym details -> Gym name: "+gym.getGymID()+" Gym Owner: "+gym.getGymOwnerID());
 		}
+		return null;
 		
 	}
 
