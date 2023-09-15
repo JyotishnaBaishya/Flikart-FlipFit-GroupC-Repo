@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 import com.flipkart.bean.User;
 import com.flipkart.constants.Constants;
@@ -23,7 +24,7 @@ public class UserDAOImplementation implements UserDAOInterface{
 	
 	static final String SELECT_USER = "SELECT * FROM " + TABLE_USER;
 	
-	static final String WHERE_USERNAME = " WHERE username = ";
+	static final String WHERE_USERNAME = " WHERE USER.username = ?";
 
 	@Override
 	public int register(User user) {
@@ -34,7 +35,9 @@ public class UserDAOImplementation implements UserDAOInterface{
 				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER);
 				prepareStatement(preparedStatement, user);
 				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
-			} catch (SQLException e) {
+			}catch(SQLIntegrityConstraintViolationException e) {
+				System.out.println("This username already exists!!");
+			}catch (SQLException e) {
 				e.printStackTrace();
 			}
 			try {
@@ -43,7 +46,7 @@ public class UserDAOImplementation implements UserDAOInterface{
 				e.printStackTrace();
 			}
 		}
-		System.out.println("# of DB Rows successfully updated: " + rowsUpdated);
+		//System.out.println("# of DB Rows successfully updated: " + rowsUpdated);
 		return rowsUpdated;
 
 	}
@@ -54,8 +57,9 @@ public class UserDAOImplementation implements UserDAOInterface{
 		String generatedColumns[] = { "ID" };
 		if (connection != null) {
 			try {
-				String selectQuery = SELECT_USER + WHERE_USERNAME + "'"+username+"'";
-				PreparedStatement preparedStatement = connection.prepareStatement(selectQuery, generatedColumns);
+				String selectQuery = SELECT_USER + WHERE_USERNAME ;
+				PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+				preparedStatement.setString(1,username);
 				ResultSet rs = preparedStatement.executeQuery();
 				while(rs.next()){
 					 //Retrieve by column name
@@ -64,7 +68,7 @@ public class UserDAOImplementation implements UserDAOInterface{
 					 String passwordRecieved = rs.getString("password");
 					 String roleRecieved = rs.getString("role");
 					 
-					 if(password != passwordRecieved) {
+					 if(!password.equals(passwordRecieved)) {
 						 System.out.println("Wrong username or password please try again!!");
 					 }else {
 						 user = new User();
@@ -72,12 +76,6 @@ public class UserDAOImplementation implements UserDAOInterface{
 						 user.setPassword(passwordRecieved);
 						 user.setRole(roleRecieved);
 						 user.setUserName(usernameRecieved);
-						 
-						 System.out.println(userID);
-						 System.out.println(passwordRecieved);
-						 System.out.println(roleRecieved);
-						 System.out.println(usernameRecieved + "1");
-						 
 					 }
 				}
 			} catch (SQLException e) {
@@ -119,13 +117,14 @@ public class UserDAOImplementation implements UserDAOInterface{
 	// Driver
 	public static void main(String[] args) {
 		UserDAOInterface userDAO = new UserDAOImplementation();
-		User user = new User();
-		user.setUserName("gymown2");
-		user.setPassword("pass");
-		user.setRole(Constants.ROLE_GYMOWNER);
+//		User user = new User();
+//		user.setUserName("gymown2");
+//		user.setPassword("pass");
+//		user.setRole(Constants.ROLE_GYMOWNER);
 		
-		userDAO.register(user);
+//		userDAO.register(user);
 		User loggedIn = userDAO.loginUser("gymown2","pass");
+		System.out.println(loggedIn);
 		
 		
 //		User user2 = new User();

@@ -2,8 +2,10 @@
  * 
  */
 package com.flipkart.application;
+import com.flipkart.bean.User;
 import com.flipkart.business.UserServiceInterface;
 import com.flipkart.business.UserServiceOperation;
+import com.flipkart.constants.Constants;
 
 import java.util.Scanner;
 
@@ -28,6 +30,7 @@ public class GymFLipFitApplication {
 					new GymFLipFitApplication().login(in);
 					break;
 				case 2:
+					new GymFLipFitApplication().register(in);
 					break;
 				case 3:
 					break;
@@ -49,41 +52,75 @@ public class GymFLipFitApplication {
 	}
 	
 	void login(Scanner in) {
-//		System.out.println("\n\n ---------- Please enter the type of user ---------- ");
-//	    System.out.println("1. Admin \n2. GymOwner \n3. Customer" + "\nEnter number between 1-3");
-//	    
-//	    UserServiceInterface userService = new UserServiceOperation();
-//	   
-//	    int userRole = in.nextInt();  // Read user input
-//	    System.out.println("Please Enter the username");
-//		String userName = in.next();
-//		System.out.println("Please Enter the password");
-//		String password = in.next();
-//	    switch(userRole) {
-//	    	case 1:
-//	    		if(userService.login(userName, password,userRole)) {
-//	    			new GymFlipFitAdminMenu().displayMenu(in);
-//	    		}else {
-//	    			System.out.println("Invalid Credentials");
-//	    		}
-//	    		break;
-//	    	case 2:
-//	    		if(userService.login(userName, password, userRole)) {
-//	    			//new GymFlipFitGymOwnerMenu().displayMenu(userName, in);
-//	    		}else {
-//	    			System.out.println("Invalid Credentials");
-//	    		}
-//	    		break;
-//	    	case 3:
-//	    		if(userService.login(userName, password,userRole)) {
-//	    			new GymFlipFitCustomerMenu().displayMenu(userName, in);
-//	    		}else {
-//	    			System.out.println("Invalid Credentials");
-//	    		}
-//	    		break;
-//	    		
-//	    }
-//	    System.out.println("Exiting login Menu..");
+		System.out.println("\n\n ---------- Please enter the type of user ---------- ");
+	    System.out.println("1. Admin \n2. GymOwner \n3. Customer" + "\nEnter number between 1-3");
+	    
+	    UserServiceInterface userService = new UserServiceOperation();
+	    int userRole = in.nextInt();
+	    while(userRole < 1 || userRole > 3) {
+	    	System.out.println("Invalid type please try again!!");
+	    	userRole = in.nextInt();
+	    }
+	    System.out.println("Please Enter the username");
+		String userName = in.next();
+		System.out.println("Please Enter the password");
+		String password = in.next();
+		User loggedInUser;
+	    switch(userRole) {
+	    	case 1:
+	    		loggedInUser = userService.login(userName, password);
+	    		if(loggedInUser!=null) {
+	    			System.out.println("Logged In Successfully!!");
+	    			new GymFlipFitAdminMenu().displayMenu(loggedInUser,in);
+	    		}else {
+	    			System.out.println("Invalid Credentials");
+	    		}
+	    		break;
+	    	case 2:
+	    		loggedInUser = userService.login(userName, password);
+	    		if(loggedInUser!=null) {
+	    			System.out.println("Logged In Successfully!!");
+	    			new GymFlipFitGymOwnerMenu().displayMenu(loggedInUser, in);
+	    		}else {
+	    			System.out.println("Invalid Credentials");
+	    		}
+	    		break;
+	    	case 3:
+	    		loggedInUser = userService.login(userName, password);
+	    		if(loggedInUser!=null) {
+	    			System.out.println("Logged In Successfully!!");
+	    			new GymFlipFitCustomerMenu().displayMenu(loggedInUser, in);
+	    		}else {
+	    			System.out.println("Invalid Credentials");
+	    		}
+	    		break;
+	    		
+	    		
+	    }
+	    System.out.println("Exiting login Menu..");
+	}
+	void register(Scanner in) {
+		System.out.println("\n\n ---------- Please enter the type of user ---------- ");
+	    System.out.println("1. Customer \n2. GymOwner" + "\nEnter number between 1-2");
+	    
+	    UserServiceInterface userService = new UserServiceOperation();
+	    int userRole = in.nextInt();
+	    while(userRole < 1 || userRole > 2) {
+	    	System.out.println("Invalid type please try again!!");
+	    	userRole = in.nextInt();
+	    }
+	    System.out.println("Please Enter the username");
+		String userName = in.next();
+		System.out.println("Please Enter the password");
+		String password = in.next();
+		String role = userRole == 1? Constants.ROLE_CUSTOMER:Constants.ROLE_GYMOWNER;
+		if(userService.registration(userName, password, role)){
+			System.out.println("User Registered successfully!!");
+		}else {
+			System.out.println("Please try again!!");
+		}
+		System.out.println("Exiting register menu");
+	    
 	}
 
 }

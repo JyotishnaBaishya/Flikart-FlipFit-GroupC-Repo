@@ -6,6 +6,7 @@ package com.flipkart.application;
 import java.util.*;
 
 import com.flipkart.bean.GymOwner;
+import com.flipkart.bean.User;
 import com.flipkart.business.AdminServiceInterface;
 import com.flipkart.business.AdminServiceOperation;
 
@@ -17,7 +18,7 @@ public class GymFlipFitAdminMenu {
 	AdminServiceInterface adminService = new AdminServiceOperation();
 	List<GymOwner> pendingGymOwnerApprovals = new ArrayList<GymOwner>();
 
-	public void displayMenu(Scanner in) {
+	public void displayMenu(User user, Scanner in) {
 		int menuOption = 1;
 		do {
 			System.out.println("\n\n ------ Admin Menu Options ------ " + "\nGym Owner:\n\t1. Approve Registration"

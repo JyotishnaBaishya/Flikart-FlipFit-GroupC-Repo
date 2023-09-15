@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.flipkart.bean.Gym;
+import com.flipkart.bean.User;
 import com.flipkart.business.GymOwnerServiceInterface;
 import com.flipkart.business.GymOwnerServiceOperation;
 
@@ -15,7 +16,7 @@ import com.flipkart.business.GymOwnerServiceOperation;
  */
 public class GymFlipFitGymOwnerMenu {
 	GymOwnerServiceInterface gymService = new GymOwnerServiceOperation();
-	public void displayMenu(int userID, Scanner in) {
+	public void displayMenu(User user, Scanner in) {
 		int menuOption = 1;
 		do {
 			System.out.println("\n\n ------ Gym Owner Menu Options ------ " + "\n1. Add a new gym Centre"
@@ -24,7 +25,7 @@ public class GymFlipFitGymOwnerMenu {
 			switch (menuOption) {
 				case 1:
 					Gym newGym = new Gym();
-					newGym.setGymOwnerID(userID);
+					newGym.setGymOwnerID(user.getUserID());
 					System.out.println("Please Enter the name for the gym");
 					int gymId = in.nextInt();
 					newGym.setGymID(gymId);
@@ -42,7 +43,7 @@ public class GymFlipFitGymOwnerMenu {
 					}
 					break;
 				case 2:
-					ArrayList<Gym>registeredGyms = gymService.viewRegisteredGyms(userID);
+					ArrayList<Gym>registeredGyms = gymService.viewRegisteredGyms(user.getUserID());
 					int n = registeredGyms.size();
 					if(n > 0) {
 						System.out.println("Displaying registered gyms ");

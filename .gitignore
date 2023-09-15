@@ -26,4 +26,4 @@ local.properties
 .loadpath
 .factorypath
 *.DS_Store
-.classpath
+*.classpath

@@ -5,35 +5,28 @@ package com.flipkart.business;
 import java.util.*;
 
 import com.flipkart.bean.User;
+import com.flipkart.dao.UserDAOImplementation;
+import com.flipkart.dao.UserDAOInterface;
 /**
  * 
  */
 public class UserServiceOperation implements UserServiceInterface{
 
-	List<User> loggedInUsers = new ArrayList<User>();
-	List<User> registeredUsers = new ArrayList<User>();
+	UserDAOInterface userDAO = new UserDAOImplementation();
 	@Override
-	public boolean registration(String username, String password, int role) {
+	public boolean registration(String username, String password, String role) {
 		// TODO Auto-generated method stub
 		User user = new User();
-		user.setUserID(1);
+		user.setUserName(username);
 		user.setPassword(password);
-		return false;
+		user.setRole(role);
+		return userDAO.register(user) != 0;
 	}
 
 	@Override
-	public boolean login(String userId, String password, int role) {
-		if(userId.equalsIgnoreCase("admin") && password.equalsIgnoreCase("pass") && role == 1) {	 // Tmp condition, needs to be updated
-			return true;
-		} else if(userId.equalsIgnoreCase("gymowner") && password.equalsIgnoreCase("pass") && role == 2) {	 // Tmp condition, needs to be updated
-			return true;
-		} else if(userId.equalsIgnoreCase("customer") && password.equalsIgnoreCase("pass") && role == 3) {	 // Tmp condition, needs to be updated
-			return true;
-		} else {
-			System.out.println("Incorrect ID/Password");
-			return false;
-		}
-		
+	public User login(String userName, String password) {
+		User loggedInUser = userDAO.loginUser(userName, password);
+		return loggedInUser;
 	}
 
 }

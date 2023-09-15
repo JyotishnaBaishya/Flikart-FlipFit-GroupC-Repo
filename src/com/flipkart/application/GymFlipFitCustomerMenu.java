@@ -5,6 +5,7 @@ package com.flipkart.application;
 
 import java.util.Scanner;
 
+import com.flipkart.bean.User;
 import com.flipkart.business.CustomerServiceInterface;
 import com.flipkart.business.CustomerServiceOperation;
 
@@ -13,7 +14,7 @@ import com.flipkart.business.CustomerServiceOperation;
  */
 public class GymFlipFitCustomerMenu {
 	CustomerServiceInterface customerService = new CustomerServiceOperation();
-	public void displayMenu(String userID,Scanner in) {
+	public void displayMenu(User user,Scanner in) {
 		int menuOption = 1;
 		do {
 			System.out.println("\n\n ------ Customer Menu Options ------ " + "\n1. Book a slot"
