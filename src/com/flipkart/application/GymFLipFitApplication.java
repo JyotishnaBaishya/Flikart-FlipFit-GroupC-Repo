@@ -56,27 +56,27 @@ public class GymFLipFitApplication {
 	   
 	    int userRole = in.nextInt();  // Read user input
 	    System.out.println("Please Enter the username");
-		String userID = in.next();
+		String userName = in.next();
 		System.out.println("Please Enter the password");
 		String password = in.next();
 	    switch(userRole) {
 	    	case 1:
-	    		if(userService.login(userID, password,userRole)) {
+	    		if(userService.login(userName, password,userRole)) {
 	    			new GymFlipFitAdminMenu().displayMenu(in);
 	    		}else {
 	    			System.out.println("Invalid Credentials");
 	    		}
 	    		break;
 	    	case 2:
-	    		if(userService.login(userID, password, userRole)) {
-	    			new GymFlipFitGymOwnerMenu().displayMenu(userID, in);
+	    		if(userService.login(userName, password, userRole)) {
+	    			//new GymFlipFitGymOwnerMenu().displayMenu(userName, in);
 	    		}else {
 	    			System.out.println("Invalid Credentials");
 	    		}
 	    		break;
 	    	case 3:
-	    		if(userService.login(userID, password,userRole)) {
-	    			new GymFlipFitCustomerMenu().displayMenu(userID, in);
+	    		if(userService.login(userName, password,userRole)) {
+	    			new GymFlipFitCustomerMenu().displayMenu(userName, in);
 	    		}else {
 	    			System.out.println("Invalid Credentials");
 	    		}

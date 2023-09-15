@@ -17,7 +17,7 @@ public class DBConnection {
 	public static int executeDMLQuery(PreparedStatement statement) {
 		if(statement != null) {
 			try {
-				System.out.println("Executing Query " + statement);
+				//System.out.println("Executing Query " + statement);
 				return statement.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

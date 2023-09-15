@@ -31,7 +31,7 @@ public class AdminDAOImplementation implements AdminDAOInterface{
 
 	@Override
 	public ArrayList<GymOwner> getPendingGymOwnerApprovals() {
-		return new GymOwnerDAOImplementation().getPendingGymOwnerApprovals(" WHERE isApproved = false");
+		return null;
 		
 	}
 

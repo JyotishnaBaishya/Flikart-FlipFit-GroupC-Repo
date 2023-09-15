@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import com.flipkart.bean.GymOwner;
 import com.flipkart.constants.Constants;
+import com.flipkart.constants.SqlConstants;
 
 /**
  * 
@@ -71,15 +72,36 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public static int approveGymOwner(String gymUserId) {
+		int rowsUpdated = 0;
+		Connection connection = DBConnection.getConnection();
+		if (connection != null) {
+			try {
+				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.UPDATE_APPROVE_GYM_OWNER);
+				preparedStatement.setString(1, gymUserId);
+				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 
-	@Override
-	public ArrayList<GymOwner> getPendingGymOwnerApprovals(String whereClause) {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("# of DB Rows successfully updated: " + rowsUpdated);
+		return rowsUpdated;
+	}
+
+	public static ArrayList<GymOwner> getPendingGymOwnerApprovals() {
 		ResultSet resultSet = null;
 		ArrayList<GymOwner> pendingGymOwnerList = new ArrayList<>();
 		Connection connection = DBConnection.getConnection();
 		if (connection != null) {
 			try {
-				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_GYM_OWNER + whereClause);
+				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.SELECT_GYM_OWNER + SqlConstants.WHERE_PENDING_APPROVAL);
 				resultSet = DBConnection.executeQuery(preparedStatement);
 				if (resultSet != null) {
 
@@ -123,6 +145,7 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 		gymOwner.setGstIN("22AAAAA0000A1Z6");
 		
 		gymDAO.insert(gymOwner);
+		GymOwnerDAOImplementation.getPendingGymOwnerApprovals();
 
 	}
 

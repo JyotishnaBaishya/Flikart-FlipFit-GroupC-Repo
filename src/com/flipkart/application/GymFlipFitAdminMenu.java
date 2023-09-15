@@ -4,7 +4,6 @@
 package com.flipkart.application;
 
 import java.util.*;
-import java.util.Scanner;
 
 import com.flipkart.bean.GymOwner;
 import com.flipkart.business.AdminServiceInterface;
@@ -23,15 +22,22 @@ public class GymFlipFitAdminMenu {
 		do {
 			System.out.println("\n\n ------ Admin Menu Options ------ " + "\n1. Approve Gym Owner Registration"
 					+ "\n2. View Pending Gym Owner Registration Request" + "\n3. Approve Gem Registeration(s)"
-					+ "\n4. View Pending Gem Registeration(s)" + "\n5. Quit" + "\nEnter number between 1-5");
+					+ "\n4. View Pending Gym Registeration(s)" + "\n5. Quit" + "\nEnter number between 1-5");
 			menuOption = in.nextInt();
 			
 			switch (menuOption) {
 				case 1:
-					adminService.approveGymOwner();
+					System.out.println("Enter gym owner user id");					
+					adminService.approveGymOwner(in.next());
 					break;
 				case 2:
-					adminService.getPendingGymOwnerApprovals();
+					ArrayList<GymOwner> gymOwnerList = adminService.getPendingGymOwnerApprovals();
+					System.out.println("UserID\tUsername\tAadhar Card #\tGSTIN#");
+					System.out.println("-----------------------------------------------------------");
+					for(GymOwner gymOwner : gymOwnerList) {
+						System.out.println(gymOwner.getUserID()+"\t"+gymOwner.getUserName()+"\t"+gymOwner.getAadharCard()+"\t"+gymOwner.getGstIN());
+					}
+					
 					break;
 				case 3:
 					adminService.approveGymRegistrationRequest();
