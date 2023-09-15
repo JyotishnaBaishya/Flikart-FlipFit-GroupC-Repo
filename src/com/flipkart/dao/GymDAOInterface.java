@@ -12,5 +12,5 @@ import com.flipkart.bean.Gym;
  */
 public interface GymDAOInterface {
 	public int insert(Gym gym);
-	public ArrayList<Gym> viewRegisteredGyms(String gymOwnerID); 
+	public ArrayList<Gym> viewRegisteredGyms(int gymOwnerID); 
 }

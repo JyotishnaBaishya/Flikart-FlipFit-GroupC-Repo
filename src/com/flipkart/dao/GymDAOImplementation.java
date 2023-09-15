@@ -5,6 +5,7 @@ package com.flipkart.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -21,6 +22,8 @@ public class GymDAOImplementation implements GymDAOInterface {
 	static final String INSERT_GYM = "INSERT INTO " + TABLE_GYM
 			+ " (gymOwnerID, location, noOfSeats, isApproved) " + " VALUES (?, ?, ?, ?)";
 	static final String SELECT_GYM = "SELECT * FROM " + TABLE_GYM;
+	
+	static final String VIEW_REGISTERED_GYM = SELECT_GYM + " WHERE gymOwnerID=(?)";
 
 	@Override
 	public int insert(Gym gym) {
@@ -47,8 +50,32 @@ public class GymDAOImplementation implements GymDAOInterface {
 	}
 
 	@Override
-	public ArrayList<Gym> viewRegisteredGyms(String gymOwnerID) {
+	public ArrayList<Gym> viewRegisteredGyms(int gymOwnerID) {
 		// TODO Auto-generated method stub
+		
+		Connection connection = DBConnection.getConnection();
+		
+		if(connection != null) {
+			try {
+				PreparedStatement preparedStatement = connection.prepareStatement(VIEW_REGISTERED_GYM);
+				preparedStatement.setInt(gymOwnerID, gymOwnerID);
+				System.out.println(preparedStatement);
+				ResultSet output = preparedStatement.executeQuery();
+			    System.out.println("\tID\tGymOwnerId\tLocation\tSeats\tApproved");
+			    while(output.next()) {
+			    	System.out.println("\t"+output.getString(1) + "\t " + output.getString(2) + "\t " + output.getString(3) + "\t " + output.getString(4) + "\t " + output.getString(5));
+			    }
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				connection.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		return null;
 	}
 	
@@ -68,12 +95,14 @@ public class GymDAOImplementation implements GymDAOInterface {
 	// Driver
 		public static void main(String args[]) {
 			GymDAOInterface gymDAO = new GymDAOImplementation();
-			Gym gym = new Gym();
-			gym.setGymOwnerID(1);
-			gym.setLocation("loc1");
-			gym.setNoOfSeats(20);
-			gym.setApproved(false);
-			gymDAO.insert(gym);
+//			Gym gym = new Gym();
+//			gym.setGymOwnerID(1);
+//			gym.setLocation("loc1");
+//			gym.setNoOfSeats(20);
+//			gym.setApproved(false);
+//			gymDAO.insert(gym);
+			
+			gymDAO.viewRegisteredGyms(1);
 
 		}
 	

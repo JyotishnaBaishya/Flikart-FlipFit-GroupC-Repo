@@ -14,7 +14,7 @@ import com.flipkart.business.GymOwnerServiceOperation;
  */
 public class GymFlipFitGymOwnerMenu {
 	GymOwnerServiceInterface gymService = new GymOwnerServiceOperation();
-	public void displayMenu(String userID, Scanner in) {
+	public void displayMenu(int userID, Scanner in) {
 		int menuOption = 1;
 		do {
 			System.out.println("\n\n ------ Gym Owner Menu Options ------ " + "\n1. Add a new gym Centre"
