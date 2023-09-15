@@ -116,13 +116,13 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 	// Driver
 	public static void main(String args[]) {
 		GymOwnerDAOInterface gymDAO = new GymOwnerDAOImplementation();
-//		GymOwner gymOwner = new GymOwner();
-//		gymOwner.setUserName("GymOwner1");
-//		gymOwner.setPassword("pass");
-//		gymOwner.setAadharCard("1234-2345-1234");
-//		gymOwner.setGstIN("22AAAAA0000A1Z5");
-//		
-//		gymDAO.insert(gymOwner);
+		GymOwner gymOwner = new GymOwner();
+		gymOwner.setUserName("GymOwner2");
+		gymOwner.setPassword("pass2");
+		gymOwner.setAadharCard("1234-2345-1233");
+		gymOwner.setGstIN("22AAAAA0000A1Z6");
+		
+		gymDAO.insert(gymOwner);
 
 	}
 

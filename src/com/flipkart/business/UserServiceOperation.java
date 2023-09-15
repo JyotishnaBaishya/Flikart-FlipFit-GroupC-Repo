@@ -2,15 +2,22 @@
  * 
  */
 package com.flipkart.business;
+import java.util.*;
 
+import com.flipkart.bean.User;
 /**
  * 
  */
 public class UserServiceOperation implements UserServiceInterface{
 
+	List<User> loggedInUsers = new ArrayList<User>();
+	List<User> registeredUsers = new ArrayList<User>();
 	@Override
-	public boolean registration() {
+	public boolean registration(String username, String password, int role) {
 		// TODO Auto-generated method stub
+		User user = new User();
+		user.setUserID(username);
+		user.setPassword(password);
 		return false;
 	}
 
