@@ -1,16 +1,16 @@
 package com.flipkart.bean;
 
 public class Gym {
-	private String gymID;
+	private int gymID;
 	private int gymOwnerID;
 	private String location;
 	private int noOfSeats;
 	private boolean isApproved = false;
 	
-	public String getGymID() {
+	public int getGymID() {
 		return gymID;
 	}
-	public void setGymID(String gymID) {
+	public void setGymID(int gymID) {
 		this.gymID = gymID;
 	}
 	public int getGymOwnerID() {

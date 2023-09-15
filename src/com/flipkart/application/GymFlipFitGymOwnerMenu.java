@@ -3,6 +3,7 @@
  */
 package com.flipkart.application;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.flipkart.bean.Gym;
@@ -25,7 +26,7 @@ public class GymFlipFitGymOwnerMenu {
 					Gym newGym = new Gym();
 					newGym.setGymOwnerID(userID);
 					System.out.println("Please Enter the name for the gym");
-					String gymId = in.next();
+					int gymId = in.nextInt();
 					newGym.setGymID(gymId);
 					System.out.println("Please Enter the location for the gym");
 					String location = in.next();
@@ -33,10 +34,25 @@ public class GymFlipFitGymOwnerMenu {
 					System.out.println("Please Enter the total number of seats available in the gym");
 					int noOfSeats = in.nextInt();
 					newGym.setNoOfSeats(noOfSeats);
-					gymService.addGymCentre(newGym);
+					boolean res = gymService.addGymCentre(newGym);
+					if(res) {
+						System.out.println("Gym Request Successfully submitted");
+					}else {
+						System.out.println("Gym Request failed");
+					}
 					break;
 				case 2:
-					gymService.viewRegisteredGyms();
+					ArrayList<Gym>registeredGyms = gymService.viewRegisteredGyms(userID);
+					int n = registeredGyms.size();
+					if(n > 0) {
+						System.out.println("Displaying registered gyms ");
+						for(Gym gym : registeredGyms) {
+							System.out.println(gym.getGymID() + " " + gym.getGymOwnerID() + " " + gym.getLocation() + " " + gym.getNoOfSeats());;
+						}
+					}else {
+						System.out.println("No Gyms registered");
+					}
+					
 					break;
 				case 3:
 					System.out.println("You have exited the gymOwner menu");

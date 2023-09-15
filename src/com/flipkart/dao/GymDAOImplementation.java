@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
@@ -28,7 +29,7 @@ public class GymDAOImplementation implements GymDAOInterface {
 	static final String VIEW_GYM_BY_GYMID = SELECT_GYM + " WHERE ID=(?)";
 
 	@Override
-	public int insert(Gym gym) {
+	public boolean addGymCentre(Gym gym) {
 		// TODO Auto-generated method stub
 		int rowsUpdated = 0;
 		Connection connection = DBConnection.getConnection();
@@ -39,33 +40,45 @@ public class GymDAOImplementation implements GymDAOInterface {
 				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
 			} catch (SQLException e) {
 				e.printStackTrace();
+				return false;
 			}
 
 			try {
 				connection.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+				return false;
 			}
 		}
 		System.out.println("# of DB Rows successfully updated: " + rowsUpdated);
-		return rowsUpdated;
+		return true;
 	}
 
 	@Override
-	public ArrayList<Gym> viewRegisteredGyms(int gymOwnerID) {
+	public ArrayList<Gym> getRegisteredGyms(int gymOwnerID) {
 		// TODO Auto-generated method stub
 		
 		Connection connection = DBConnection.getConnection();
-		
+		ArrayList<Gym> registeredGyms = new ArrayList<Gym>();
 		if(connection != null) {
 			try {
 				PreparedStatement preparedStatement = connection.prepareStatement(VIEW_REGISTERED_GYM);
-				preparedStatement.setInt(gymOwnerID, gymOwnerID);
-				System.out.println(preparedStatement);
+				preparedStatement.setInt(1, gymOwnerID);
 				ResultSet output = preparedStatement.executeQuery();
-			    System.out.println("\tID\tGymOwnerId\tLocation\tSeats\tApproved");
 			    while(output.next()) {
-			    	System.out.println("\t"+output.getString(1) + "\t " + output.getString(2) + "\t " + output.getString(3) + "\t " + output.getString(4) + "\t " + output.getString(5));
+			    	int ID = output.getInt(1);
+			    	String location = output.getString(3);
+			    	int numberOfSeats = output.getInt(4);
+			    	boolean isApproved= output.getBoolean(5);
+			    	if(isApproved) {
+			    		Gym currGym = new Gym();
+			    		currGym.setGymID(ID);
+			    		currGym.setApproved(isApproved);
+			    		currGym.setGymOwnerID(gymOwnerID);
+			    		currGym.setLocation(location);
+			    		currGym.setNoOfSeats(numberOfSeats);
+			    		registeredGyms.add(currGym);
+			    	}
 			    }
 			} catch(SQLException e) {
 				e.printStackTrace();
@@ -78,7 +91,7 @@ public class GymDAOImplementation implements GymDAOInterface {
 			}
 		}
 		
-		return null;
+		return registeredGyms;
 	}
 	
 	private void prepareStatement(PreparedStatement preparedStatement, Gym gym) {
@@ -128,9 +141,7 @@ public class GymDAOImplementation implements GymDAOInterface {
 //			gym.setNoOfSeats(20);
 //			gym.setApproved(false);
 //			gymDAO.insert(gym);
-			
-			gymDAO.viewRegisteredGyms(1);
-			gymDAO.viewGym(1);
+		
 
 		}
 

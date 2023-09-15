@@ -49,41 +49,41 @@ public class GymFLipFitApplication {
 	}
 	
 	void login(Scanner in) {
-		System.out.println("\n\n ---------- Please enter the type of user ---------- ");
-	    System.out.println("1. Admin \n2. GymOwner \n3. Customer" + "\nEnter number between 1-3");
-	    
-	    UserServiceInterface userService = new UserServiceOperation();
-	   
-	    int userRole = in.nextInt();  // Read user input
-	    System.out.println("Please Enter the username");
-		String userName = in.next();
-		System.out.println("Please Enter the password");
-		String password = in.next();
-	    switch(userRole) {
-	    	case 1:
-	    		if(userService.login(userName, password,userRole)) {
-	    			new GymFlipFitAdminMenu().displayMenu(in);
-	    		}else {
-	    			System.out.println("Invalid Credentials");
-	    		}
-	    		break;
-	    	case 2:
-	    		if(userService.login(userName, password, userRole)) {
-	    			//new GymFlipFitGymOwnerMenu().displayMenu(userName, in);
-	    		}else {
-	    			System.out.println("Invalid Credentials");
-	    		}
-	    		break;
-	    	case 3:
-	    		if(userService.login(userName, password,userRole)) {
-	    			new GymFlipFitCustomerMenu().displayMenu(userName, in);
-	    		}else {
-	    			System.out.println("Invalid Credentials");
-	    		}
-	    		break;
-	    		
-	    }
-	    System.out.println("Exiting login Menu..");
+//		System.out.println("\n\n ---------- Please enter the type of user ---------- ");
+//	    System.out.println("1. Admin \n2. GymOwner \n3. Customer" + "\nEnter number between 1-3");
+//	    
+//	    UserServiceInterface userService = new UserServiceOperation();
+//	   
+//	    int userRole = in.nextInt();  // Read user input
+//	    System.out.println("Please Enter the username");
+//		String userName = in.next();
+//		System.out.println("Please Enter the password");
+//		String password = in.next();
+//	    switch(userRole) {
+//	    	case 1:
+//	    		if(userService.login(userName, password,userRole)) {
+//	    			new GymFlipFitAdminMenu().displayMenu(in);
+//	    		}else {
+//	    			System.out.println("Invalid Credentials");
+//	    		}
+//	    		break;
+//	    	case 2:
+//	    		if(userService.login(userName, password, userRole)) {
+//	    			//new GymFlipFitGymOwnerMenu().displayMenu(userName, in);
+//	    		}else {
+//	    			System.out.println("Invalid Credentials");
+//	    		}
+//	    		break;
+//	    	case 3:
+//	    		if(userService.login(userName, password,userRole)) {
+//	    			new GymFlipFitCustomerMenu().displayMenu(userName, in);
+//	    		}else {
+//	    			System.out.println("Invalid Credentials");
+//	    		}
+//	    		break;
+//	    		
+//	    }
+//	    System.out.println("Exiting login Menu..");
 	}
 
 }
