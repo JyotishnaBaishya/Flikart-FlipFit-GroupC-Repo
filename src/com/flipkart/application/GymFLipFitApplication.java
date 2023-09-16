@@ -33,6 +33,7 @@ public class GymFLipFitApplication {
 					new GymFLipFitApplication().register(in);
 					break;
 				case 3:
+					new GymFLipFitApplication().updatePassword(in);
 					break;
 				case 4:
 					System.out.println("Exiting Application");
@@ -121,6 +122,23 @@ public class GymFLipFitApplication {
 		}
 		System.out.println("Exiting register menu");
 	    
+	}
+	void updatePassword(Scanner in) {
+		System.out.println("Please enter the username!!");
+		String userName = in.next();
+		System.out.println("Please enter your old password");
+		String password = in.next();
+		UserServiceInterface userService = new UserServiceOperation();
+		User oldUser = userService.login(userName, password);
+		if(oldUser != null) {
+			System.out.println("Please enter your new Password!!");
+			String newPassword = in.next();
+			if(userService.updatePassword(oldUser,newPassword) != 0) {
+				System.out.println("Password Updated successfully!!");
+			}else {
+				System.out.println("Please try again!!");
+			}
+		}
 	}
 
 }

@@ -28,5 +28,8 @@ public class UserServiceOperation implements UserServiceInterface{
 		User loggedInUser = userDAO.loginUser(userName, password);
 		return loggedInUser;
 	}
-
+	
+	public int updatePassword(User user, String newPassword) {
+		return userDAO.updatePassword(user,newPassword);
+	}
 }

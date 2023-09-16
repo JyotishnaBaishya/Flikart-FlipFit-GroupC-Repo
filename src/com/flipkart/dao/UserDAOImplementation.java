@@ -25,6 +25,8 @@ public class UserDAOImplementation implements UserDAOInterface{
 	static final String SELECT_USER = "SELECT * FROM " + TABLE_USER;
 	
 	static final String WHERE_USERNAME = " WHERE USER.username = ?";
+	
+	static final String UPDATE_USER_PASSWORD = "UPDATE " + TABLE_USER + " SET password = ? WHERE ID = ?";
 
 	@Override
 	public int register(User user) {
@@ -54,7 +56,6 @@ public class UserDAOImplementation implements UserDAOInterface{
 	public User loginUser(String username, String password) {
 		User user = null;
 		Connection connection = DBConnection.getConnection();
-		String generatedColumns[] = { "ID" };
 		if (connection != null) {
 			try {
 				String selectQuery = SELECT_USER + WHERE_USERNAME ;
@@ -93,12 +94,31 @@ public class UserDAOImplementation implements UserDAOInterface{
 	@Override
 	public void delete(String id) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public void update(String id, User user) {
+	public int updatePassword(User user, String newPassword) {
 		// TODO Auto-generated method stub
+		int rowsUpdated = 0;
+		Connection connection = DBConnection.getConnection();
+		if (connection != null) {
+			try {
+				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_PASSWORD);
+				preparedStatement.setString(1,newPassword);
+				preparedStatement.setInt(2,user.getUserID());
+				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return rowsUpdated;
 
 	}
 

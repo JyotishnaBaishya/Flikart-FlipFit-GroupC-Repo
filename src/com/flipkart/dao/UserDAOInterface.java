@@ -15,7 +15,7 @@ public interface UserDAOInterface {
 	public void delete(String id);
 
 
-	public void update(String id, User user);
+	public int updatePassword(User user, String newPassword);
 	
 	public User loginUser(String username, String password);
 }
