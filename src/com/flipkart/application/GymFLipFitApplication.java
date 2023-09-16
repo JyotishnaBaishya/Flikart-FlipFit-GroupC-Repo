@@ -56,7 +56,7 @@ public class GymFLipFitApplication {
 		System.out.println("\n\n ---------- Please enter the type of user ---------- ");
 	    System.out.println("1. Admin \n2. GymOwner \n3. Customer" + "\nEnter number between 1-3");
 	    
-	    UserServiceInterface userService = new UserServiceOperation();
+	    UserServiceInterface userService = UserServiceOperation.getInstance();
 	    int userRole = in.nextInt();
 	    while(userRole < 1 || userRole > 3) {
 	    	System.out.println("Invalid type please try again!!");
@@ -104,7 +104,7 @@ public class GymFLipFitApplication {
 		System.out.println("\n\n ---------- Please enter the type of user ---------- ");
 	    System.out.println("1. Customer \n2. GymOwner" + "\nEnter number between 1-2");
 	    
-	    UserServiceInterface userService = new UserServiceOperation();
+	    UserServiceInterface userService = UserServiceOperation.getInstance();
 	    int userRole = in.nextInt();
 	    while(userRole < 1 || userRole > 2) {
 	    	System.out.println("Invalid type please try again!!");
@@ -128,7 +128,7 @@ public class GymFLipFitApplication {
 		String userName = in.next();
 		System.out.println("Please enter your old password");
 		String password = in.next();
-		UserServiceInterface userService = new UserServiceOperation();
+		UserServiceInterface userService = UserServiceOperation.getInstance();
 		User oldUser = userService.login(userName, password);
 		if(oldUser != null) {
 			System.out.println("Please enter your new Password!!");

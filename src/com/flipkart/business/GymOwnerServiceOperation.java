@@ -11,6 +11,18 @@ import com.flipkart.dao.GymDAOImplementation;
 import com.flipkart.dao.GymDAOInterface;
 
 public class GymOwnerServiceOperation implements GymOwnerServiceInterface{
+
+	private static GymOwnerServiceInterface gymOwnerServiceObj = null;
+
+	private GymOwnerServiceOperation() {
+	}
+
+	public static synchronized GymOwnerServiceInterface getInstance() {
+		if (gymOwnerServiceObj == null)
+			gymOwnerServiceObj = new GymOwnerServiceOperation();
+
+		return gymOwnerServiceObj;
+	}
 	
 	List<Gym> gymList = new ArrayList<Gym>();
 	@Override

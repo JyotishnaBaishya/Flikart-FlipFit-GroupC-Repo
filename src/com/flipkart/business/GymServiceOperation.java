@@ -7,6 +7,18 @@ import com.flipkart.bean.TimeSlot;
 
 public class GymServiceOperation implements GymServiceInterface {
 
+	private static GymServiceInterface gymServiceObj = null;
+
+	private GymServiceOperation() {
+	}
+
+	public static synchronized GymServiceInterface getInstance() {
+		if (gymServiceObj == null)
+			gymServiceObj = new GymServiceOperation();
+
+		return gymServiceObj;
+	}
+
 	@Override
 	public Gym viewGym() {
 		// TODO Auto-generated method stub

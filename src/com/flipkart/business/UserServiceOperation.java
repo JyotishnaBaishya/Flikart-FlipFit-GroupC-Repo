@@ -11,6 +11,18 @@ import com.flipkart.dao.UserDAOInterface;
  * 
  */
 public class UserServiceOperation implements UserServiceInterface{
+
+	private static UserServiceInterface userServiceObj = null;
+
+	private UserServiceOperation() {
+	}
+
+	public static synchronized UserServiceInterface getInstance() {
+		if (userServiceObj == null)
+			userServiceObj = new UserServiceOperation();
+
+		return userServiceObj;
+	}
 	
 	@Override
 	public boolean registration(String username, String password, String role) {

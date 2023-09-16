@@ -13,7 +13,7 @@ import com.flipkart.business.CustomerServiceOperation;
  * 
  */
 public class GymFlipFitCustomerMenu {
-	CustomerServiceInterface customerService = new CustomerServiceOperation();
+	CustomerServiceInterface customerService = CustomerServiceOperation.getInstance();
 	public void displayMenu(User user,Scanner in) {
 		int menuOption = 1;
 		do {

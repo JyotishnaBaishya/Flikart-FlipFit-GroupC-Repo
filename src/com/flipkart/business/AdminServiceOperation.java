@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
+import com.flipkart.dao.AdminDAOImplementation;
 import com.flipkart.dao.GymDAOImplementation;
 import com.flipkart.dao.GymOwnerDAOImplementation;
 
@@ -19,9 +20,18 @@ public class AdminServiceOperation implements AdminServiceInterface{
 	List<Gym> pendingGymApprovals = new ArrayList<Gym>();
 	List<GymOwner> pendingGymOwnerApprovals = new ArrayList<GymOwner>();
 	
-	public AdminServiceOperation() {
+	private static AdminServiceInterface adminServiceObj = null;
 
+	private AdminServiceOperation() {
 	}
+
+	public static synchronized AdminServiceInterface getInstance() {
+		if (adminServiceObj == null)
+			adminServiceObj = new AdminServiceOperation();
+
+		return adminServiceObj;
+	}
+
 	@Override
 	public boolean approveAllGymOwners() {
 		// TODO Auto-generated method stub

@@ -19,12 +19,12 @@ import com.flipkart.utils.DBConnection;
  */
 public class UserDAOImplementation implements UserDAOInterface{
 
-	private static UserDAOImplementation userDaoObj = null;
+	private static UserDAOInterface userDaoObj = null;
 
 	private UserDAOImplementation() {
 	}
 
-	public static synchronized UserDAOImplementation getInstance() {
+	public static synchronized UserDAOInterface getInstance() {
 		if (userDaoObj == null)
 			userDaoObj = new UserDAOImplementation();
 

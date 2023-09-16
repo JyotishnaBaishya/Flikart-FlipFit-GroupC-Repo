@@ -17,7 +17,7 @@ import com.flipkart.business.AdminServiceOperation;
  */
 public class GymFlipFitAdminMenu {
 
-	AdminServiceInterface adminService = new AdminServiceOperation();
+	AdminServiceInterface adminService = AdminServiceOperation.getInstance();
 	List<GymOwner> pendingGymOwnerApprovals = new ArrayList<GymOwner>();
 
 	public void displayMenu(User user, Scanner in) {

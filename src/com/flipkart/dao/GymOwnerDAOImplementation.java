@@ -20,12 +20,12 @@ import com.flipkart.utils.DBConnection;
  */
 public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 
-	private static GymOwnerDAOImplementation gymOwnerDaoObj = null;
+	private static GymOwnerDAOInterface gymOwnerDaoObj = null;
 
 	private GymOwnerDAOImplementation() {
 	}
 
-	public static synchronized GymOwnerDAOImplementation getInstance() {
+	public static synchronized GymOwnerDAOInterface getInstance() {
 		if (gymOwnerDaoObj == null)
 			gymOwnerDaoObj = new GymOwnerDAOImplementation();
 

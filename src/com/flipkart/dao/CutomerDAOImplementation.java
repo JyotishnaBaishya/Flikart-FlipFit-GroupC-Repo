@@ -12,12 +12,12 @@ import com.flipkart.utils.DBConnection;
 public class CutomerDAOImplementation implements CustomerDAOInterface {
 	
 
-	private static CutomerDAOImplementation customerDaoObj = null;
+	private static CustomerDAOInterface customerDaoObj = null;
 
 	private CutomerDAOImplementation() {
 	}
 
-	public static synchronized CutomerDAOImplementation getInstance() {
+	public static synchronized CustomerDAOInterface getInstance() {
 		if (customerDaoObj == null)
 			customerDaoObj = new CutomerDAOImplementation();
 

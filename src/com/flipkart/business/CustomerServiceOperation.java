@@ -9,6 +9,18 @@ import com.flipkart.bean.Booking;
 **/
 public class CustomerServiceOperation implements CustomerServiceInterface{
 
+	private static CustomerServiceInterface customerServiceObj = null;
+
+	private CustomerServiceOperation() {
+	}
+
+	public static synchronized CustomerServiceInterface getInstance() {
+		if (customerServiceObj == null)
+			customerServiceObj = new CustomerServiceOperation();
+
+		return customerServiceObj;
+	}
+
 	@Override
 	public boolean bookSlot(String gymID, String slotID) {
 		// TODO Auto-generated method stub

@@ -21,12 +21,12 @@ import com.flipkart.utils.DBConnection;
  */
 public class GymDAOImplementation implements GymDAOInterface {
 
-	private static GymDAOImplementation gymDaoObj = null;
+	private static GymDAOInterface gymDaoObj = null;
 
 	private GymDAOImplementation() {
 	}
 
-	public static synchronized GymDAOImplementation getInstance() {
+	public static synchronized GymDAOInterface getInstance() {
 		if (gymDaoObj == null)
 			gymDaoObj = new GymDAOImplementation();
 

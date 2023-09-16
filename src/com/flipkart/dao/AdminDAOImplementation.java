@@ -17,12 +17,12 @@ import com.flipkart.business.AdminServiceInterface;
 public class AdminDAOImplementation implements AdminDAOInterface{
 
 
-	private static AdminDAOImplementation adminDaoObj = null;
+	private static AdminDAOInterface adminDaoObj = null;
 
 	private AdminDAOImplementation() {
 	}
 
-	public static synchronized AdminDAOImplementation getInstance() {
+	public static synchronized AdminDAOInterface getInstance() {
 		if (adminDaoObj == null)
 			adminDaoObj = new AdminDAOImplementation();
 

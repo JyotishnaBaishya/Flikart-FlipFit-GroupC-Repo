@@ -18,6 +18,18 @@ import com.flipkart.utils.DBConnection;
  */
 public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 
+
+	private static TimeSlotDAOInterface timeSlotDaoObj = null;
+
+	private TimeSlotDAOImplementation() {
+	}
+
+	public static synchronized TimeSlotDAOInterface getInstance() {
+		if (timeSlotDaoObj == null)
+			timeSlotDaoObj = new TimeSlotDAOImplementation();
+
+		return timeSlotDaoObj;
+	}
 	
 	@Override
 	public int insert(TimeSlot slot) {
