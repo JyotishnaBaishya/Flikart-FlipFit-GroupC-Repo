@@ -10,10 +10,23 @@ import java.util.Date;
  */
 public class Notification {
 	String notifID;
-	String userID;
+	int userID;
+	String userType;
 	String content;
 	Boolean isViewed = false;
 	Date createdAt;
+	
+	public Notification() {
+		
+	}
+
+	public Notification(int userID, String userType, String content, Boolean isViewed) {
+		super();
+		this.userID = userID;
+		this.userType = userType;
+		this.content = content;
+		this.isViewed = isViewed;
+	}
 
 	public Boolean getIsViewed() {
 		return isViewed;
@@ -31,11 +44,11 @@ public class Notification {
 		this.notifID = notifID;
 	}
 
-	public String getUserID() {
+	public int getUserID() {
 		return userID;
 	}
 
-	public void setUserID(String userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 
@@ -54,4 +67,13 @@ public class Notification {
 	public void setDate(Date date) {
 		this.createdAt = date;
 	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
 }

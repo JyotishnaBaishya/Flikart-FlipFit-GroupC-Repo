@@ -43,7 +43,6 @@ public class CutomerDAOImplementation implements CustomerDAOInterface {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("# of DB Rows successfully updated: " + rowsUpdated);
 		return rowsUpdated;
 
 	}

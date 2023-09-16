@@ -15,7 +15,7 @@ public interface AdminServiceInterface {
 
 	public ArrayList<GymOwner> getPendingGymOwnerApprovals();
 
-	public void handleGymRegistrationRequest(int gymId, int status);
+	public int handleGymRegistrationRequest(int gymId, int status);
 
 	public void approveAllGymRegistrationRequests();
 

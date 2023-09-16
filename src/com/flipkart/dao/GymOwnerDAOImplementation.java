@@ -51,9 +51,7 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("# of DB Rows successfully updated: " + rowsUpdated);
 		return rowsUpdated;
-
 	}
 
 	private void prepareStatement(PreparedStatement preparedStatement, GymOwner gymOwner) {

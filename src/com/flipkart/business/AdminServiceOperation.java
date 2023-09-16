@@ -51,7 +51,7 @@ public class AdminServiceOperation implements AdminServiceInterface {
 	}
 
 	@Override
-	public void handleGymRegistrationRequest(int gymId, int status) {
+	public int handleGymRegistrationRequest(int gymId, int status) {
 		for (Gym gym : getPendingGymRegistrationRequests()) {
 			if (gym.getGymID() == gymId) {
 				int flag = GymDAOImplementation.getInstance().handleGymRequest(gymId, status);
@@ -60,9 +60,10 @@ public class AdminServiceOperation implements AdminServiceInterface {
 				} else {
 					System.out.println("Gym ID " + gymId + " could not be updated!");
 				}
-				break;
+				return flag;
 			}
 		}
+		return 0;
 	}
 
 	@Override

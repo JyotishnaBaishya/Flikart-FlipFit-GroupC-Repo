@@ -37,6 +37,10 @@ public class SqlConstants {
 	public static final String WHERE_USERNAME = " WHERE username = ";
 	public static final String UPDATE_USER_PASSWORD = "UPDATE " + TABLE_USER + " SET password = ? WHERE ID = ?";
 
+	// Notification
+	public static final String TABLE_NOTIFICATION = "NOTIFICATION";
+	public static final String INSERT_NOTIFICATION = "INSERT INTO " + TABLE_NOTIFICATION + " (userid, usertype, content, isViewed) "
+			+ " VALUES (?, ?, ?, ?)";	
 
 
 	// common WHERE clauses

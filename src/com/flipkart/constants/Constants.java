@@ -8,4 +8,7 @@ public class Constants {
 	public static final int PENDING = 0;
 	public static final int APPROVED = 1;
 	public static final int REJECTED = 2;
+	
+	public static final String NOTIFICATION_APPROVED = "Your Request has been Approved for ";
+	public static final String NOTIFICATION_REJECTED = "Your Request has been Rejected for ";
 }

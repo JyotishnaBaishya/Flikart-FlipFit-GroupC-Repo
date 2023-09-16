@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.flipkart.bean.Notification;
 import com.flipkart.bean.User;
+import com.flipkart.dao.NotificationDAOImplementation;
 
 /**
  * 
@@ -27,7 +28,7 @@ public class NotificationServiceOperation implements NotificationServiceInterfac
 
 	@Override
 	public void addNotification(Notification notification) {
-		// TODO Auto-generated method stub
+		NotificationDAOImplementation.getInstance().insert(notification);
 
 	}
 
