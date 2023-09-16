@@ -10,20 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.flipkart.bean.TimeSlot;
+import com.flipkart.constants.SqlConstants;
+import com.flipkart.utils.DBConnection;
 
 /**
  * 
  */
 public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 
-	static final String TABLE_TIMESLOT = "TimeSlot";
-
-	static final String INSERT_TIMESLOT = "INSERT INTO " + TABLE_TIMESLOT
-			+ " (slotID, gymID, availableSeats, day) " + " VALUES (?, ?, ?, ?)";
-	
-	static final String CHECK_TIMESLOT_AVAILABILITY = "SELECT availableSeats FROM " + TABLE_TIMESLOT + " WHERE slotID = (?) AND gymID = (?)";
-	
-	static final String UPDATE_TIMESLOT_AVAILABILITY = "UPDATE " + TABLE_TIMESLOT + " SET availableSeats = availableSeats + (?) WHERE slotID = (?) AND gymID = (?)";
 	
 	@Override
 	public int insert(TimeSlot slot) {
@@ -33,9 +27,9 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 		Connection connection = DBConnection.getConnection();
 		if (connection != null) {
 			try {
-				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_TIMESLOT);
+				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.INSERT_TIMESLOT);
 				prepareStatement(preparedStatement, slot);
-				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
+				rowsUpdated = preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -58,10 +52,10 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 		Connection connection = DBConnection.getConnection();
 		if (connection != null) {
 			try {
-				PreparedStatement preparedStatement = connection.prepareStatement(CHECK_TIMESLOT_AVAILABILITY);
+				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.CHECK_TIMESLOT_AVAILABILITY);
 				preparedStatement.setInt(1, slotID);
 				preparedStatement.setInt(2, gymID);
-				resultSet = DBConnection.executeQuery(preparedStatement);
+				resultSet = preparedStatement.executeQuery();
 				if (resultSet != null) {
 					while(resultSet.next()) {
 						availableSeats = resultSet.getInt(1);
@@ -88,11 +82,11 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 		
 		if (connection != null) {
 			try {
-				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_TIMESLOT_AVAILABILITY);
+				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.UPDATE_TIMESLOT_AVAILABILITY);
 				preparedStatement.setInt(1, changeInSeats);
 				preparedStatement.setInt(2, slotID);
 				preparedStatement.setInt(3, gymID);
-				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
+				rowsUpdated = preparedStatement.executeUpdate();
 				
 			} catch (SQLException e) {
 				e.printStackTrace();

@@ -9,6 +9,7 @@
 *.nar
 hs_err_pid*
 replay_pid*
+.properties
 ##############################
 ## Eclipse
 ##############################
@@ -26,4 +27,4 @@ local.properties
 .loadpath
 .factorypath
 *.DS_Store
-*.classpath
+.classpath

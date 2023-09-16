@@ -16,12 +16,19 @@ import com.flipkart.business.AdminServiceInterface;
  */
 public class AdminDAOImplementation implements AdminDAOInterface{
 
-	static final String TABLE_USER = "USER";
 
-	static final String INSERT_USER = "INSERT INTO " + TABLE_USER + " (username, password, role) "
-			+ " VALUES (?, ?, ?)";
-	
-	
+	private static AdminDAOImplementation adminDaoObj = null;
+
+	private AdminDAOImplementation() {
+	}
+
+	public static synchronized AdminDAOImplementation getInstance() {
+		if (adminDaoObj == null)
+			adminDaoObj = new AdminDAOImplementation();
+
+		return adminDaoObj;
+	}
+		
 
 	@Override
 	public boolean approveGymOwner() {

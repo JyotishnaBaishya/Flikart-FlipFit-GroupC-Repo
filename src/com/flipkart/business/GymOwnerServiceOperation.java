@@ -13,11 +13,10 @@ import com.flipkart.dao.GymDAOInterface;
 public class GymOwnerServiceOperation implements GymOwnerServiceInterface{
 	
 	List<Gym> gymList = new ArrayList<Gym>();
-	static final GymDAOInterface gymDAO = new GymDAOImplementation();
 	@Override
 	public boolean addGymCentre(Gym newGym) {
 		// TODO Auto-generated method stub
-		boolean isAdded = gymDAO.addGymCentre(newGym);
+		boolean isAdded = GymDAOImplementation.getInstance().addGymCentre(newGym);
 		if(isAdded) {
 			gymList.add(newGym); 
 		}
@@ -28,7 +27,7 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface{
 	@Override
 	public ArrayList<Gym> viewRegisteredGyms(int gymOwnerID) {
 		// TODO Auto-generated method stub
-		ArrayList<Gym>registeredGyms = gymDAO.getRegisteredGyms(gymOwnerID);
+		ArrayList<Gym>registeredGyms = GymDAOImplementation.getInstance().getRegisteredGyms(gymOwnerID);
 		return registeredGyms;
 		
 	}

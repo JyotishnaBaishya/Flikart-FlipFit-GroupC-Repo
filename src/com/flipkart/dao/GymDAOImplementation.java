@@ -12,21 +12,26 @@ import java.util.List;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
+import com.flipkart.constants.Constants;
+import com.flipkart.constants.SqlConstants;
+import com.flipkart.utils.DBConnection;
 
 /**
  * 
  */
 public class GymDAOImplementation implements GymDAOInterface {
-	
-	static final String TABLE_GYM = "GYM";
 
-	static final String INSERT_GYM = "INSERT INTO " + TABLE_GYM
-			+ " (gymOwnerID, location, noOfSeats, isApproved) " + " VALUES (?, ?, ?, ?)";
-	static final String SELECT_GYM = "SELECT * FROM " + TABLE_GYM;
-	
-	static final String VIEW_REGISTERED_GYM = SELECT_GYM + " WHERE gymOwnerID=(?)";
-	
-	static final String VIEW_GYM_BY_GYMID = SELECT_GYM + " WHERE ID=(?)";
+	private static GymDAOImplementation gymDaoObj = null;
+
+	private GymDAOImplementation() {
+	}
+
+	public static synchronized GymDAOImplementation getInstance() {
+		if (gymDaoObj == null)
+			gymDaoObj = new GymDAOImplementation();
+
+		return gymDaoObj;
+	}
 
 	@Override
 	public boolean addGymCentre(Gym gym) {
@@ -35,9 +40,9 @@ public class GymDAOImplementation implements GymDAOInterface {
 		Connection connection = DBConnection.getConnection();
 		if (connection != null) {
 			try {
-				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GYM);
+				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.INSERT_GYM);
 				prepareStatement(preparedStatement, gym);
-				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
+				rowsUpdated = preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return false;
@@ -60,40 +65,40 @@ public class GymDAOImplementation implements GymDAOInterface {
 		
 		Connection connection = DBConnection.getConnection();
 		ArrayList<Gym> registeredGyms = new ArrayList<Gym>();
-		if(connection != null) {
+		if (connection != null) {
 			try {
-				PreparedStatement preparedStatement = connection.prepareStatement(VIEW_REGISTERED_GYM);
+				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.VIEW_REGISTERED_GYM);
 				preparedStatement.setInt(1, gymOwnerID);
 				ResultSet output = preparedStatement.executeQuery();
-			    while(output.next()) {
-			    	int ID = output.getInt(1);
-			    	String location = output.getString(3);
-			    	int numberOfSeats = output.getInt(4);
-			    	boolean isApproved= output.getBoolean(5);
-			    	if(isApproved) {
-			    		Gym currGym = new Gym();
-			    		currGym.setGymID(ID);
-			    		currGym.setApproved(isApproved);
-			    		currGym.setGymOwnerID(gymOwnerID);
-			    		currGym.setLocation(location);
-			    		currGym.setNoOfSeats(numberOfSeats);
-			    		registeredGyms.add(currGym);
-			    	}
-			    }
-			} catch(SQLException e) {
+				while (output.next()) {
+					int ID = output.getInt(1);
+					String location = output.getString(3);
+					int numberOfSeats = output.getInt(4);
+					boolean isApproved = output.getBoolean(5);
+					if (isApproved) {
+						Gym currGym = new Gym();
+						currGym.setGymID(ID);
+						currGym.setApproved(isApproved);
+						currGym.setGymOwnerID(gymOwnerID);
+						currGym.setLocation(location);
+						currGym.setNoOfSeats(numberOfSeats);
+						registeredGyms.add(currGym);
+					}
+				}
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
+
 			try {
 				connection.close();
-			} catch(SQLException e) {
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return registeredGyms;
 	}
-	
+
 	private void prepareStatement(PreparedStatement preparedStatement, Gym gym) {
 		try {
 			preparedStatement.setInt(1, gym.getGymOwnerID());
@@ -106,45 +111,105 @@ public class GymDAOImplementation implements GymDAOInterface {
 		}
 
 	}
-	
+
+	public static ArrayList<Gym> getPendingGymRegistrationRequests() {
+		ResultSet resultSet = null;
+		ArrayList<Gym> pendingGymList = new ArrayList<>();
+		Connection connection = DBConnection.getConnection();
+		if (connection != null) {
+			try {
+				PreparedStatement preparedStatement = connection
+						.prepareStatement(SqlConstants.SELECT_GYM + SqlConstants.WHERE_PENDING_APPROVAL);
+				resultSet = preparedStatement.executeQuery();
+				if (resultSet != null) {
+
+					try {
+						while (resultSet.next()) {
+							Gym gym = new Gym();
+							gym.setGymID(resultSet.getInt(1));
+							gym.setGymOwnerID(resultSet.getInt(2));
+							gym.setLocation(resultSet.getString(3));
+							gym.setNoOfSeats(resultSet.getInt(4));
+							pendingGymList.add(gym);
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return pendingGymList;
+	}
+
+	public static int approveGym(int gymId) {
+
+		int rowsUpdated = 0;
+		Connection connection = DBConnection.getConnection();
+		if (connection != null) {
+			try {
+				PreparedStatement preparedStatement = connection
+						.prepareStatement(SqlConstants.UPDATE_APPROVE_GYM_OWNER);
+				preparedStatement.setInt(1, gymId);
+				rowsUpdated = preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("# of DB Rows successfully updated: " + rowsUpdated);
+		return rowsUpdated;
+
+	}
+
 	@Override
 	public Gym viewGym(int gymID) {
 		// TODO Auto-generated method stub
 		Connection connection = DBConnection.getConnection();
-			try {
-				PreparedStatement preparedStatement = connection.prepareStatement(VIEW_GYM_BY_GYMID);
-				preparedStatement.setInt(gymID, gymID);
-				System.out.println(preparedStatement);
-				ResultSet output = preparedStatement.executeQuery();
-				while(output.next()) {
-					System.out.println("\t"+output.getString(1) + "\t " + output.getString(2) + "\t " + output.getString(3) + "\t " + output.getString(4) + "\t " + output.getString(5));
-				}
-			} catch(SQLException e) {
-				e.printStackTrace();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.WHERE_ID);
+			preparedStatement.setInt(gymID, gymID);
+			System.out.println(preparedStatement);
+			ResultSet output = preparedStatement.executeQuery();
+			while (output.next()) {
+				System.out.println("\t" + output.getString(1) + "\t " + output.getString(2) + "\t "
+						+ output.getString(3) + "\t " + output.getString(4) + "\t " + output.getString(5));
 			}
-			
-			try {
-				connection.close();
-			} catch(SQLException e) {
-				e.printStackTrace();
-			}
-			
-		return null;
-	}
-	
-	// Driver
-		public static void main(String args[]) {
-			GymDAOInterface gymDAO = new GymDAOImplementation();
-//			Gym gym = new Gym();
-//			gym.setGymOwnerID(1);
-//			gym.setLocation("loc1");
-//			gym.setNoOfSeats(20);
-//			gym.setApproved(false);
-//			gymDAO.insert(gym);
-		
-
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
-		
-	
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	// Driver
+	public static void main(String args[]) {
+		GymDAOInterface gymDAO = new GymDAOImplementation();
+		Gym gym = new Gym();
+		gym.setGymOwnerID(55);
+		gym.setLocation("loc5");
+		gym.setNoOfSeats(20);
+		gym.setApproved(false);
+		gymDAO.addGymCentre(gym);
+
+	}
+
 }

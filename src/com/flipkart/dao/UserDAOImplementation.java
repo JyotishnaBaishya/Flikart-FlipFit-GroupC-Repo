@@ -11,22 +11,25 @@ import java.sql.SQLIntegrityConstraintViolationException;
 
 import com.flipkart.bean.User;
 import com.flipkart.constants.Constants;
+import com.flipkart.constants.SqlConstants;
+import com.flipkart.utils.DBConnection;
 
 /**
  * 
  */
 public class UserDAOImplementation implements UserDAOInterface{
 
-	static final String TABLE_USER = "USER";
+	private static UserDAOImplementation userDaoObj = null;
 
-	static final String INSERT_USER = "INSERT INTO " + TABLE_USER + " (username, password, role) "
-			+ " VALUES (?, ?, ?)";
-	
-	static final String SELECT_USER = "SELECT * FROM " + TABLE_USER;
-	
-	static final String WHERE_USERNAME = " WHERE USER.username = ?";
-	
-	static final String UPDATE_USER_PASSWORD = "UPDATE " + TABLE_USER + " SET password = ? WHERE ID = ?";
+	private UserDAOImplementation() {
+	}
+
+	public static synchronized UserDAOImplementation getInstance() {
+		if (userDaoObj == null)
+			userDaoObj = new UserDAOImplementation();
+
+		return userDaoObj;
+	}
 
 	@Override
 	public int register(User user) {
@@ -34,12 +37,12 @@ public class UserDAOImplementation implements UserDAOInterface{
 		Connection connection = DBConnection.getConnection();
 		if (connection != null) {
 			try {
-				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER);
+				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.INSERT_USER);
 				prepareStatement(preparedStatement, user);
-				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
-			}catch(SQLIntegrityConstraintViolationException e) {
+				rowsUpdated = preparedStatement.executeUpdate();
+			} catch(SQLIntegrityConstraintViolationException e) {
 				System.out.println("This username already exists!!");
-			}catch (SQLException e) {
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			try {
@@ -56,11 +59,11 @@ public class UserDAOImplementation implements UserDAOInterface{
 	public User loginUser(String username, String password) {
 		User user = null;
 		Connection connection = DBConnection.getConnection();
+		String generatedColumns[] = { "ID" };
 		if (connection != null) {
 			try {
-				String selectQuery = SELECT_USER + WHERE_USERNAME ;
-				PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
-				preparedStatement.setString(1,username);
+				String selectQuery = SqlConstants.SELECT_USER + SqlConstants.WHERE_USERNAME + "'"+username+"'";
+				PreparedStatement preparedStatement = connection.prepareStatement(selectQuery, generatedColumns);
 				ResultSet rs = preparedStatement.executeQuery();
 				while(rs.next()){
 					 //Retrieve by column name
@@ -104,10 +107,10 @@ public class UserDAOImplementation implements UserDAOInterface{
 		Connection connection = DBConnection.getConnection();
 		if (connection != null) {
 			try {
-				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_PASSWORD);
+				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.UPDATE_USER_PASSWORD);
 				preparedStatement.setString(1,newPassword);
 				preparedStatement.setInt(2,user.getUserID());
-				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
+				rowsUpdated = preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

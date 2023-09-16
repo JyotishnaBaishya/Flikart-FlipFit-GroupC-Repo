@@ -11,8 +11,7 @@ import com.flipkart.dao.UserDAOInterface;
  * 
  */
 public class UserServiceOperation implements UserServiceInterface{
-
-	UserDAOInterface userDAO = new UserDAOImplementation();
+	
 	@Override
 	public boolean registration(String username, String password, String role) {
 		// TODO Auto-generated method stub
@@ -20,16 +19,16 @@ public class UserServiceOperation implements UserServiceInterface{
 		user.setUserName(username);
 		user.setPassword(password);
 		user.setRole(role);
-		return userDAO.register(user) != 0;
+		return UserDAOImplementation.getInstance().register(user) != 0;
 	}
 
 	@Override
 	public User login(String userName, String password) {
-		User loggedInUser = userDAO.loginUser(userName, password);
+		User loggedInUser = UserDAOImplementation.getInstance().loginUser(userName, password);
 		return loggedInUser;
 	}
 	
 	public int updatePassword(User user, String newPassword) {
-		return userDAO.updatePassword(user,newPassword);
+		return UserDAOImplementation.getInstance().updatePassword(user,newPassword);
 	}
 }

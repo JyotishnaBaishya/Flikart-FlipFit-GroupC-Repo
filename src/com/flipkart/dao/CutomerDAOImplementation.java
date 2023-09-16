@@ -6,23 +6,33 @@ import java.sql.SQLException;
 
 import com.flipkart.bean.Customer;
 import com.flipkart.constants.Constants;
+import com.flipkart.constants.SqlConstants;
+import com.flipkart.utils.DBConnection;
 
 public class CutomerDAOImplementation implements CustomerDAOInterface {
+	
 
-	static final String TABLE_USER = "USER";
+	private static CutomerDAOImplementation customerDaoObj = null;
 
-	static final String INSERT_USER = "INSERT INTO " + TABLE_USER + " (username, password, role) "
-			+ " VALUES (?, ?, ?)";
+	private CutomerDAOImplementation() {
+	}
 
+	public static synchronized CutomerDAOImplementation getInstance() {
+		if (customerDaoObj == null)
+			customerDaoObj = new CutomerDAOImplementation();
+
+		return customerDaoObj;
+	}
+	
 	@Override
 	public int insert(Customer customer) {
 		int rowsUpdated = 0;
 		Connection connection = DBConnection.getConnection();
 		if (connection != null) {
 			try {
-				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER);
+				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.INSERT_USER);
 				prepareStatement(preparedStatement, customer);
-				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
+				rowsUpdated = preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

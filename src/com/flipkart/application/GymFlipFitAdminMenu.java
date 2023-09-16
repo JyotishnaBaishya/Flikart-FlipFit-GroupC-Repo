@@ -5,10 +5,12 @@ package com.flipkart.application;
 
 import java.util.*;
 
+import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
 import com.flipkart.business.AdminServiceInterface;
 import com.flipkart.business.AdminServiceOperation;
+
 
 /**
  * 
@@ -41,10 +43,16 @@ public class GymFlipFitAdminMenu {
 					
 					break;
 				case 3:
-					System.out.println("Enter gym owner user id");					
+					System.out.println("Enter gym id");					
 					adminService.approveGymRegistrationRequest(in.nextInt());
 					break;
 				case 4:
+					ArrayList<Gym> gymList = adminService.getPendingGymRegistrationRequests();
+					System.out.println("GymID\tOwnerID\tLocation\t# of seats");
+					System.out.println("-----------------------------------------------------------");
+					for(Gym gym : gymList) {
+						System.out.println(gym.getGymID()+"\t"+gym.getGymOwnerID()+"\t"+gym.getLocation()+"\t\t"+gym.getNoOfSeats());
+					}
 					adminService.getPendingGymRegistrationRequests();
 					break;
 				case 5:
