@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * 
  */
-public class GymFLipFitApplication {
+public class GymFlipFitApplication {
 
 	/**
 	 * @param args
@@ -27,13 +27,13 @@ public class GymFLipFitApplication {
 			menuOption = in.nextInt();
 			switch(menuOption) {
 				case 1:
-					new GymFLipFitApplication().login(in);
+					new GymFlipFitApplication().login(in);
 					break;
 				case 2:
-					new GymFLipFitApplication().register(in);
+					new GymFlipFitApplication().register(in);
 					break;
 				case 3:
-					new GymFLipFitApplication().updatePassword(in);
+					new GymFlipFitApplication().updatePassword(in);
 					break;
 				case 4:
 					System.out.println("Exiting Application");
@@ -53,7 +53,12 @@ public class GymFLipFitApplication {
 	}
 	
 	void login(Scanner in) {
-		System.out.println("\n\n ---------- Please enter the type of user ---------- ");
+		
+	    System.out.println("Please Enter the username");
+		String userName = in.next();
+		System.out.println("Please Enter the password");
+		String password = in.next();
+		System.out.println("\n\n \033[1m  --------------- Please enter the type of user ---------------\033[0m ");
 	    System.out.println("1. Admin \n2. GymOwner \n3. Customer" + "\nEnter number between 1-3");
 	    
 	    UserServiceInterface userService = UserServiceOperation.getInstance();
@@ -62,10 +67,6 @@ public class GymFLipFitApplication {
 	    	System.out.println("Invalid type please try again!!");
 	    	userRole = in.nextInt();
 	    }
-	    System.out.println("Please Enter the username");
-		String userName = in.next();
-		System.out.println("Please Enter the password");
-		String password = in.next();
 		User loggedInUser;
 	    switch(userRole) {
 	    	case 1:

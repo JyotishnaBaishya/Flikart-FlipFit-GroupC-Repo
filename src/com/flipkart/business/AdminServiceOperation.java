@@ -17,9 +17,6 @@ import com.flipkart.dao.GymOwnerDAOImplementation;
  */
 public class AdminServiceOperation implements AdminServiceInterface{
 	
-	List<Gym> pendingGymApprovals = new ArrayList<Gym>();
-	List<GymOwner> pendingGymOwnerApprovals = new ArrayList<GymOwner>();
-	
 	private static AdminServiceInterface adminServiceObj = null;
 
 	private AdminServiceOperation() {
@@ -32,11 +29,6 @@ public class AdminServiceOperation implements AdminServiceInterface{
 		return adminServiceObj;
 	}
 
-	@Override
-	public boolean approveAllGymOwners() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	@Override
 	public void approveGymOwner(int gymOwnerId) {
 		for(GymOwner owner: getPendingGymOwnerApprovals()) {
@@ -62,7 +54,7 @@ public class AdminServiceOperation implements AdminServiceInterface{
 	public void approveGymRegistrationRequest(int gymId) {
 		for(Gym gym: getPendingGymRegistrationRequests()) {
 			if(gym.getGymID() == gymId){
-				int flag = GymDAOImplementation.approveGym(gymId);
+				int flag = GymDAOImplementation.getInstance().approveGym(gymId);
 				if(flag > 0) {
 					System.out.println("Gym ID " + gymId + " approved");
 				} else {
@@ -75,8 +67,19 @@ public class AdminServiceOperation implements AdminServiceInterface{
 
 	@Override
 	public ArrayList<Gym> getPendingGymRegistrationRequests() {
-		return GymDAOImplementation.getPendingGymRegistrationRequests();
+		return GymDAOImplementation.getInstance().getPendingGymRegistrationRequests();
 		
 		}
+
+	@Override
+	public void approveAllGymRegistrationRequests() {
+		GymDAOImplementation.getInstance().approveAllGymRegistrationRequests();
+		
+	}
+
+	@Override
+	public void approveAllGymOwners() {
+		GymOwnerDAOImplementation.getInstance().approveAllGymOwners();
+	}
 
 }

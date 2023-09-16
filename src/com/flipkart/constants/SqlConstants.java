@@ -5,16 +5,14 @@ public class SqlConstants {
 	// GymOwner
 	public static final String TABLE_GYM_OWNER = "GYMOWNER";
 	public static final String SELECT_GYM_OWNER = "SELECT * FROM " + TABLE_GYM_OWNER;
-	public static final String UPDATE_APPROVE_GYM_OWNER = "UPDATE " + TABLE_GYM_OWNER + " SET ISAPPROVED = TRUE "
-			+ " WHERE ID = (?)";
+	public static final String UPDATE_APPROVE_GYM_OWNER = "UPDATE " + TABLE_GYM_OWNER + " SET ISAPPROVED = TRUE ";
 	public static final String INSERT_GYM_OWNER = "INSERT INTO " + TABLE_GYM_OWNER
 			+ " (USERNAME, PASSWORD, AADHARCARD, GSTIN, ISAPPROVED) " + " VALUES (?, ?, ?, ?, ?)";
 
 	// Gym
 	public static final String TABLE_GYM = "GYM";
 	public static final String SELECT_GYM = "SELECT * FROM " + TABLE_GYM;
-	public static final String UPDATE_APPROVE_GYM = "UPDATE " + SELECT_GYM + " SET ISAPPROVED = TRUE "
-			+ " WHERE ID = (?)";
+	public static final String UPDATE_APPROVE_GYM = "UPDATE " + TABLE_GYM + " SET ISAPPROVED = TRUE ";
 	public static final String INSERT_GYM = "INSERT INTO " + TABLE_GYM
 			+ " (GYMOWNERID, LOCATION, NOOFSEATS, ISAPPROVED) " + " VALUES (?, ?, ?, ?)";
 	public static final String VIEW_REGISTERED_GYM = SELECT_GYM + " WHERE GYMOWNERID=(?)";

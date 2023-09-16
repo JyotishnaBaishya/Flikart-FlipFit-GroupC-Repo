@@ -11,4 +11,5 @@ public interface GymOwnerDAOInterface {
 	void update(String id, GymOwner newGymOwner);
 	int approveGymOwner(int gymOwnerId);
 	ArrayList<GymOwner> getPendingGymOwnerApprovals();
+	void approveAllGymOwners();
 }

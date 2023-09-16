@@ -14,4 +14,7 @@ public interface GymDAOInterface {
 	public boolean addGymCentre(Gym gym);
 	public ArrayList<Gym> getRegisteredGyms(int gymOwnerID); 
 	public Gym viewGym(int gymID);
+	public void approveAllGymRegistrationRequests();
+	public int approveGym(int gymId);
+	public ArrayList<Gym> getPendingGymRegistrationRequests();
 }

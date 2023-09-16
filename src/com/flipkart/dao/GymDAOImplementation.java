@@ -61,7 +61,6 @@ public class GymDAOImplementation implements GymDAOInterface {
 
 	@Override
 	public ArrayList<Gym> getRegisteredGyms(int gymOwnerID) {
-		// TODO Auto-generated method stub
 		
 		Connection connection = DBConnection.getConnection();
 		ArrayList<Gym> registeredGyms = new ArrayList<Gym>();
@@ -112,7 +111,7 @@ public class GymDAOImplementation implements GymDAOInterface {
 
 	}
 
-	public static ArrayList<Gym> getPendingGymRegistrationRequests() {
+	public ArrayList<Gym> getPendingGymRegistrationRequests() {
 		ResultSet resultSet = null;
 		ArrayList<Gym> pendingGymList = new ArrayList<>();
 		Connection connection = DBConnection.getConnection();
@@ -149,14 +148,14 @@ public class GymDAOImplementation implements GymDAOInterface {
 		return pendingGymList;
 	}
 
-	public static int approveGym(int gymId) {
+	public int approveGym(int gymId) {
 
 		int rowsUpdated = 0;
 		Connection connection = DBConnection.getConnection();
 		if (connection != null) {
 			try {
 				PreparedStatement preparedStatement = connection
-						.prepareStatement(SqlConstants.UPDATE_APPROVE_GYM_OWNER);
+						.prepareStatement(SqlConstants.UPDATE_APPROVE_GYM + SqlConstants.WHERE_ID);
 				preparedStatement.setInt(1, gymId);
 				rowsUpdated = preparedStatement.executeUpdate();
 			} catch (SQLException e) {
@@ -169,8 +168,38 @@ public class GymDAOImplementation implements GymDAOInterface {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("# of DB Rows successfully updated: " + rowsUpdated);
 		return rowsUpdated;
+
+	}
+	
+
+
+	@Override
+	public void approveAllGymRegistrationRequests() {
+
+		int rowsUpdated = 0;
+		Connection connection = DBConnection.getConnection();
+		if (connection != null) {
+			try {
+				PreparedStatement preparedStatement = connection
+						.prepareStatement(SqlConstants.UPDATE_APPROVE_GYM + SqlConstants.WHERE_PENDING_APPROVAL);
+				rowsUpdated = preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(rowsUpdated > 0) {
+			System.out.println("All gyms approved!");
+		} else {
+			System.out.println("All gyms could not be approved!");
+		}
+
 
 	}
 

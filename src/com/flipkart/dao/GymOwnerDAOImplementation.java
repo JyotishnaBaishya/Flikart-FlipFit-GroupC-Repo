@@ -88,7 +88,7 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 		if (connection != null) {
 			try {
 				PreparedStatement preparedStatement = connection
-						.prepareStatement(SqlConstants.UPDATE_APPROVE_GYM_OWNER);
+						.prepareStatement(SqlConstants.UPDATE_APPROVE_GYM_OWNER + SqlConstants.WHERE_ID);
 				preparedStatement.setInt(1, gymUserId);
 				rowsUpdated = preparedStatement.executeUpdate();
 			} catch (SQLException e) {
@@ -103,6 +103,31 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 		}
 		System.out.println("# of DB Rows successfully updated: " + rowsUpdated);
 		return rowsUpdated;
+	}
+	
+	public void approveAllGymOwners() {
+		int rowsUpdated = 0;
+		Connection connection = DBConnection.getConnection();
+		if (connection != null) {
+			try {
+				PreparedStatement preparedStatement = connection
+						.prepareStatement(SqlConstants.UPDATE_APPROVE_GYM_OWNER);
+				rowsUpdated = preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(rowsUpdated > 0) {
+			System.out.println("Gym Owners successfully approved");
+		} else {
+			System.out.println("Gym Owners could not be approved");
+		}
 	}
 
 	public ArrayList<GymOwner> getPendingGymOwnerApprovals() {
