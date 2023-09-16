@@ -7,17 +7,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.flipkart.bean.Gym;
+import com.flipkart.bean.Notification;
 import com.flipkart.bean.User;
 import com.flipkart.business.GymOwnerServiceInterface;
 import com.flipkart.business.GymOwnerServiceOperation;
+import com.flipkart.business.NotificationServiceInterface;
+import com.flipkart.business.NotificationServiceOperation;
+import com.flipkart.constants.Constants;
 
 /**
  * 
  */
 public class GymFlipFitGymOwnerMenu {
 	GymOwnerServiceInterface gymService = GymOwnerServiceOperation.getInstance();
+	NotificationServiceInterface notificationSerice = NotificationServiceOperation.getInstance();
 
 	public void displayMenu(User user, Scanner in) {
+		displayNotifications(user);
 		int menuOption = 1;
 		do {
 			System.out.println("\n\n ------ Gym Owner Menu Options ------ " + "\n1. Add a new gym Centre"
@@ -67,5 +73,23 @@ public class GymFlipFitGymOwnerMenu {
 
 			}
 		} while (menuOption != 3);
+	}
+
+	private void displayNotifications(User user) {
+	
+		 ArrayList<Notification> notificationList = notificationSerice.viewMyNotifications(user, Constants.ROLE_GYMOWNER);
+		 if(notificationList != null && !notificationList.isEmpty()) {
+			 System.out.println(
+						"\n\n\033[1m ~~~~~~~~ New Notifications ~~~~~~~~ \033[0m");
+			 for(Notification notification : notificationList) {
+				 System.out.println("  - " + notification.getContent());
+			 }
+		 }		
+	}
+	
+	public static void main(String args[]) {
+		User u = new User();
+		u.setUserID(2);
+		new GymFlipFitGymOwnerMenu().displayNotifications(u);
 	}
 }

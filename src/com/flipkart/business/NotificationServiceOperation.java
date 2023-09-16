@@ -3,6 +3,7 @@
  */
 package com.flipkart.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.flipkart.bean.Notification;
@@ -33,9 +34,8 @@ public class NotificationServiceOperation implements NotificationServiceInterfac
 	}
 
 	@Override
-	public List<Notification> viewMyNotifications(User user) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Notification> viewMyNotifications(User user, String userType) {
+		return NotificationDAOImplementation.getInstance().getNotifications(user.getUserID(), userType);
 	}
 
 }
