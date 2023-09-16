@@ -1,6 +1,6 @@
 package com.flipkart.business;
 
-public class TimeSlotOperation implements TimeSlotInterface{
+public class TimeSlotOperation implements TimeSlotInterface {
 
 	private static TimeSlotInterface timeSlotServiceObj = null;
 

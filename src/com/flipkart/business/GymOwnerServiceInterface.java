@@ -12,5 +12,6 @@ import com.flipkart.bean.Gym;
  */
 public interface GymOwnerServiceInterface {
 	public boolean addGymCentre(Gym newGym);
-	public ArrayList<Gym> viewRegisteredGyms(int gymOwnerID) ;
+
+	public ArrayList<Gym> viewRegisteredGyms(int gymOwnerID);
 }

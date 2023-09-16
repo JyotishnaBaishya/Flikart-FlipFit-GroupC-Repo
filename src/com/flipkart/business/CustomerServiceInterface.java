@@ -12,6 +12,8 @@ import com.flipkart.bean.Booking;
  */
 public interface CustomerServiceInterface {
 	public boolean bookSlot(String gymID, String slotID);
+
 	public boolean cancelSlot(String gymID, String slotID);
+
 	public ArrayList<Booking> viewMyBookings();
 }

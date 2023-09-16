@@ -1,4 +1,5 @@
 package com.flipkart.business;
+
 /**
  * @author karan.k2
  */
@@ -10,7 +11,7 @@ import com.flipkart.bean.Gym;
 import com.flipkart.dao.GymDAOImplementation;
 import com.flipkart.dao.GymDAOInterface;
 
-public class GymOwnerServiceOperation implements GymOwnerServiceInterface{
+public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
 
 	private static GymOwnerServiceInterface gymOwnerServiceObj = null;
 
@@ -23,14 +24,15 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface{
 
 		return gymOwnerServiceObj;
 	}
-	
+
 	List<Gym> gymList = new ArrayList<Gym>();
+
 	@Override
 	public boolean addGymCentre(Gym newGym) {
 		// TODO Auto-generated method stub
 		boolean isAdded = GymDAOImplementation.getInstance().addGymCentre(newGym);
-		if(isAdded) {
-			gymList.add(newGym); 
+		if (isAdded) {
+			gymList.add(newGym);
 		}
 		System.out.println("Added");
 		return isAdded;
@@ -39,13 +41,13 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface{
 	@Override
 	public ArrayList<Gym> viewRegisteredGyms(int gymOwnerID) {
 		// TODO Auto-generated method stub
-		ArrayList<Gym>registeredGyms = GymDAOImplementation.getInstance().getRegisteredGyms(gymOwnerID);
+		ArrayList<Gym> registeredGyms = GymDAOImplementation.getInstance().getRegisteredGyms(gymOwnerID);
 		return registeredGyms;
-		
+
 	}
-	
+
 	public static void main(String[] args) {
-		
+
 		Gym currGym = new Gym();
 		currGym.setGymID(1);
 		currGym.setApproved(true);
@@ -56,18 +58,18 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface{
 		service.addGymCentre(currGym);
 		ArrayList<Gym> registeredGyms = service.viewRegisteredGyms(2);
 		int n = registeredGyms.size();
-		if(n > 0) {
+		if (n > 0) {
 			System.out.println("Displaying registered gyms ");
-			for(Gym gym : registeredGyms) {
-				if(gym != null) {
-					System.out.println(gym.getGymID() + " " + gym.getGymOwnerID() + " " + gym.getLocation() + " " + gym.getNoOfSeats());
+			for (Gym gym : registeredGyms) {
+				if (gym != null) {
+					System.out.println(gym.getGymID() + " " + gym.getGymOwnerID() + " " + gym.getLocation() + " "
+							+ gym.getNoOfSeats());
 				}
-				
+
 			}
-		}else {
+		} else {
 			System.out.println("No Gyms registered");
 		}
 	}
-	
-		
+
 }

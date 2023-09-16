@@ -6,8 +6,8 @@ import com.flipkart.bean.Booking;
 
 /**
  * @author karan.k2
-**/
-public class CustomerServiceOperation implements CustomerServiceInterface{
+ **/
+public class CustomerServiceOperation implements CustomerServiceInterface {
 
 	private static CustomerServiceInterface customerServiceObj = null;
 
@@ -41,5 +41,5 @@ public class CustomerServiceOperation implements CustomerServiceInterface{
 		System.out.println("Your bookings are as shown");
 		return null;
 	}
-	
+
 }

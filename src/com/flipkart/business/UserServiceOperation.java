@@ -2,15 +2,17 @@
  * 
  */
 package com.flipkart.business;
+
 import java.util.*;
 
 import com.flipkart.bean.User;
 import com.flipkart.dao.UserDAOImplementation;
 import com.flipkart.dao.UserDAOInterface;
+
 /**
  * 
  */
-public class UserServiceOperation implements UserServiceInterface{
+public class UserServiceOperation implements UserServiceInterface {
 
 	private static UserServiceInterface userServiceObj = null;
 
@@ -23,7 +25,7 @@ public class UserServiceOperation implements UserServiceInterface{
 
 		return userServiceObj;
 	}
-	
+
 	@Override
 	public boolean registration(String username, String password, String role) {
 		// TODO Auto-generated method stub
@@ -39,8 +41,8 @@ public class UserServiceOperation implements UserServiceInterface{
 		User loggedInUser = UserDAOImplementation.getInstance().loginUser(userName, password);
 		return loggedInUser;
 	}
-	
+
 	public int updatePassword(User user, String newPassword) {
-		return UserDAOImplementation.getInstance().updatePassword(user,newPassword);
+		return UserDAOImplementation.getInstance().updatePassword(user, newPassword);
 	}
 }

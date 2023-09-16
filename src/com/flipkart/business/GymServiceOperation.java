@@ -31,8 +31,4 @@ public class GymServiceOperation implements GymServiceInterface {
 		return null;
 	}
 
-	
-	
-	
-
 }

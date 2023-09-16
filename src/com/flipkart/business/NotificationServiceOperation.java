@@ -28,7 +28,7 @@ public class NotificationServiceOperation implements NotificationServiceInterfac
 	@Override
 	public void addNotification(Notification notification) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -36,6 +36,5 @@ public class NotificationServiceOperation implements NotificationServiceInterfac
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 
 }

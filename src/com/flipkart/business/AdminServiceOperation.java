@@ -15,8 +15,8 @@ import com.flipkart.dao.GymOwnerDAOImplementation;
 /**
  * @author avantika.kala
  */
-public class AdminServiceOperation implements AdminServiceInterface{
-	
+public class AdminServiceOperation implements AdminServiceInterface {
+
 	private static AdminServiceInterface adminServiceObj = null;
 
 	private AdminServiceOperation() {
@@ -31,10 +31,10 @@ public class AdminServiceOperation implements AdminServiceInterface{
 
 	@Override
 	public void approveGymOwner(int gymOwnerId) {
-		for(GymOwner owner: getPendingGymOwnerApprovals()) {
-			if(owner.getUserID() == gymOwnerId){
+		for (GymOwner owner : getPendingGymOwnerApprovals()) {
+			if (owner.getUserID() == gymOwnerId) {
 				int flag = GymOwnerDAOImplementation.getInstance().approveGymOwner(gymOwnerId);
-				if(flag > 0) {
+				if (flag > 0) {
 					System.out.println("Gym Owner ID " + gymOwnerId + " approved");
 				} else {
 					System.out.println("Gym Owner ID " + gymOwnerId + " could not be approved");
@@ -47,15 +47,15 @@ public class AdminServiceOperation implements AdminServiceInterface{
 	@Override
 	public ArrayList<GymOwner> getPendingGymOwnerApprovals() {
 		return GymOwnerDAOImplementation.getInstance().getPendingGymOwnerApprovals();
-		
+
 	}
 
 	@Override
 	public void approveGymRegistrationRequest(int gymId) {
-		for(Gym gym: getPendingGymRegistrationRequests()) {
-			if(gym.getGymID() == gymId){
+		for (Gym gym : getPendingGymRegistrationRequests()) {
+			if (gym.getGymID() == gymId) {
 				int flag = GymDAOImplementation.getInstance().approveGym(gymId);
-				if(flag > 0) {
+				if (flag > 0) {
 					System.out.println("Gym ID " + gymId + " approved");
 				} else {
 					System.out.println("Gym ID " + gymId + " could not be approved");
@@ -68,13 +68,13 @@ public class AdminServiceOperation implements AdminServiceInterface{
 	@Override
 	public ArrayList<Gym> getPendingGymRegistrationRequests() {
 		return GymDAOImplementation.getInstance().getPendingGymRegistrationRequests();
-		
-		}
+
+	}
 
 	@Override
 	public void approveAllGymRegistrationRequests() {
 		GymDAOImplementation.getInstance().approveAllGymRegistrationRequests();
-		
+
 	}
 
 	@Override

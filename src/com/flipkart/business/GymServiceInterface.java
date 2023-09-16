@@ -9,5 +9,5 @@ public interface GymServiceInterface {
 	public Gym viewGym();;
 
 	public ArrayList<Gym> viewGymList();
-	
+
 }
