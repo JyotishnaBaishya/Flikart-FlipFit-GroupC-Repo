@@ -23,10 +23,10 @@ public class GymFlipFitAdminMenu {
 		int menuOption = 1;
 		do {
 			System.out.println("\n\n \033[1m  --------------- Admin Menu Options ---------------\033[0m "
-					+ "\nGym Owner Options:\n\t1. View Pending Registration Request" + "\n\t2. Approve Registration"
+					+ "\nGym Owner Options:\n\t1. View Pending Registration Request" + "\n\t2. Approve/Reject Registration"
 					+ "\n\t3. Approve ALL Pending Registration Requests"
-					+ "\nGym Options: \n\t4. View Pending Gym Registration" + "\n\t5. Approve Gym Registration"
-					+ "\n\t6. Approve ALL Gym Registration Requests" + "\n7. Quit" + "\nEnter number between 1-7");
+					+ "\nGym Options: \n\t4. View Pending Gym Registration" + "\n\t5. Approve/Reject Gym Registration"
+					+ "\n\t6. Approve ALL Gym Registration Requests" + "\n7. View all gym owners"+"\n8. Quit" + "\nEnter number between 1-7");
 			menuOption = in.nextInt();
 
 			switch (menuOption) {
@@ -42,22 +42,28 @@ public class GymFlipFitAdminMenu {
 				break;
 			case 2:
 				System.out.println("Enter gym owner user id");
-				adminService.approveGymOwner(in.nextInt());
+				int gymId = in.nextInt();
+				System.out.println("1. Approve\n2. Reject\nEnter number between 1-2");				
+				int newStatus = in.nextInt();
+				adminService.handleGymOwnerRequest(gymId, newStatus);
 				break;
 			case 3:
 				adminService.approveAllGymOwners();
 				break;
 			case 4:
 				ArrayList<Gym> gymList = adminService.getPendingGymRegistrationRequests();
-				System.out.println("GymID\tLocation\t# of seats");
+				System.out.println("GymID\tName\tLocation\t# of seats");
 				System.out.println("-----------------------------------------------------------");
 				for (Gym gym : gymList) {
-					System.out.println(gym.getGymID() + "\t" + gym.getLocation() + "\t\t" + gym.getNoOfSeats());
+					System.out.println(gym.getGymID() + "\t" + gym.getGymName()+ "\t" + gym.getLocation() + "\t\t" + gym.getNoOfSeats());
 				}
 				break;
 			case 5:
 				System.out.println("Enter gym id");
-				adminService.approveGymRegistrationRequest(in.nextInt());
+				gymId = in.nextInt();
+				System.out.println("1. Approve\n2. Reject\nEnter number between 1-2");
+				newStatus = in.nextInt();
+				adminService.handleGymRegistrationRequest(in.nextInt(), newStatus);
 				break;
 			case 6:
 				adminService.approveAllGymRegistrationRequests();
@@ -70,7 +76,7 @@ public class GymFlipFitAdminMenu {
 				System.out.println("You have selected invalid option please try again!!");
 				break;
 			}
-		} while (menuOption != 7);
+		} while (menuOption != 8);
 
 	}
 

@@ -30,14 +30,14 @@ public class AdminServiceOperation implements AdminServiceInterface {
 	}
 
 	@Override
-	public void approveGymOwner(int gymOwnerId) {
+	public void handleGymOwnerRequest(int gymOwnerId, int status) {
 		for (GymOwner owner : getPendingGymOwnerApprovals()) {
 			if (owner.getUserID() == gymOwnerId) {
-				int flag = GymOwnerDAOImplementation.getInstance().approveGymOwner(gymOwnerId);
+				int flag = GymOwnerDAOImplementation.getInstance().handleGymOwnerRequest(gymOwnerId, status);
 				if (flag > 0) {
-					System.out.println("Gym Owner ID " + gymOwnerId + " approved");
+					System.out.println("Gym Owner ID " + gymOwnerId + " updated!");
 				} else {
-					System.out.println("Gym Owner ID " + gymOwnerId + " could not be approved");
+					System.out.println("Gym Owner ID " + gymOwnerId + " could not be udpated!");
 				}
 				break;
 			}
@@ -51,14 +51,14 @@ public class AdminServiceOperation implements AdminServiceInterface {
 	}
 
 	@Override
-	public void approveGymRegistrationRequest(int gymId) {
+	public void handleGymRegistrationRequest(int gymId, int status) {
 		for (Gym gym : getPendingGymRegistrationRequests()) {
 			if (gym.getGymID() == gymId) {
-				int flag = GymDAOImplementation.getInstance().approveGym(gymId);
+				int flag = GymDAOImplementation.getInstance().handleGymRequest(gymId, status);
 				if (flag > 0) {
-					System.out.println("Gym ID " + gymId + " approved");
+					System.out.println("Gym ID " + gymId + " updated!");
 				} else {
-					System.out.println("Gym ID " + gymId + " could not be approved");
+					System.out.println("Gym ID " + gymId + " could not be updated!");
 				}
 				break;
 			}

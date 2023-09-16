@@ -28,8 +28,8 @@ public class GymFlipFitGymOwnerMenu {
 				Gym newGym = new Gym();
 				newGym.setGymOwnerID(user.getUserID());
 				System.out.println("Please Enter the name for the gym");
-				int gymId = in.nextInt();
-				newGym.setGymID(gymId);
+				String gymName = in.next();
+				newGym.setGymName(gymName);
 				System.out.println("Please Enter the location for the gym");
 				String location = in.next();
 				newGym.setLocation(location);

@@ -82,14 +82,15 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 
 	}
 
-	public int approveGymOwner(int gymUserId) {
+	public int handleGymOwnerRequest(int gymUserId, int status) {
 		int rowsUpdated = 0;
 		Connection connection = DBConnection.getConnection();
 		if (connection != null) {
 			try {
 				PreparedStatement preparedStatement = connection
-						.prepareStatement(SqlConstants.UPDATE_APPROVE_GYM_OWNER + SqlConstants.WHERE_ID);
-				preparedStatement.setInt(1, gymUserId);
+						.prepareStatement(SqlConstants.UPDATE_APPROVE_OR_REJECT_GYM_OWNER + SqlConstants.WHERE_ID);
+				preparedStatement.setInt(1, status);
+				preparedStatement.setInt(2, gymUserId);
 				rowsUpdated = preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -101,7 +102,6 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("# of DB Rows successfully updated: " + rowsUpdated);
 		return rowsUpdated;
 	}
 	
@@ -111,7 +111,7 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 		if (connection != null) {
 			try {
 				PreparedStatement preparedStatement = connection
-						.prepareStatement(SqlConstants.UPDATE_APPROVE_GYM_OWNER);
+						.prepareStatement(SqlConstants.UPDATE_APPROVE_OR_REJECT_GYM_OWNER);
 				rowsUpdated = preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -137,7 +137,7 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 		if (connection != null) {
 			try {
 				PreparedStatement preparedStatement = connection
-						.prepareStatement(SqlConstants.SELECT_GYM_OWNER + SqlConstants.WHERE_PENDING_APPROVAL);
+						.prepareStatement(SqlConstants.SELECT_GYM_OWNER + SqlConstants.WHERE_PENDING_APPROVAL_FALSE);
 				resultSet = preparedStatement.executeQuery();
 				if (resultSet != null) {
 
@@ -149,7 +149,7 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 							gymOwner.setPassword(resultSet.getString(3));
 							gymOwner.setAadharCard(resultSet.getString(4));
 							gymOwner.setGstIN(resultSet.getString(5));
-							gymOwner.setApproved(resultSet.getBoolean(6));
+							gymOwner.setApprovalStatus(resultSet.getInt(6));
 							gymOwner.setRole(Constants.ROLE_GYMOWNER);
 							pendingGymOwnerList.add(gymOwner);
 						}
@@ -173,13 +173,13 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 	// Driver
 	public static void main(String args[]) {
 		GymOwnerDAOInterface gymDAO = GymOwnerDAOImplementation.getInstance();
-		GymOwner gymOwner = new GymOwner();
-		gymOwner.setUserName("GymOwner2");
-		gymOwner.setPassword("pass2");
-		gymOwner.setAadharCard("1234-2345-1233");
-		gymOwner.setGstIN("22AAAAA0000A1Z6");
-
-		gymDAO.insert(gymOwner);
+//		GymOwner gymOwner = new GymOwner();
+//		gymOwner.setUserName("GymOwner2");
+//		gymOwner.setPassword("pass2");
+//		gymOwner.setAadharCard("1234-2345-1233");
+//		gymOwner.setGstIN("22AAAAA0000A1Z6");
+		
+		gymDAO.handleGymOwnerRequest(6, 2);
 
 	}
 

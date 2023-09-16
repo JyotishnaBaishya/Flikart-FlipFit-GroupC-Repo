@@ -8,6 +8,7 @@ import com.flipkart.business.UserServiceInterface;
 import com.flipkart.business.UserServiceOperation;
 import com.flipkart.constants.Constants;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -26,24 +27,30 @@ public class GymFlipFitApplication {
 					"\n\n\033[1m***************** Welcome to FlipFit Gym Slot Booking Application *****************\033[0m");
 			System.out.println("Menu Options: \n1. Login \n2. Register \n3. Update Password \n4. Exit");
 			System.out.println("\nEnter number between 1-4");
-			menuOption = in.nextInt();
-			switch (menuOption) {
-			case 1:
-				new GymFlipFitApplication().login(in);
-				break;
-			case 2:
-				new GymFlipFitApplication().register(in);
-				break;
-			case 3:
-				new GymFlipFitApplication().updatePassword(in);
-				break;
-			case 4:
-				System.out.println("Exiting Application");
-				break;
-			default:
-				System.out.println("Invalid Option Please try again!!");
-				break;
+			try {
+				menuOption = in.nextInt();
 
+				switch (menuOption) {
+				case 1:
+					new GymFlipFitApplication().login(in);
+					break;
+				case 2:
+					new GymFlipFitApplication().register(in);
+					break;
+				case 3:
+					new GymFlipFitApplication().updatePassword(in);
+					break;
+				case 4:
+					System.out.println("Exiting Application");
+					break;
+				default:
+					System.out.println("Invalid Option Please try again!!");
+					break;
+
+				}
+			} catch (InputMismatchException ex) {
+				System.out.println("Incorrect Input");
+				System.exit(0);
 			}
 		} while (menuOption != 4);
 		// Create a Scanner object

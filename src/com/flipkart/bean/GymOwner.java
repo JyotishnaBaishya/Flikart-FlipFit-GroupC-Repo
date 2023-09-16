@@ -2,11 +2,13 @@ package com.flipkart.bean;
 
 import java.util.ArrayList;
 
+import com.flipkart.constants.Constants;
+
 public class GymOwner extends User {
 	private String aadharCard;
 	private String panCard;
 	private String gstIN;
-	private boolean isApproved = false;
+	private int approvalStatus = Constants.PENDING;
 	private ArrayList<Gym> gymList;
 
 	public String getPanCard() {
@@ -41,12 +43,12 @@ public class GymOwner extends User {
 		this.gymList = gymList;
 	}
 
-	public boolean isApproved() {
-		return isApproved;
+	public int getApprovalStatus() {
+		return approvalStatus;
 	}
 
-	public void setApproved(boolean isApproved) {
-		this.isApproved = isApproved;
+	public void setApprovalStatus(int status) {
+		this.approvalStatus = status;
 	}
 
 }

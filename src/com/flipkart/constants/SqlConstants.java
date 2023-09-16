@@ -5,17 +5,17 @@ public class SqlConstants {
 	// GymOwner
 	public static final String TABLE_GYM_OWNER = "GYMOWNER";
 	public static final String SELECT_GYM_OWNER = "SELECT * FROM " + TABLE_GYM_OWNER;
-	public static final String UPDATE_APPROVE_GYM_OWNER = "UPDATE " + TABLE_GYM_OWNER + " SET ISAPPROVED = TRUE ";
+	public static final String UPDATE_APPROVE_OR_REJECT_GYM_OWNER = "UPDATE " + TABLE_GYM_OWNER + " SET ISAPPROVED = ? ";
 	public static final String INSERT_GYM_OWNER = "INSERT INTO " + TABLE_GYM_OWNER
 			+ " (USERNAME, PASSWORD, AADHARCARD, GSTIN, ISAPPROVED) " + " VALUES (?, ?, ?, ?, ?)";
 
 	// Gym
 	public static final String TABLE_GYM = "GYM";
 	public static final String SELECT_GYM = "SELECT * FROM " + TABLE_GYM;
-	public static final String UPDATE_APPROVE_GYM = "UPDATE " + TABLE_GYM + " SET ISAPPROVED = TRUE ";
+	public static final String UPDATE_APPROVE_GYM = "UPDATE " + TABLE_GYM + " SET ISAPPROVED = ? ";
 	public static final String INSERT_GYM = "INSERT INTO " + TABLE_GYM
-			+ " (GYMOWNERID, LOCATION, NOOFSEATS, ISAPPROVED) " + " VALUES (?, ?, ?, ?)";
-	public static final String VIEW_REGISTERED_GYM = SELECT_GYM + " WHERE GYMOWNERID=(?)";
+			+ " (GYMOWNERID, GYMNAME, LOCATION, NOOFSEATS, ISAPPROVED) " + " VALUES (?, ?, ?, ?, ?)";
+	public static final String WHERE_GYM_OWNER = SELECT_GYM + " WHERE GYMOWNERID=(?)";
 
 	// TimeSlot
 	public static final String TABLE_TIMESLOT = "TimeSlot";
@@ -41,6 +41,7 @@ public class SqlConstants {
 
 	// common WHERE clauses
 	public static final String WHERE_ID = " WHERE ID=(?)";
-	public static final String WHERE_PENDING_APPROVAL = " WHERE ISAPPROVED = FALSE";
+	public static final String WHERE_PENDING_APPROVAL_FALSE = " WHERE ISAPPROVED = FALSE";
+	public static final String WHERE_APPROVAL_TRUE = " WHERE ISAPPROVED = TRUE";
 
 }

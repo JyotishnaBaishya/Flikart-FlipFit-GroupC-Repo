@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.flipkart.bean.Gym;
+import com.flipkart.constants.Constants;
 import com.flipkart.dao.GymDAOImplementation;
 import com.flipkart.dao.GymDAOInterface;
 
@@ -41,7 +42,7 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
 	@Override
 	public ArrayList<Gym> viewRegisteredGyms(int gymOwnerID) {
 		// TODO Auto-generated method stub
-		ArrayList<Gym> registeredGyms = GymDAOImplementation.getInstance().getRegisteredGyms(gymOwnerID);
+		ArrayList<Gym> registeredGyms = GymDAOImplementation.getInstance().getRegisteredGymsForGymID(gymOwnerID);
 		return registeredGyms;
 
 	}
@@ -50,7 +51,7 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
 
 		Gym currGym = new Gym();
 		currGym.setGymID(1);
-		currGym.setApproved(true);
+		currGym.setApprovalStatus(Constants.APPROVED);
 		currGym.setGymOwnerID(2);
 		currGym.setLocation("korea");
 		currGym.setNoOfSeats(40);

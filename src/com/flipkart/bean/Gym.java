@@ -1,11 +1,14 @@
 package com.flipkart.bean;
 
+import com.flipkart.constants.Constants;
+
 public class Gym {
 	private int gymID;
+	private String gymName;
 	private int gymOwnerID;
 	private String location;
 	private int noOfSeats;
-	private boolean isApproved = false;
+	private int approvalStatus = Constants.PENDING;
 
 	public int getGymID() {
 		return gymID;
@@ -39,12 +42,20 @@ public class Gym {
 		this.noOfSeats = noOfSeats;
 	}
 
-	public boolean isApproved() {
-		return isApproved;
+	public int getApprovalStatus() {
+		return approvalStatus;
 	}
 
-	public void setApproved(boolean isApproved) {
-		this.isApproved = isApproved;
+	public void setApprovalStatus(int isApproved) {
+		this.approvalStatus = isApproved;
+	}
+
+	public String getGymName() {
+		return gymName;
+	}
+
+	public void setGymName(String gymName) {
+		this.gymName = gymName;
 	}
 
 }

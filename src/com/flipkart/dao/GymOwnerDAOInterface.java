@@ -9,7 +9,7 @@ public interface GymOwnerDAOInterface {
 	int insert(GymOwner gymOwner);
 	void delete(String id);
 	void update(String id, GymOwner newGymOwner);
-	int approveGymOwner(int gymOwnerId);
+	int handleGymOwnerRequest(int gymOwnerId, int status);
 	ArrayList<GymOwner> getPendingGymOwnerApprovals();
 	void approveAllGymOwners();
 }

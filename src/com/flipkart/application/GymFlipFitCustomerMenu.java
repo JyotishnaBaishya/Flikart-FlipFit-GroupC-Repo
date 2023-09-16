@@ -8,12 +8,15 @@ import java.util.Scanner;
 import com.flipkart.bean.User;
 import com.flipkart.business.CustomerServiceInterface;
 import com.flipkart.business.CustomerServiceOperation;
+import com.flipkart.business.GymServiceInterface;
+import com.flipkart.business.GymServiceOperation;
 
 /**
  * 
  */
 public class GymFlipFitCustomerMenu {
 	CustomerServiceInterface customerService = CustomerServiceOperation.getInstance();
+	GymServiceInterface gymService = GymServiceOperation.getInstance();
 
 	public void displayMenu(User user, Scanner in) {
 		int menuOption = 1;
@@ -23,6 +26,7 @@ public class GymFlipFitCustomerMenu {
 			menuOption = in.nextInt();
 			switch (menuOption) {
 			case 1:
+				gymService.viewGymList();
 				System.out.println("Please enter the gymID");
 				String gymID = in.next();
 				System.out.println("Please enter you slot number");

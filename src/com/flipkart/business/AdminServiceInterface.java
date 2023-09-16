@@ -15,13 +15,13 @@ public interface AdminServiceInterface {
 
 	public ArrayList<GymOwner> getPendingGymOwnerApprovals();
 
-	public void approveGymRegistrationRequest(int gymId);
+	public void handleGymRegistrationRequest(int gymId, int status);
 
 	public void approveAllGymRegistrationRequests();
 
 	public ArrayList<Gym> getPendingGymRegistrationRequests();
 
-	public void approveGymOwner(int gymOwnerId);
+	public void handleGymOwnerRequest(int gymOwnerId, int status);
 
 	public void approveAllGymOwners();
 }
