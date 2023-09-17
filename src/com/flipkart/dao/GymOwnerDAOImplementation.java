@@ -169,7 +169,7 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 		if (connection != null) {
 			try {
 				PreparedStatement preparedStatement = connection
-						.prepareStatement(SqlConstants.UPDATE_APPROVE_OR_REJECT_GYM_OWNER);
+						.prepareStatement(SqlConstants.UPDATE_APPROVE_OR_REJECT_GYM_OWNER + SqlConstants.WHERE_PENDING_APPROVAL_FALSE);
 				preparedStatement.setInt(1, Constants.APPROVED);
 				rowsUpdated = preparedStatement.executeUpdate();
 			} catch (SQLException e) {
