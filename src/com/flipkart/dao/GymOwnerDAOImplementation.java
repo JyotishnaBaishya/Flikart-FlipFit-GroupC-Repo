@@ -196,7 +196,7 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 		if (connection != null) {
 			try {
 				PreparedStatement preparedStatement = connection
-						.prepareStatement(SqlConstants.JOIN_GYM_OWNER_USER);
+						.prepareStatement(SqlConstants.JOIN_GYM_OWNER_USER + SqlConstants.WHERE_PENDING_APPROVAL_FALSE);
 				resultSet = preparedStatement.executeQuery();
 				if (resultSet != null) {
 
