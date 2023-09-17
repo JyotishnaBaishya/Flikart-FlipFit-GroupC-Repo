@@ -111,14 +111,14 @@ public class GymDAOImplementation implements GymDAOInterface {
 				ResultSet output = preparedStatement.executeQuery();
 				while (output.next()) {
 					int ID = output.getInt(1);
-					String name = output.getString(3);
-					String location = output.getString(4);
-					int numberOfSeats = output.getInt(5);
-					int isApproved = output.getInt(6);
+					
+					String location = output.getString(3);
+					int numberOfSeats = output.getInt(4);
+					int isApproved = output.getInt(5);
 					if (isApproved == Constants.APPROVED) {
 						Gym currGym = new Gym();
 						currGym.setGymID(ID);
-						currGym.setGymName(name);
+						//currGym.setGymName(name);
 						currGym.setApprovalStatus(isApproved);
 						currGym.setGymOwnerID(gymOwnerID);
 						currGym.setLocation(location);
