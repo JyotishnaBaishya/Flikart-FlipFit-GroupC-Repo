@@ -55,9 +55,9 @@ public class GymFlipFitGymOwnerMenu {
 				ArrayList<Gym> registeredGyms = gymOwnerService.getRegisteredGyms(user.getUserID());
 				int n = registeredGyms.size();
 				if (n > 0) {
-					System.out.println("\n\n ------ Displaying registered gyms ------ ");
+					System.out.println("Displaying registered gyms ");
 					for (Gym gym : registeredGyms) {
-						System.out.println("\nGymId : " + gym.getGymID() + "\nGymOwnerID : " + gym.getGymOwnerID() + "\nGymLocaton : " + gym.getLocation() + "\nNumber of Seats : "
+						System.out.println(gym.getGymID() + " " + gym.getGymOwnerID() + " " + gym.getLocation() + " "
 								+ gym.getNoOfSeats());
 						;
 					}

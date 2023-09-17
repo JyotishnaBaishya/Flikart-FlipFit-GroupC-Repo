@@ -169,8 +169,8 @@ public class GymDAOImplementation implements GymDAOInterface {
 						while (resultSet.next()) {
 							Gym gym = new Gym();
 							gym.setGymID(resultSet.getInt(1));
-							gym.setGymOwnerID(resultSet.getInt(2));
-							gym.setGymName(resultSet.getString(3));
+							gym.setGymName(resultSet.getString(2));
+							gym.setGymOwnerID(resultSet.getInt(3));
 							gym.setLocation(resultSet.getString(4));
 							gym.setNoOfSeats(resultSet.getInt(5));
 							pendingGymList.add(gym);
@@ -228,6 +228,7 @@ public class GymDAOImplementation implements GymDAOInterface {
 			try {
 				PreparedStatement preparedStatement = connection
 						.prepareStatement(SqlConstants.UPDATE_APPROVE_GYM + SqlConstants.WHERE_PENDING_APPROVAL_FALSE);
+				preparedStatement.setInt(1, Constants.APPROVED);
 				rowsUpdated = preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();

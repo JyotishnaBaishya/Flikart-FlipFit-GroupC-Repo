@@ -14,7 +14,7 @@ public class SqlConstants {
 	public static final String SELECT_GYM = "SELECT * FROM " + TABLE_GYM;
 	public static final String UPDATE_APPROVE_GYM = "UPDATE " + TABLE_GYM + " SET ISAPPROVED = ? ";
 	public static final String INSERT_GYM = "INSERT INTO " + TABLE_GYM
-			+ " (GYMOWNERID, GYMNAME, LOCATION, NOOFSEATS, ISAPPROVED) " + " VALUES (?, ?, ?, ?, ?)";
+			+ " (GYMNAME, GYMOWNERID, LOCATION, NOOFSEATS, ISAPPROVED) " + " VALUES (?, ?, ?, ?, ?)";
 	public static final String WHERE_GYM_OWNER = SELECT_GYM + " WHERE GYMOWNERID=(?)";
 
 	// TimeSlot
