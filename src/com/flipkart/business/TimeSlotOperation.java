@@ -1,5 +1,7 @@
 package com.flipkart.business;
 
+import java.util.ArrayList;
+
 import com.flipkart.bean.TimeSlot;
 import com.flipkart.dao.TimeSlotDAOImplementation;
 
@@ -43,6 +45,13 @@ public class TimeSlotOperation implements TimeSlotInterface {
 		boolean isUpdated = TimeSlotDAOImplementation.getInstance().updateSlot(slotHour, gymID, changeInSeats);
 		return isUpdated;
 	}
+
+	@Override
+	public ArrayList<TimeSlot> getAllAvailableSlots() {
+		// TODO Auto-generated method stub
+		return TimeSlotDAOImplementation.getInstance().getAllAvailableSlots();
+	}
 	
+
 
 }

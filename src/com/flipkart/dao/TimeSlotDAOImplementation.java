@@ -8,6 +8,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import com.flipkart.bean.TimeSlot;
 import com.flipkart.constants.SqlConstants;
 import com.flipkart.utils.DBConnection;
@@ -118,7 +120,77 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 		System.out.println("# of DB Rows successfully updated: " + rowsUpdated);
 		return false;
 	}
+	
+	@Override
+	public ArrayList<TimeSlot> getAllAvailableSlots() {
+		// TODO Auto-generated method stub
+		ResultSet resultSet = null;
+		ArrayList<TimeSlot> slotList = new ArrayList<>();
+		Connection connection = DBConnection.getConnection();
+		if (connection != null) {
+			try {
+				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.GET_AVAILABLE_TIMESLOT);
+				resultSet = preparedStatement.executeQuery();
+				if (resultSet != null) {
 
+					try {
+							while (resultSet.next()) {
+								TimeSlot slot = new TimeSlot();
+								slot.setSlotID(resultSet.getInt(1));
+								slot.setSlotHour(resultSet.getInt(2));
+								slot.setGymID(resultSet.getInt(3));
+								slot.setAvailableSeats(resultSet.getInt(4));
+								slotList.add(slot);
+							}
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return slotList;
+	}
+	
+	@Override
+	public TimeSlot getSlotByID(int slotID) {
+		// TODO Auto-generated method stub
+		ResultSet resultSet = null;
+		Connection connection = DBConnection.getConnection();
+		if (connection != null) {
+			try {
+				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.GET_SLOT_BY_ID);
+				preparedStatement.setInt(1, slotID);
+				resultSet = preparedStatement.executeQuery();
+				if (resultSet != null) {
+					while(resultSet.next()) {
+						TimeSlot slot = new TimeSlot();
+						slot.setSlotID(resultSet.getInt(1));
+						slot.setSlotHour(resultSet.getInt(2));
+						slot.setGymID(resultSet.getInt(3));
+						slot.setAvailableSeats(resultSet.getInt(4));
+						return slot;
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
 	/**
 	 * @param preparedStatement
 	 * @param slot

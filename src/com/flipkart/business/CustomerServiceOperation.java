@@ -2,7 +2,6 @@ package com.flipkart.business;
 
 import java.util.ArrayList;
 
-import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.User;
 import com.flipkart.dao.CustomerDAOImplementation;
@@ -32,8 +31,10 @@ public class CustomerServiceOperation implements CustomerServiceInterface {
 		// TODO Auto-generated method stub
 		TimeSlot slot = TimeSlotOperation.getInstance().findSlot(slotHour, gymID);
 		if(slot!=null) {
+			if(!(BookingServiceOperation.getInstance().removeBooking(slot.getSlotID(), customerID))) {
+				TimeSlotOperation.getInstance().updateSlot(slotHour, gymID, -1);
+			}
 			BookingServiceOperation.getInstance().addBooking(slot.getSlotID(), customerID);
-			TimeSlotOperation.getInstance().updateSlot(slotHour, gymID, -1);
 			System.out.println("You have succesfully booked your slot.");
 			return true;
 		}
@@ -57,13 +58,6 @@ public class CustomerServiceOperation implements CustomerServiceInterface {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public ArrayList<Booking> viewMyBookings(int customerID) {
-		// TODO Auto-generated method stub
-		ArrayList<Booking> bookings = BookingServiceOperation.getInstance().viewBookings(customerID);
-		return bookings;
 	}
 
 }

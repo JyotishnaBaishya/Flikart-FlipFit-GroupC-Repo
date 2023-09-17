@@ -1,5 +1,7 @@
 package com.flipkart.business;
 
+import java.util.ArrayList;
+
 import com.flipkart.bean.TimeSlot;
 
 public interface TimeSlotInterface {
@@ -9,5 +11,7 @@ public interface TimeSlotInterface {
 	public boolean addSlot(int slotHour, int gymID, int availableSeats);
 
 	public boolean updateSlot(int slotHour, int gymID, int changeInSeats);
+	
+	public ArrayList<TimeSlot> getAllAvailableSlots();
 	
 }

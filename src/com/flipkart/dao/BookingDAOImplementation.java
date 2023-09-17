@@ -107,7 +107,6 @@ public class BookingDAOImplementation implements BookingDAOInterface {
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
-					return bookingList;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

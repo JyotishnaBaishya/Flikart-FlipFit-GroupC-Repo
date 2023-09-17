@@ -3,15 +3,19 @@
  */
 package com.flipkart.application;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.flipkart.bean.Booking;
 import com.flipkart.bean.Gym;
+import com.flipkart.bean.TimeSlot;
 import com.flipkart.bean.User;
+import com.flipkart.business.BookingServiceOperation;
 import com.flipkart.business.CustomerServiceInterface;
 import com.flipkart.business.CustomerServiceOperation;
 import com.flipkart.business.GymServiceInterface;
 import com.flipkart.business.GymServiceOperation;
+import com.flipkart.business.TimeSlotOperation;
 
 /**
  * 
@@ -36,26 +40,45 @@ public class GymFlipFitCustomerMenu {
 					}
 					break;
 				case 2:
-					System.out.println("Please enter the gymID");
-					int gymID = in.nextInt();
-					System.out.println("Please enter you slot number");
-					int slotHour = in.nextInt();
-					System.out.println(gymID+slotHour);
-					customerService.bookSlot(gymID, slotHour, user.getUserID());
+					ArrayList<TimeSlot> slots = TimeSlotOperation.getInstance().getAllAvailableSlots();
+					System.out.println("Slot No.\t\tSlotHour\t\tGymID\n-----------------------------------");
+					int index = 1;
+					for(TimeSlot slot: slots) {
+						System.out.println(index+"\t\t"+slot.getSlotHour()+"\t\t"+slot.getGymID());
+						index++;
+					}
+					System.out.println("Please enter the slot number you want to book");
+					int slotIndex = in.nextInt();
+					if(slotIndex < index) {
+						customerService.bookSlot(slots.get(slotIndex-1).getGymID(), slots.get(slotIndex-1).getSlotHour(), user.getUserID());
+					}
+					else {
+						System.out.println("Unknown Slot!");
+					}
 					break;
 				case 3:
-					System.out.println("Please enter the gymID");
-					gymID = in.nextInt();
-					System.out.println("Please enter you slot number");
-					slotHour = in.nextInt();
-					customerService.cancelSlot(gymID, slotHour, user.getUserID());
+					ArrayList<TimeSlot> bookedSlots = BookingServiceOperation.getInstance().viewBookings(user.getUserID());
+					System.out.println("Slot No.\t\tSlotHour\t\tGymID\n-----------------------------------");
+					index=1;
+					for(TimeSlot slot: bookedSlots) {
+						System.out.println(index+"\t\t"+slot.getSlotHour()+"\t\t"+slot.getGymID());
+						index++;
+					}
+					System.out.println("Please enter the booking to be cancelled");
+					int bookingIndex = in.nextInt();
+					if(bookingIndex < index)
+						customerService.cancelSlot(bookedSlots.get(bookingIndex-1).getGymID(), bookedSlots.get(bookingIndex-1).getSlotHour(), user.getUserID());
+					else
+						System.out.println("No such booking number exists!");
 					break;
 				case 4:
-					System.out.println("Your bookings: ");
-					System.out.println("SlotID\tCustomerID");
-					System.out.println("-----------------------------------------------------------");
-					for(Booking booking: customerService.viewMyBookings(user.getUserID())) {
-						System.out.println(booking.getSlotID() + "\t" + booking.getCustomerID());
+					bookedSlots = BookingServiceOperation.getInstance().viewBookings(user.getUserID());
+					System.out.println(bookedSlots.size());
+					System.out.println("Slot No.\t\tSlotHour\t\tGymID\n-----------------------------------");
+					index=1;
+					for(TimeSlot slot: bookedSlots) {
+						System.out.println(index+"\t\t"+slot.getSlotHour()+"\t\t"+slot.getGymID());
+						index++;
 					}
 					break;
 				case 5:

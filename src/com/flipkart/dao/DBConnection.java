@@ -12,7 +12,7 @@ public class DBConnection {
 
 	static final String USER = "root";
 
-	static final String PASS = "";
+	static final String PASS = "jyotishna";
 	
 	public static int executeDMLQuery(PreparedStatement statement) {
 		if(statement != null) {

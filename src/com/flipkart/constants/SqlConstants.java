@@ -39,6 +39,10 @@ public class SqlConstants {
 	public static final String UPDATE_TIMESLOT_AVAILABILITY = "UPDATE " + TABLE_TIMESLOT
 			+ " SET AVAILABLESEATS = AVAILABLESEATS + (?) WHERE SLOTHOUR = (?) AND GYMID = (?)";
 
+	public static final String GET_AVAILABLE_TIMESLOT = "SELECT * FROM " + TABLE_TIMESLOT + " WHERE availableSeats > 0";
+	
+	public static final String GET_SLOT_BY_ID = "SELECT * FROM " + TABLE_TIMESLOT + " WHERE SLOTID = ?";
+	
 	// User
 	public static final String TABLE_USER = "USER";
 	public static final String INSERT_USER = "INSERT INTO " + TABLE_USER + " (username, password, role) "

@@ -19,6 +19,4 @@ public interface CustomerServiceInterface {
 	public boolean bookSlot(int gymID, int slotHour, int customerID);
 
 	public boolean cancelSlot(int gymID, int slotHour, int customerID);
-
-	public ArrayList<Booking> viewMyBookings(int customerID);
 }

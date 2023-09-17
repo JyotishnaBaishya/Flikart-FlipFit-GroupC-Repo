@@ -6,7 +6,9 @@ package com.flipkart.business;
 import java.util.ArrayList;
 
 import com.flipkart.bean.Booking;
+import com.flipkart.bean.TimeSlot;
 import com.flipkart.dao.BookingDAOImplementation;
+import com.flipkart.dao.TimeSlotDAOImplementation;
 /**
  * 
  */
@@ -36,9 +38,15 @@ public class BookingServiceOperation implements BookingServiceInterface {
 	}
 
 	@Override
-	public ArrayList<Booking> viewBookings(int customerID) {
+	public ArrayList<TimeSlot> viewBookings(int customerID) {
 		// TODO Auto-generated method stub
-		return BookingDAOImplementation.getInstance().viewBookings(customerID);
+		ArrayList<Booking> bookings = BookingDAOImplementation.getInstance().viewBookings(customerID);
+		ArrayList<TimeSlot> slots = new ArrayList<TimeSlot>();
+		for(Booking booking: bookings) {
+			TimeSlot slot = TimeSlotDAOImplementation.getInstance().getSlotByID(booking.getSlotID());
+			slots.add(slot);
+		}
+		return slots;
 	}
 
 }
