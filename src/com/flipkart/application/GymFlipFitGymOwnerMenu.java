@@ -44,6 +44,7 @@ public class GymFlipFitGymOwnerMenu {
 				System.out.println("Please Enter the total number of seats available in the gym");
 				int noOfSeats = in.nextInt();
 				newGym.setNoOfSeats(noOfSeats);
+				newGym.setGymOwnerID(user.getUserID());
 				boolean res = gymOwnerService.addGymCentre(newGym);
 				if (res) {
 					System.out.println("Gym Request Successfully submitted");
@@ -54,10 +55,11 @@ public class GymFlipFitGymOwnerMenu {
 			case 2:
 				ArrayList<Gym> registeredGyms = gymOwnerService.getRegisteredGyms(user.getUserID());
 				int n = registeredGyms.size();
+				
 				if (n > 0) {
-					System.out.println("Displaying registered gyms ");
+					System.out.println("\n\n ------ Your Registered GYMS ------ ");
 					for (Gym gym : registeredGyms) {
-						System.out.println(gym.getGymID() + " " + gym.getGymOwnerID() + " " + gym.getLocation() + " "
+						System.out.println("\n\nGymID. " + gym.getGymID() + "\n\nGymOwnerId. " + gym.getGymOwnerID() + "\n\nGym Name. " + gym.getGymName() + "\n\nGym Location. " + gym.getLocation() + "\n\nNumber of Seats "
 								+ gym.getNoOfSeats());
 						;
 					}
@@ -67,7 +69,8 @@ public class GymFlipFitGymOwnerMenu {
 
 				break;
 			case 3:
-				
+				gymOwnerService.addGymSlot(user.getUserID(), in);
+				break;
 			case 4 :
 				System.out.println("You have exited the gymOwner menu");
 				break;

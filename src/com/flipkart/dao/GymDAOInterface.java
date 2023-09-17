@@ -15,7 +15,7 @@ public interface GymDAOInterface {
 	
 	public ArrayList<Gym> getApprovedGymsList();
 
-	public ArrayList<Gym> getRegisteredGymsForGymID(int gymOwnerID);
+	public ArrayList<Gym> getRegisteredGymsForGymOwnerID(int gymOwnerID);
 
 	public Gym getGym(int gymID);
 

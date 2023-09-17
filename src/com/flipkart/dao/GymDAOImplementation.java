@@ -100,7 +100,7 @@ public class GymDAOImplementation implements GymDAOInterface {
 	}
 	
 	@Override
-	public ArrayList<Gym> getRegisteredGymsForGymID(int gymOwnerID) {
+	public ArrayList<Gym> getRegisteredGymsForGymOwnerID(int gymOwnerID) {
 		
 		Connection connection = DBConnection.getConnection();
 		ArrayList<Gym> registeredGyms = new ArrayList<Gym>();
@@ -110,15 +110,17 @@ public class GymDAOImplementation implements GymDAOInterface {
 				preparedStatement.setInt(1, gymOwnerID);
 				ResultSet output = preparedStatement.executeQuery();
 				while (output.next()) {
-					int ID = output.getInt(1);
 					
-					String location = output.getString(3);
-					int numberOfSeats = output.getInt(4);
-					int isApproved = output.getInt(5);
+					int ID = output.getInt(1);
+					String gymName = output.getString(2); 
+					String location = output.getString(4);
+					int numberOfSeats = output.getInt(5);
+					int isApproved = output.getInt(6);
 					if (isApproved == Constants.APPROVED) {
+						
 						Gym currGym = new Gym();
 						currGym.setGymID(ID);
-						//currGym.setGymName(name);
+						currGym.setGymName(gymName);
 						currGym.setApprovalStatus(isApproved);
 						currGym.setGymOwnerID(gymOwnerID);
 						currGym.setLocation(location);
@@ -142,8 +144,8 @@ public class GymDAOImplementation implements GymDAOInterface {
 
 	private void prepareStatement(PreparedStatement preparedStatement, Gym gym) {
 		try {
-			preparedStatement.setInt(1, gym.getGymOwnerID());
-			preparedStatement.setString(2, gym.getGymName());
+			preparedStatement.setString(1, gym.getGymName());
+			preparedStatement.setInt(2, gym.getGymOwnerID());
 			preparedStatement.setString(3, gym.getLocation());
 			preparedStatement.setInt(4, gym.getNoOfSeats());
 			preparedStatement.setInt(5, gym.getApprovalStatus());

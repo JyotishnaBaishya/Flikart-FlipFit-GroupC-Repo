@@ -36,14 +36,13 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
 		if (isAdded) {
 			gymList.add(newGym);
 		}
-		System.out.println("Added");
 		return isAdded;
 	}
 
 	@Override
 	public ArrayList<Gym> getRegisteredGyms(int gymOwnerID) {
 		// TODO Auto-generated method stub
-		ArrayList<Gym> registeredGyms = GymDAOImplementation.getInstance().getRegisteredGymsForGymID(gymOwnerID);
+		ArrayList<Gym> registeredGyms = GymDAOImplementation.getInstance().getRegisteredGymsForGymOwnerID(gymOwnerID);
 		return registeredGyms;
 
 	}
@@ -52,8 +51,10 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
 	public void addGymSlot(int gymOwnerID, Scanner sc) {
 		ArrayList<Gym> registeredGyms = getRegisteredGyms(gymOwnerID);
 		Gym gym  = null;
+		System.out.println("\n\n ------ Added the GymID where to want to register slots ------");
+		int gymID = sc.nextInt();
 		for(Gym curr : registeredGyms) {
-			if(curr.getGymOwnerID() == gymOwnerID) {
+			if(curr.getGymID() == gymID) {
 				gym = curr;
 				break;
 			}
