@@ -42,6 +42,7 @@ public class AdminServiceOperation implements AdminServiceInterface {
 				break;
 			}
 		}
+		System.out.println("Gym Owner ID " + gymOwnerId + " could not be found!");
 	}
 
 	@Override
@@ -63,6 +64,7 @@ public class AdminServiceOperation implements AdminServiceInterface {
 				return flag;
 			}
 		}
+		System.out.println("Gym ID " + gymId + " could not be found!");
 		return 0;
 	}
 
