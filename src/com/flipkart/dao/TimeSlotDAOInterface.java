@@ -12,6 +12,6 @@ import com.flipkart.bean.TimeSlot;
  */
 public interface TimeSlotDAOInterface {
 	public boolean insertSlot(TimeSlot slot);
-	public int isAvailable(int slotHour, int gymID);
-	public int updateSlot(int slotHour, int gymID, int changeInSeats);
+	public TimeSlot findSlot(int slotHour, int gymID);
+	public boolean updateSlot(int slotHour, int gymID, int changeInSeats);
 }

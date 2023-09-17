@@ -8,8 +8,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-
 import com.flipkart.bean.TimeSlot;
 import com.flipkart.constants.SqlConstants;
 import com.flipkart.utils.DBConnection;
@@ -58,20 +56,24 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 	}
 	
 	@Override
-	public int isAvailable(int slotHour, int gymID) {
+	public TimeSlot findSlot(int slotHour, int gymID) {
 		// TODO Auto-generated method stub
 		ResultSet resultSet = null;
-		int availableSeats = 0;
 		Connection connection = DBConnection.getConnection();
 		if (connection != null) {
 			try {
-				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.CHECK_TIMESLOT_AVAILABILITY);
+				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.FIND_TIMESLOT);
 				preparedStatement.setInt(1, slotHour);
 				preparedStatement.setInt(2, gymID);
 				resultSet = preparedStatement.executeQuery();
 				if (resultSet != null) {
 					while(resultSet.next()) {
-						availableSeats = resultSet.getInt(1);
+						TimeSlot slot = new TimeSlot();
+						slot.setSlotID(resultSet.getInt(1));
+						slot.setSlotHour(resultSet.getInt(2));
+						slot.setGymID(resultSet.getInt(3));
+						slot.setAvailableSeats(resultSet.getInt(4));
+						return slot;
 					}
 				}
 			} catch (SQLException e) {
@@ -84,11 +86,11 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 				e.printStackTrace();
 			}
 		}
-		return availableSeats;
+		return null;
 	}
 	
 	@Override
-	public int updateSlot(int slotHour, int gymID, int changeInSeats) {
+	public boolean updateSlot(int slotHour, int gymID, int changeInSeats) {
 		// TODO Auto-generated method stub
 		int rowsUpdated = 0;
 		Connection connection = DBConnection.getConnection();
@@ -100,6 +102,7 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 				preparedStatement.setInt(2, slotHour);
 				preparedStatement.setInt(3, gymID);
 				rowsUpdated = preparedStatement.executeUpdate();
+				if(rowsUpdated > 0) return true;
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -113,7 +116,7 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 		}
 		
 		System.out.println("# of DB Rows successfully updated: " + rowsUpdated);
-		return rowsUpdated;
+		return false;
 	}
 
 	/**
@@ -137,13 +140,9 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 	// Driver
 		public static void main(String args[]) {
 			TimeSlotDAOInterface timeSlotDAO = new TimeSlotDAOImplementation();
-			TimeSlot slot = new TimeSlot();
-			slot.setSlotHour(2);
-			slot.setGymID(1);
-			slot.setAvailableSeats(20);
-			slot.setDay(java.time.LocalDate.now());
-			timeSlotDAO.insertSlot(slot);
+			
+			TimeSlot slot = timeSlotDAO.findSlot(2, 1);
+			System.out.println(slot.getSlotID());
 		}
-
 	
 }

@@ -1,7 +1,5 @@
 package com.flipkart.business;
 
-import java.time.LocalDate;
-
 import com.flipkart.bean.TimeSlot;
 import com.flipkart.dao.TimeSlotDAOImplementation;
 
@@ -18,11 +16,11 @@ public class TimeSlotOperation implements TimeSlotInterface {
 	}
 
 	@Override
-	public boolean isAvailable(int slotHour, int gymID) {
+	public TimeSlot findSlot(int slotHour, int gymID) {
 		// TODO Auto-generated method stub
-		int availableSeats = TimeSlotDAOImplementation.getInstance().isAvailable(slotHour, gymID);
-		if(availableSeats > 0) return true;
-		return false;
+		TimeSlot availableSlot = TimeSlotDAOImplementation.getInstance().findSlot(slotHour, gymID);
+		if(availableSlot.getAvailableSeats() > 0) return availableSlot;
+		return null;
 	}
 
 	@Override
@@ -40,9 +38,11 @@ public class TimeSlotOperation implements TimeSlotInterface {
 	}
 
 	@Override
-	public boolean updateSlot(int slotHour, int gymID, LocalDate day) {
+	public boolean updateSlot(int slotHour, int gymID, int changeInSeats) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean isUpdated = TimeSlotDAOImplementation.getInstance().updateSlot(slotHour, gymID, changeInSeats);
+		return isUpdated;
 	}
+	
 
 }

@@ -20,27 +20,31 @@ import com.flipkart.constants.SqlConstants;
  */
 public class BookingDAOImplementation implements BookingDAOInterface {
 
-	static final String TABLE_BOOKING = "Booking";
+	private static BookingDAOInterface bookingDaoObj = null;
 
-	static final String INSERT_BOOKING = "INSERT INTO " + TABLE_BOOKING
-			+ " (slotID, customerID) " + " VALUES (?, ?)";
-	
-	static final String DELETE_BOOKING = "DELETE FROM " + TABLE_BOOKING + " WHERE bookingID = ?";
-	
-	static final String SELECT_BOOKING = "SELECT * FROM " + TABLE_BOOKING + " WHERE customerID = ?";
+	private BookingDAOImplementation() {
+	}
+
+	public static synchronized BookingDAOInterface getInstance() {
+		if (bookingDaoObj == null)
+			bookingDaoObj = new BookingDAOImplementation();
+
+		return bookingDaoObj;
+	}
 	
 	@Override
-	public int insertBooking(Booking booking) {
+	public boolean insertBooking(Booking booking) {
 		// TODO Auto-generated method stub
 		
-		int rowsUpdated = 0;
 		Connection connection = DBConnection.getConnection();
+		int rowsUpdated = 0;
 		if (connection != null) {
 			try {
-				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_BOOKING);
+				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.INSERT_BOOKING);
 				preparedStatement.setInt(1, booking.getSlotID());
 				preparedStatement.setInt(2, booking.getCustomerID());
 				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
+				if (rowsUpdated > 0) return true;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -52,21 +56,23 @@ public class BookingDAOImplementation implements BookingDAOInterface {
 			}
 		}
 		System.out.println("# of DB Rows successfully updated: " + rowsUpdated);
-		return rowsUpdated;
+		return false;
 	}
 	
 	@Override
-	public int removeBooking(int bookingID) {
+	public boolean removeBooking(int slotID, int customerID) {
 		// TODO Auto-generated method stub
 		
 		int rowsUpdated = 0;
 		Connection connection = DBConnection.getConnection();
 		if (connection != null) {
 			try {
-				PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BOOKING);
-				preparedStatement.setInt(1, bookingID);
+				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.DELETE_BOOKING);
+				preparedStatement.setInt(1, slotID);
+				preparedStatement.setInt(2, customerID);
 				
 				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
+				if(rowsUpdated > 0) return true;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -78,7 +84,7 @@ public class BookingDAOImplementation implements BookingDAOInterface {
 			}
 		}
 		System.out.println("# of DB Rows successfully deleted: " + rowsUpdated);
-		return rowsUpdated;
+		return false;
 	}
 	
 	@Override
@@ -90,7 +96,7 @@ public class BookingDAOImplementation implements BookingDAOInterface {
 		Connection connection = DBConnection.getConnection();
 		if (connection != null) {
 			try {
-				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BOOKING);
+				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.SELECT_BOOKING);
 				preparedStatement.setInt(1, 1);
 				resultSet = DBConnection.executeQuery(preparedStatement);
 				if (resultSet != null) {
@@ -126,12 +132,12 @@ public class BookingDAOImplementation implements BookingDAOInterface {
 		
 		BookingDAOInterface bookingDAO = new BookingDAOImplementation();
 		
-//		Booking booking = new Booking();
+		Booking booking = new Booking();
 		
-//		booking.setCustomerID(1);
-//		booking.setSlotID(2);
-		System.out.println(bookingDAO.viewBookings(1).size());
-//		bookingDAO.removeBooking(1);
+		booking.setCustomerID(100);
+		booking.setSlotID(200);
+//		System.out.println(bookingDAO.viewBookings(1).size());
+		bookingDAO.insertBooking(booking);
 		
 //		ArrayList<Booking> bL = bookingDAO.viewBookings(1);
 //		System.out.println(bL.size());

@@ -28,20 +28,21 @@ public class GymFlipFitCustomerMenu {
 			case 1:
 				gymService.viewGymList();
 				System.out.println("Please enter the gymID");
-				String gymID = in.next();
+				int gymID = in.nextInt();
 				System.out.println("Please enter you slot number");
-				String slotID = in.next();
-				customerService.bookSlot(gymID, slotID);
+				int slotHour = in.nextInt();
+				System.out.println(gymID+slotHour);
+				customerService.bookSlot(gymID, slotHour, user.getUserID());
 				break;
 			case 2:
 				System.out.println("Please enter the gymID");
-				gymID = in.next();
+				gymID = in.nextInt();
 				System.out.println("Please enter you slot number");
-				slotID = in.next();
-				customerService.cancelSlot(gymID, slotID);
+				slotHour = in.nextInt();
+				customerService.cancelSlot(gymID, slotHour, user.getUserID());
 				break;
 			case 3:
-				customerService.viewMyBookings();
+				customerService.viewMyBookings(user.getUserID());
 				break;
 			case 4:
 				customerService.viewProfile(user).display();

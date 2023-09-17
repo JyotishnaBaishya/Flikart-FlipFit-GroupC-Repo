@@ -6,7 +6,7 @@ import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.User;
 import com.flipkart.dao.CutomerDAOImplementation;
-
+import com.flipkart.bean.TimeSlot;
 /**
  * @author karan.k2
  **/
@@ -28,24 +28,42 @@ public class CustomerServiceOperation implements CustomerServiceInterface {
 		return CutomerDAOImplementation.getInstance().viewProfile(user.getUserName(), user.getPassword());
 	}
 	@Override
-	public boolean bookSlot(String gymID, String slotID) {
+	public boolean bookSlot(int gymID, int slotHour, int customerID) {
 		// TODO Auto-generated method stub
-		System.out.println("You have succesfully booked a slot");
-		return true;
+		TimeSlot slot = TimeSlotOperation.getInstance().findSlot(slotHour, gymID);
+		if(slot!=null) {
+			BookingServiceOperation.getInstance().addBooking(slot.getSlotID(), customerID);
+			TimeSlotOperation.getInstance().updateSlot(slotHour, gymID, -1);
+			System.out.println("You have succesfully booked your slot.");
+			return true;
+		}
+		System.out.println("Slot Unavailable!");
+		return false;
 	}
 
 	@Override
-	public boolean cancelSlot(String gymID, String slotID) {
+	public boolean cancelSlot(int gymID, int slotHour, int customerID) {
 		// TODO Auto-generated method stub
-		System.out.println("You have succesfully cancelled your booking");
-		return true;
+		TimeSlot slot = TimeSlotOperation.getInstance().findSlot(slotHour, gymID);
+		if(slot!=null) {
+			if(BookingServiceOperation.getInstance().removeBooking(slot.getSlotID(), customerID)) {
+				TimeSlotOperation.getInstance().updateSlot(slotHour, gymID, 1);
+				System.out.println("You have succesfully cancelled your booking.");
+				return true;
+			}
+			else {
+				System.out.println("Booking not found.");
+				return false;
+			}
+		}
+		return false;
 	}
 
 	@Override
-	public ArrayList<Booking> viewMyBookings() {
+	public ArrayList<Booking> viewMyBookings(int customerID) {
 		// TODO Auto-generated method stub
-		System.out.println("Your bookings are as shown");
-		return null;
+		ArrayList<Booking> bookings = BookingServiceOperation.getInstance().viewBookings(customerID);
+		return bookings;
 	}
 
 }

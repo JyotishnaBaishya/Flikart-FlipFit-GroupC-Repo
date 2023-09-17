@@ -33,7 +33,7 @@ public class SqlConstants {
 	public static final String INSERT_TIMESLOT = "INSERT INTO " + TABLE_TIMESLOT + " (SLOTHOUR, GYMID, AVAILABLESEATS, DAY) "
 			+ " VALUES (?, ?, ?, ?)";
 
-	public static final String CHECK_TIMESLOT_AVAILABILITY = "SELECT AVAILABLESEATS FROM " + TABLE_TIMESLOT
+	public static final String FIND_TIMESLOT = "SELECT * FROM " + TABLE_TIMESLOT
 			+ " WHERE SLOTHOUR = (?) AND GYMID = (?)";
 
 	public static final String UPDATE_TIMESLOT_AVAILABILITY = "UPDATE " + TABLE_TIMESLOT
@@ -52,15 +52,24 @@ public class SqlConstants {
 	public static final String INSERT_NOTIFICATION = "INSERT INTO " + TABLE_NOTIFICATION + " (userid, usertype, content, isViewed) "
 			+ " VALUES (?, ?, ?, ?)";	
 	public static final String SELECT_NOTIFICATION = "SELECT * FROM " + TABLE_NOTIFICATION;	
+
 	public static final String UPDATE_NOTIFICATION = "UPDATE " + TABLE_NOTIFICATION + " SET ISVIEWED = 1";
 	public static final String DELETE_NOTIFICATION = "DELETE FROM " + TABLE_NOTIFICATION;
 	public static final String WHERE_NOT_VIEWED_NOTIFICATION = " WHERE USERID=(?) AND USERTYPE=(?) AND ISVIEWED=0";
 	
-
+	public static final String WHERE__NOT_VIEWED_NOTIFICATION = " WHERE USERID=(?) AND USERTYPE=(?) AND ISVIEWED=0";
+	
+	//Booking
+	public static final String TABLE_BOOKING = "Booking";
+	public static final String INSERT_BOOKING = "INSERT INTO " + TABLE_BOOKING
+	+ " (slotID, customerID) " + " VALUES (?, ?)";
+	public static final String DELETE_BOOKING = "DELETE FROM " + TABLE_BOOKING + " WHERE slotID = ? AND customerID = ?";
+	public static final String SELECT_BOOKING = "SELECT * FROM " + TABLE_BOOKING + " WHERE customerID = ?";
 
 	// common WHERE clauses
 	public static final String WHERE_ID = " WHERE ID=(?)";
 	public static final String WHERE_PENDING_APPROVAL_FALSE = " WHERE ISAPPROVED = FALSE";
 	public static final String WHERE_APPROVAL_TRUE = " WHERE ISAPPROVED = TRUE";
+	
 
 }
