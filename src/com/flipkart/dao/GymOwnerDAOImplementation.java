@@ -11,6 +11,9 @@ import java.util.ArrayList;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
+import com.flipkart.bean.User;
+import com.flipkart.business.UserServiceInterface;
+import com.flipkart.business.UserServiceOperation;
 import com.flipkart.constants.Constants;
 import com.flipkart.constants.SqlConstants;
 import com.flipkart.utils.DBConnection;
@@ -31,7 +34,64 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 
 		return gymOwnerDaoObj;
 	}
+	
+	public boolean register(GymOwner gymowner) {
+		UserDAOInterface userDAO = UserDAOImplementation.getInstance();
+		if(userDAO.register(gymowner) > 0) {
+			User user  = userDAO.loginUser(gymowner.getUserName(), gymowner.getPassword());
+			gymowner.setUserID(user.getUserID());
+			
+			if(insert(gymowner) > 0) {
+				System.out.println("GymOwner has been registered and sent for approval!!");
+				return true;
+			}else {
+				return false;
+			}
+		}
+		return false;
+	}
+	public GymOwner viewProfile(String username, String password) {
+		UserDAOInterface userDAO = UserDAOImplementation.getInstance();
+		User loggedInUser = userDAO.loginUser(username, password);
+		if(loggedInUser!=null){
+			GymOwner gymOwner = new GymOwner();
+			gymOwner.setUserID(loggedInUser.getUserID());
+			gymOwner.setUserName(loggedInUser.getUserName());
+			gymOwner.setPassword(loggedInUser.getPassword());
+			Connection connection = DBConnection.getConnection();
+			if (connection != null) {
+				try {
+					String selectQuery = SqlConstants.SELECT_GYM_OWNER + SqlConstants.WHERE_ID;
+					PreparedStatement preparedStatement = connection.prepareStatement(selectQuery);
+					preparedStatement.setInt(1,gymOwner.getUserID());
+					ResultSet rs = preparedStatement.executeQuery();
+					while(rs.next()){
+						 //Retrieve by column name
+						 rs.getInt("ID");
+						 String aadharCard = rs.getString("aadharcard");
+						 gymOwner.setAadharCard(aadharCard);
+						 String panCard = rs.getString("pancard");
+						 gymOwner.setPanCard(panCard);
+						 String gstIn = rs.getString("gstin");
+						 gymOwner.setGstIN(gstIn);
+						 int isApproved = rs.getInt("isApproved");
+						 gymOwner.setApprovalStatus(isApproved);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return gymOwner;
+		}
+		return null;
+		
+	}
 	@Override
 	public int insert(GymOwner gymOwner) {
 		int rowsUpdated = 0;
@@ -56,11 +116,11 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 
 	private void prepareStatement(PreparedStatement preparedStatement, GymOwner gymOwner) {
 		try {
-			preparedStatement.setString(1, gymOwner.getUserName());
-			preparedStatement.setString(2, gymOwner.getPassword());
-			preparedStatement.setString(3, gymOwner.getAadharCard());
+			preparedStatement.setInt(1, gymOwner.getUserID());
+			preparedStatement.setString(2, gymOwner.getAadharCard());
+			preparedStatement.setString(3, gymOwner.getPanCard());
 			preparedStatement.setString(4, gymOwner.getGstIN());
-			preparedStatement.setBoolean(5, false);
+			preparedStatement.setInt(5, 0);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -178,7 +238,8 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 //		gymOwner.setAadharCard("1234-2345-1233");
 //		gymOwner.setGstIN("22AAAAA0000A1Z6");
 		
-		gymDAO.handleGymOwnerRequest(6, 2);
+		GymOwner obj = gymDAO.viewProfile("gymowner1", "password");
+		System.out.println(obj.getPanCard());
 
 	}
 

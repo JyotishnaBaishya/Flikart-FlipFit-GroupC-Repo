@@ -2,12 +2,18 @@ package com.flipkart.constants;
 
 public class SqlConstants {
 
+	// Customer
+	public static final String TABLE_CUSTOMER = "CUSTOMER";
+	public static final String SELECT_CUSTOMER = "SELECT * FROM " + TABLE_CUSTOMER;
+	public static final String INSERT_CUSTOMER = "INSERT INTO " + TABLE_CUSTOMER
+			+ " (ID, NAME, AGE, LOCATION) " + " VALUES (?, ?, ?, ?)";
+	
 	// GymOwner
 	public static final String TABLE_GYM_OWNER = "GYMOWNER";
 	public static final String SELECT_GYM_OWNER = "SELECT * FROM " + TABLE_GYM_OWNER;
 	public static final String UPDATE_APPROVE_OR_REJECT_GYM_OWNER = "UPDATE " + TABLE_GYM_OWNER + " SET ISAPPROVED = ? ";
 	public static final String INSERT_GYM_OWNER = "INSERT INTO " + TABLE_GYM_OWNER
-			+ " (USERNAME, PASSWORD, AADHARCARD, GSTIN, ISAPPROVED) " + " VALUES (?, ?, ?, ?, ?)";
+			+ " (ID, AADHARCARD, PANCARD, GSTIN, ISAPPROVED) " + " VALUES (?, ?, ?, ?, ?)";
 
 	// Gym
 	public static final String TABLE_GYM = "GYM";

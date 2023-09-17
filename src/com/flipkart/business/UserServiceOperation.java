@@ -5,7 +5,12 @@ package com.flipkart.business;
 
 import java.util.*;
 
+import com.flipkart.bean.Customer;
+import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
+import com.flipkart.constants.Constants;
+import com.flipkart.dao.CutomerDAOImplementation;
+import com.flipkart.dao.GymOwnerDAOImplementation;
 import com.flipkart.dao.UserDAOImplementation;
 import com.flipkart.dao.UserDAOInterface;
 
@@ -25,7 +30,7 @@ public class UserServiceOperation implements UserServiceInterface {
 
 		return userServiceObj;
 	}
-
+	
 	@Override
 	public boolean registration(String username, String password, String role) {
 		// TODO Auto-generated method stub
@@ -44,5 +49,17 @@ public class UserServiceOperation implements UserServiceInterface {
 
 	public int updatePassword(User user, String newPassword) {
 		return UserDAOImplementation.getInstance().updatePassword(user, newPassword);
+	}
+
+	@Override
+	public boolean customerRegistration(Customer customer) {
+		// TODO Auto-generated method stub
+		return CutomerDAOImplementation.getInstance().register(customer);
+	}
+
+	@Override
+	public boolean gymOwnerRegistration(GymOwner gymOwner) {
+		// TODO Auto-generated method stub
+		return GymOwnerDAOImplementation.getInstance().register(gymOwner);
 	}
 }

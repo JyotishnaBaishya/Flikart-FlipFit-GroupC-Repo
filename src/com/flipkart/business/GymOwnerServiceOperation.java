@@ -6,6 +6,7 @@ package com.flipkart.business;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.constants.Constants;
@@ -49,7 +50,7 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
 	
 	@Override
 	public void addGymSlot(int gymOwnerID, Scanner sc) {
-		ArrayList<Gym> registeredGyms = gymOwnerService.getRegisteredGyms(gymOwnerID);
+		ArrayList<Gym> registeredGyms = getRegisteredGyms(gymOwnerID);
 		Gym gym  = null;
 		for(Gym curr : registeredGyms) {
 			if(curr.getGymOwnerID() == gymOwnerID) {
