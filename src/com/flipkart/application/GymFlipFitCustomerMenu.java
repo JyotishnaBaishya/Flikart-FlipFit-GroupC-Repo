@@ -22,7 +22,7 @@ public class GymFlipFitCustomerMenu {
 		int menuOption = 1;
 		do {
 			System.out.println("\n\n ------ Customer Menu Options ------ " + "\n1. Book a slot" + "\n2. Cancel Booking "
-					+ "\n3. View my bookings" + "\n4. Quit" + "\nEnter number between 1-4");
+					+ "\n3. View my bookings" +"\n4. View Profile" +"\n5. Quit" + "\nEnter number between 1-5");
 			menuOption = in.nextInt();
 			switch (menuOption) {
 			case 1:
@@ -44,6 +44,9 @@ public class GymFlipFitCustomerMenu {
 				customerService.viewMyBookings();
 				break;
 			case 4:
+				customerService.viewProfile(user).display();
+				break;
+			case 5:
 				System.out.println("You have exited the customer menu");
 				break;
 			default:
@@ -51,7 +54,7 @@ public class GymFlipFitCustomerMenu {
 				break;
 
 			}
-		} while (menuOption != 4);
+		} while (menuOption != 5);
 	}
 
 }

@@ -29,7 +29,7 @@ public class GymFlipFitGymOwnerMenu {
 		int menuOption = 1;
 		do {
 			System.out.println("\n\n ------ Gym Owner Menu Options ------ " + "\n1. Add a new gym Centre"
-					+ "\n2. View Registered Gyms " + "\n3. Register Time Slots " + "\n4. Quit");
+					+ "\n2. View Registered Gyms " + "\n3. Register Time Slots " + "\n4. View Profile" +"\n5. Quit");
 			menuOption = in.nextInt();
 			switch (menuOption) {
 			case 1:
@@ -67,8 +67,11 @@ public class GymFlipFitGymOwnerMenu {
 
 				break;
 			case 3:
-				
-			case 4 :
+				break;
+			case 4:
+				gymOwnerService.viewProfile(user).display();
+				break;
+			case 5 :
 				System.out.println("You have exited the gymOwner menu");
 				break;
 			default:
@@ -76,7 +79,7 @@ public class GymFlipFitGymOwnerMenu {
 				break;
 
 			}
-		} while (menuOption != 3);
+		} while (menuOption != 5);
 	}
 	
 	
