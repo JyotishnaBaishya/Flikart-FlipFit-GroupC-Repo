@@ -53,9 +53,9 @@ public class GymFlipFitGymOwnerMenu {
 				ArrayList<Gym> registeredGyms = gymService.viewRegisteredGyms(user.getUserID());
 				int n = registeredGyms.size();
 				if (n > 0) {
-					System.out.println("Displaying registered gyms ");
+					System.out.println("\n\n ------ Displaying registered gyms ------ ");
 					for (Gym gym : registeredGyms) {
-						System.out.println(gym.getGymID() + " " + gym.getGymOwnerID() + " " + gym.getLocation() + " "
+						System.out.println("\nGymId : " + gym.getGymID() + "\nGymOwnerID : " + gym.getGymOwnerID() + "\nGymLocaton : " + gym.getLocation() + "\nNumber of Seats : "
 								+ gym.getNoOfSeats());
 						;
 					}
@@ -90,6 +90,7 @@ public class GymFlipFitGymOwnerMenu {
 	public static void main(String args[]) {
 		User u = new User();
 		u.setUserID(2);
-		new GymFlipFitGymOwnerMenu().displayNotifications(u);
+		Scanner sc = new Scanner(System.in);
+		new GymFlipFitGymOwnerMenu().displayMenu(u,sc);
 	}
 }
