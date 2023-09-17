@@ -56,7 +56,7 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
 	public void addGymSlot(int gymOwnerID, Scanner sc) {
 		ArrayList<Gym> registeredGyms = getRegisteredGyms(gymOwnerID);
 		Gym gym  = null;
-		System.out.println("\n\n ------ Added the GymID where to want to register slots ------");
+		System.out.println("Enter the GymID where to want to register slots");
 		int gymID = sc.nextInt();
 		for(Gym curr : registeredGyms) {
 			if(curr.getGymID() == gymID) {
@@ -65,7 +65,7 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
 			}
 		}
 		if(gym != null) {
-			System.out.println("\n\n ------ Add the number of slots to be added ------");
+			System.out.println("Add the number of slots to be added");
 			int numberOfSlots = sc.nextInt();
 			TimeSlotOperation service = new TimeSlotOperation();
 			while(numberOfSlots > 0) {
@@ -81,7 +81,7 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
 			System.out.println("Gym not found");
 		}
 		
-		System.out.println("\n\n ------ Exiting slot adding menu ------- ");
+		System.out.println("Exiting slot adding menu");
 		
 	}
 	

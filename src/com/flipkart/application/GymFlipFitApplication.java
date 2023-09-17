@@ -81,7 +81,14 @@ public class GymFlipFitApplication {
 					break;
 				case Constants.ROLE_GYMOWNER:
 					System.out.println("Logged In Successfully!!");
-					new GymFlipFitGymOwnerMenu().displayMenu(loggedInUser, in);
+					GymOwnerServiceInterface gymOwnerServiceOperation = GymOwnerServiceOperation.getInstance();
+					int isApproved = gymOwnerServiceOperation.viewProfile(loggedInUser).getApprovalStatus();
+					if(isApproved == Constants.APPROVED) {
+						new GymFlipFitGymOwnerMenu().displayMenu(loggedInUser, in);
+					}else {
+						System.out.println("Gym Owner not Approved");
+					}
+					
 					break;
 				case Constants.ROLE_CUSTOMER:
 					System.out.println("Logged In Successfully!!");
