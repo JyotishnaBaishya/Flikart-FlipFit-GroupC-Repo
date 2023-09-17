@@ -73,7 +73,7 @@ public class NotificationDAOImplementation implements NotificationDAOInterface {
 		if (connection != null) {
 			try {
 				PreparedStatement preparedStatement = connection
-						.prepareStatement(SqlConstants.SELECT_NOTIFICATION + SqlConstants.WHERE__NOT_VIEWED_NOTIFICATION);
+						.prepareStatement(SqlConstants.SELECT_NOTIFICATION + SqlConstants.WHERE_NOT_VIEWED_NOTIFICATION);
 				preparedStatement.setInt(1, userId);
 				preparedStatement.setString(2, userType);
 				ResultSet output = preparedStatement.executeQuery();
@@ -84,6 +84,13 @@ public class NotificationDAOImplementation implements NotificationDAOInterface {
 					notification.setContent(output.getString(4));
 					notificationList.add(notification);
 				}
+				//Update the notifications after they are displayed once
+				preparedStatement = connection
+						.prepareStatement(SqlConstants.UPDATE_NOTIFICATION + SqlConstants.WHERE_NOT_VIEWED_NOTIFICATION);
+				preparedStatement.setInt(1, userId);
+				preparedStatement.setString(2, userType);
+				preparedStatement.executeUpdate();
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

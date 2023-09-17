@@ -52,7 +52,10 @@ public class SqlConstants {
 	public static final String INSERT_NOTIFICATION = "INSERT INTO " + TABLE_NOTIFICATION + " (userid, usertype, content, isViewed) "
 			+ " VALUES (?, ?, ?, ?)";	
 	public static final String SELECT_NOTIFICATION = "SELECT * FROM " + TABLE_NOTIFICATION;	
-	public static final String WHERE__NOT_VIEWED_NOTIFICATION = " WHERE USERID=(?) AND USERTYPE=(?) AND ISVIEWED=0";
+	public static final String UPDATE_NOTIFICATION = "UPDATE " + TABLE_NOTIFICATION + " SET ISVIEWED = 1";
+	public static final String DELETE_NOTIFICATION = "DELETE FROM " + TABLE_NOTIFICATION;
+	public static final String WHERE_NOT_VIEWED_NOTIFICATION = " WHERE USERID=(?) AND USERTYPE=(?) AND ISVIEWED=0";
+	
 
 
 	// common WHERE clauses

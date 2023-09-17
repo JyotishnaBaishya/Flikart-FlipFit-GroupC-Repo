@@ -93,7 +93,7 @@ public class GymFlipFitGymOwnerMenu {
 		 ArrayList<Notification> notificationList = notificationSerice.viewMyNotifications(user, Constants.ROLE_GYMOWNER);
 		 if(notificationList != null && !notificationList.isEmpty()) {
 			 System.out.println(
-						"\n\n\033[1m ~~~~~~~~ New Notifications ~~~~~~~~ \033[0m");
+						"\n\n\033[1m\t~~~~~~~~ You have " + notificationList.size() + " new notification(s) ~~~~~~~~ \033[0m");
 			 for(Notification notification : notificationList) {
 				 System.out.println("  - " + notification.getContent());
 			 }
@@ -102,6 +102,7 @@ public class GymFlipFitGymOwnerMenu {
 	
 	public static void main(String args[]) {
 		User u = new User();
-		u.setUserID(2);
+		u.setUserID(1);
+		new  GymFlipFitGymOwnerMenu().displayNotifications(u);
 	}
 }
