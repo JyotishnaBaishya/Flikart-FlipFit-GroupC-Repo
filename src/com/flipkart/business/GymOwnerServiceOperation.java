@@ -46,6 +46,37 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
 		return registeredGyms;
 
 	}
+	
+	@Override
+	public void addGymSlot(int gymOwnerID, Scanner sc) {
+		ArrayList<Gym> registeredGyms = gymOwnerService.getRegisteredGyms(gymOwnerID);
+		Gym gym  = null;
+		for(Gym curr : registeredGyms) {
+			if(curr.getGymOwnerID() == gymOwnerID) {
+				gym = curr;
+				break;
+			}
+		}
+		if(gym != null) {
+			System.out.println("\n\n ------ Add the number of slots to be added ------");
+			int numberOfSlots = sc.nextInt();
+			TimeSlotOperation service = new TimeSlotOperation();
+			while(numberOfSlots > 0) {
+				System.out.println("\nEnter the slot hour ");
+				int slotHour = sc.nextInt();
+				boolean isAdded = service.addSlot(slotHour, gym.getGymID(), gym.getNoOfSeats());
+				if(isAdded) {
+					System.out.println("\nSlot Added Successfully");
+				}
+				numberOfSlots--;
+			}
+		}else {
+			System.out.println("Gym not found");
+		}
+		
+		System.out.println("\n\n ------ Exiting slot adding menu ------- ");
+		
+	}
 
 	public static void main(String[] args) {
 
