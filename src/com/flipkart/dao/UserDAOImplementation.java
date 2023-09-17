@@ -37,10 +37,8 @@ public class UserDAOImplementation implements UserDAOInterface{
 		Connection connection = DBConnection.getConnection();
 		if (connection != null) {
 			try {
-				System.out.println("here");
 				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.INSERT_USER);
 				prepareStatement(preparedStatement, user);
-				System.out.println(preparedStatement);
 				rowsUpdated = preparedStatement.executeUpdate();
 			} catch(SQLIntegrityConstraintViolationException e) {
 				System.out.println("This username already exists!!");

@@ -64,7 +64,7 @@ public class GymFlipFitGymOwnerMenu {
 						;
 					}
 				} else {
-					System.out.println("No Gyms registered");
+					System.out.println("No Gyms added/approved yet");
 				}
 
 				break;

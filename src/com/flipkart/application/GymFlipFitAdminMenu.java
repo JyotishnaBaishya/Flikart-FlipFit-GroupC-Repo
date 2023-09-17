@@ -33,7 +33,7 @@ public class GymFlipFitAdminMenu {
 					+ "\nGym Owner Options:\n\t1. View Pending Registration Request" + "\n\t2. Approve/Reject Registration"
 					+ "\n\t3. Approve ALL Pending Registration Requests"
 					+ "\nGym Options: \n\t4. View Pending Gym Registration" + "\n\t5. Approve/Reject Gym Registration"
-					+ "\n\t6. Approve ALL Gym Registration Requests" + "\n7. View all gym owners"+"\n8. Quit" + "\nEnter number between 1-7");
+					+ "\n\t6. Approve ALL Gym Registration Requests" +"\n7. Quit" + "\nEnter number between 1-7");
 			menuOption = in.nextInt();
 			switch (menuOption) {
 			case 1:
@@ -41,7 +41,7 @@ public class GymFlipFitAdminMenu {
 				System.out.println("UserID\tUsername\tAadhar Card #\tGSTIN#");
 				System.out.println("-----------------------------------------------------------");
 				for (GymOwner gymOwner : gymOwnerList) {
-					System.out.println(gymOwner.getUserID() + "\t" + gymOwner.getUserName() + "\t"
+					System.out.println(gymOwner.getUserID() + "\t" + gymOwner.getUserName() + "\t\t"
 							+ gymOwner.getAadharCard() + "\t" + gymOwner.getGstIN());
 				}
 
@@ -93,7 +93,7 @@ public class GymFlipFitAdminMenu {
 				System.out.println("You have selected invalid option please try again!!");
 				break;
 			}
-		} while (menuOption != 8);
+		} while (menuOption != 7);
 
 	}
 
