@@ -40,7 +40,7 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
 	}
 
 	@Override
-	public ArrayList<Gym> viewRegisteredGyms(int gymOwnerID) {
+	public ArrayList<Gym> getRegisteredGyms(int gymOwnerID) {
 		// TODO Auto-generated method stub
 		ArrayList<Gym> registeredGyms = GymDAOImplementation.getInstance().getRegisteredGymsForGymID(gymOwnerID);
 		return registeredGyms;
@@ -57,7 +57,7 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
 		currGym.setNoOfSeats(40);
 		GymOwnerServiceOperation service = new GymOwnerServiceOperation();
 		service.addGymCentre(currGym);
-		ArrayList<Gym> registeredGyms = service.viewRegisteredGyms(2);
+		ArrayList<Gym> registeredGyms = service.getRegisteredGyms(2);
 		int n = registeredGyms.size();
 		if (n > 0) {
 			System.out.println("Displaying registered gyms ");

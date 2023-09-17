@@ -249,17 +249,22 @@ public class GymDAOImplementation implements GymDAOInterface {
 	}
 
 	@Override
-	public Gym viewGym(int gymID) {
+	public Gym getGym(int gymID) {
 		// TODO Auto-generated method stub
 		Connection connection = DBConnection.getConnection();
+		Gym gym = null;
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.WHERE_ID);
-			preparedStatement.setInt(gymID, gymID);
+			preparedStatement.setInt(1, gymID);
 			System.out.println(preparedStatement);
 			ResultSet output = preparedStatement.executeQuery();
+			gym = new Gym();
 			while (output.next()) {
-				System.out.println("\t" + output.getString(1) + "\t " + output.getString(2) + "\t "
-						+ output.getString(3) + "\t " + output.getString(4) + "\t " + output.getString(5));
+				gym.setGymID(output.getInt(1));
+				gym.setGymOwnerID(output.getInt(2));
+				gym.setGymName(output.getString(3));
+				gym.setLocation(output.getString(4));
+				gym.setNoOfSeats(output.getInt(5));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -271,7 +276,7 @@ public class GymDAOImplementation implements GymDAOInterface {
 			e.printStackTrace();
 		}
 
-		return null;
+		return gym;
 	}
 
 	// Driver

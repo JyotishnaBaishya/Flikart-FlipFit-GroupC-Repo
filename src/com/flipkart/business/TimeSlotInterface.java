@@ -7,6 +7,6 @@ public interface TimeSlotInterface {
 
 	public boolean addSlot(int slotHour, int gymID, int availableSeats);
 
-	public boolean updateSlot(int slotHour, int gymID);
+	public boolean updateSlot(int slotHour, int gymID, LocalDate date);
 	
 }

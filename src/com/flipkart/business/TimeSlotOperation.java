@@ -10,9 +10,6 @@ public class TimeSlotOperation implements TimeSlotInterface {
 
 	private static TimeSlotInterface timeSlotServiceObj = null;
 
-	private TimeSlotOperation() {
-	}
-
 	public static synchronized TimeSlotInterface getInstance() {
 		if (timeSlotServiceObj == null)
 			timeSlotServiceObj = new TimeSlotOperation();
@@ -38,8 +35,8 @@ public class TimeSlotOperation implements TimeSlotInterface {
 		slot.setAvailableSeats(availableSeats);
 		slot.setDay(java.time.LocalDate.now());
 		
-		TimeSlotDAOImplementation.getInstance().insertSlot(slot);
-		return false;
+		boolean isAdded = TimeSlotDAOImplementation.getInstance().insertSlot(slot);
+		return isAdded;
 	}
 
 	@Override

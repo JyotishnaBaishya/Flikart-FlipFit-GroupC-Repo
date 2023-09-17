@@ -33,7 +33,7 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 	}
 	
 	@Override
-	public int insertSlot(TimeSlot slot) {
+	public boolean insertSlot(TimeSlot slot) {
 		// TODO Auto-generated method stub
 		
 		int rowsUpdated = 0;
@@ -43,6 +43,7 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.INSERT_TIMESLOT);
 				prepareStatement(preparedStatement, slot);
 				rowsUpdated = preparedStatement.executeUpdate();
+				if(rowsUpdated > 0) return true;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -53,8 +54,7 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("# of DB Rows successfully updated: " + rowsUpdated);
-		return rowsUpdated;
+		return false;
 	}
 	
 	@Override
