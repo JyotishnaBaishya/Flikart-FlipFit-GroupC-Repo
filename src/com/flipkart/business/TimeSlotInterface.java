@@ -1,9 +1,12 @@
 package com.flipkart.business;
 
+import java.time.LocalDate;
+
 public interface TimeSlotInterface {
-	public boolean isAvailable(int slotID, int gymID);
+	public boolean isAvailable(int slotHour, int gymID);
 
-	public boolean addSlot(int slotID, int gymID);
+	public boolean addSlot(int slotHour, int gymID, int availableSeats);
 
-	public boolean updateSlot(int slotID, int gymID);
+	public boolean updateSlot(int slotHour, int gymID);
+	
 }

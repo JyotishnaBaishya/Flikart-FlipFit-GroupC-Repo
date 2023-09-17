@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class TimeSlot {
 	private int slotID;
+	private int slotHour;
 	private int gymID;
 	private int availableSeats;
 	private LocalDate day;
@@ -38,5 +39,13 @@ public class TimeSlot {
 
 	public void setDay(LocalDate day) {
 		this.day = day;
+	}
+
+	public int getSlotHour() {
+		return slotHour;
+	}
+
+	public void setSlotHour(int slotHour) {
+		this.slotHour = slotHour;
 	}
 }

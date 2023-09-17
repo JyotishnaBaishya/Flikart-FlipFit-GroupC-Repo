@@ -18,16 +18,16 @@ public class SqlConstants {
 	public static final String WHERE_GYM_OWNER = SELECT_GYM + " WHERE GYMOWNERID=(?)";
 
 	// TimeSlot
-	public static final String TABLE_TIMESLOT = "TimeSlot";
+	public static final String TABLE_TIMESLOT = "TIMESLOT";
 
-	public static final String INSERT_TIMESLOT = "INSERT INTO " + TABLE_TIMESLOT + " (SLOTID, GYMID, AVAILABLESEATS, DAY) "
+	public static final String INSERT_TIMESLOT = "INSERT INTO " + TABLE_TIMESLOT + " (SLOTHOUR, GYMID, AVAILABLESEATS, DAY) "
 			+ " VALUES (?, ?, ?, ?)";
 
 	public static final String CHECK_TIMESLOT_AVAILABILITY = "SELECT AVAILABLESEATS FROM " + TABLE_TIMESLOT
-			+ " WHERE SLOTID = (?) AND GYMID = (?)";
+			+ " WHERE SLOTHOUR = (?) AND GYMID = (?)";
 
 	public static final String UPDATE_TIMESLOT_AVAILABILITY = "UPDATE " + TABLE_TIMESLOT
-			+ " SET AVAILABLESEATS = AVAILABLESEATS + (?) WHERE SLOTID = (?) AND GYMID = (?)";
+			+ " SET AVAILABLESEATS = AVAILABLESEATS + (?) WHERE SLOTHOUR = (?) AND GYMID = (?)";
 
 	// User
 	public static final String TABLE_USER = "USER";

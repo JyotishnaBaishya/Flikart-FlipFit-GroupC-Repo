@@ -3,13 +3,15 @@
  */
 package com.flipkart.dao;
 
+import java.time.LocalDate;
+
 import com.flipkart.bean.TimeSlot;
 
 /**
  * 
  */
 public interface TimeSlotDAOInterface {
-	public int insert(TimeSlot slot);
-	public int isAvailable(int slotID, int gymID);
-	public int update(int slotID, int gymID, int changeInSeats);
+	public int insertSlot(TimeSlot slot);
+	public int isAvailable(int slotHour, int gymID);
+	public int updateSlot(int slotHour, int gymID, int changeInSeats);
 }

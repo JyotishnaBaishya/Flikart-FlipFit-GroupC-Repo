@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import com.flipkart.bean.TimeSlot;
 import com.flipkart.constants.SqlConstants;
@@ -32,7 +33,7 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 	}
 	
 	@Override
-	public int insert(TimeSlot slot) {
+	public int insertSlot(TimeSlot slot) {
 		// TODO Auto-generated method stub
 		
 		int rowsUpdated = 0;
@@ -57,7 +58,7 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 	}
 	
 	@Override
-	public int isAvailable(int slotID, int gymID) {
+	public int isAvailable(int slotHour, int gymID) {
 		// TODO Auto-generated method stub
 		ResultSet resultSet = null;
 		int availableSeats = 0;
@@ -65,7 +66,7 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 		if (connection != null) {
 			try {
 				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.CHECK_TIMESLOT_AVAILABILITY);
-				preparedStatement.setInt(1, slotID);
+				preparedStatement.setInt(1, slotHour);
 				preparedStatement.setInt(2, gymID);
 				resultSet = preparedStatement.executeQuery();
 				if (resultSet != null) {
@@ -87,7 +88,7 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 	}
 	
 	@Override
-	public int update(int slotID, int gymID, int changeInSeats) {
+	public int updateSlot(int slotHour, int gymID, int changeInSeats) {
 		// TODO Auto-generated method stub
 		int rowsUpdated = 0;
 		Connection connection = DBConnection.getConnection();
@@ -96,7 +97,7 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 			try {
 				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.UPDATE_TIMESLOT_AVAILABILITY);
 				preparedStatement.setInt(1, changeInSeats);
-				preparedStatement.setInt(2, slotID);
+				preparedStatement.setInt(2, slotHour);
 				preparedStatement.setInt(3, gymID);
 				rowsUpdated = preparedStatement.executeUpdate();
 				
@@ -122,7 +123,7 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 	private void prepareStatement(PreparedStatement preparedStatement, TimeSlot slot) {
 		// TODO Auto-generated method stub
 		try {
-			preparedStatement.setInt(1, slot.getSlotID());
+			preparedStatement.setInt(1, slot.getSlotHour());
 			preparedStatement.setInt(2, slot.getGymID());
 			preparedStatement.setInt(3, slot.getAvailableSeats());
 			preparedStatement.setDate(4, Date.valueOf(slot.getDay()));;
@@ -136,13 +137,12 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 	// Driver
 		public static void main(String args[]) {
 			TimeSlotDAOInterface timeSlotDAO = new TimeSlotDAOImplementation();
-//			TimeSlot slot = new TimeSlot();
-//			slot.setSlotID(2);
-//			slot.setGymID(1);
-//			slot.setAvailableSeats(20);
-//			slot.setDay(java.time.LocalDate.now());
-//			
-			System.out.println(timeSlotDAO.update(1, 1, -2));
+			TimeSlot slot = new TimeSlot();
+			slot.setSlotHour(2);
+			slot.setGymID(1);
+			slot.setAvailableSeats(20);
+			slot.setDay(java.time.LocalDate.now());
+			timeSlotDAO.insertSlot(slot);
 		}
 
 	
