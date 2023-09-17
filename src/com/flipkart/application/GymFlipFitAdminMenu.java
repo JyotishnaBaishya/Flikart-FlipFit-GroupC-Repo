@@ -52,7 +52,6 @@ public class GymFlipFitAdminMenu {
 				System.out.println("1. Approve\n2. Reject\nEnter number between 1-2");				
 				int newStatus = in.nextInt();
 				adminService.handleGymOwnerRequest(gymId, newStatus);
-				notificationService.addNotification(null);
 				break;
 			case 3:
 				adminService.approveAllGymOwners();
