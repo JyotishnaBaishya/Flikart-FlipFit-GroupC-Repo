@@ -3,14 +3,9 @@
  */
 package com.flipkart.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymOwner;
-import com.flipkart.business.AdminServiceInterface;
-
 /**
  * 
  */
@@ -58,9 +53,4 @@ public class AdminDAOImplementation implements AdminDAOInterface{
 		
 	}
 	
-	//driver
-	public static void main(String args[]) {
-		new AdminDAOImplementation().getPendingGymOwnerApprovals();
-	}
-
 }

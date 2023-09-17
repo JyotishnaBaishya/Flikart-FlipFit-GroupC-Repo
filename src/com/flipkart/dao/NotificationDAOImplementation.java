@@ -9,10 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.flipkart.bean.Gym;
-import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Notification;
-import com.flipkart.constants.Constants;
 import com.flipkart.constants.SqlConstants;
 import com.flipkart.utils.DBConnection;
 
@@ -103,14 +100,6 @@ public class NotificationDAOImplementation implements NotificationDAOInterface {
 		}
 
 		return notificationList;
-
-	}
-
-	/**
-	 * driver
-	 */
-	public static void main(String[] args) {
-		NotificationDAOImplementation.getInstance().getNotifications(2, Constants.ROLE_GYMOWNER);
 
 	}
 

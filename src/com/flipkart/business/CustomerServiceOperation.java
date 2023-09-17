@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.User;
-import com.flipkart.dao.CutomerDAOImplementation;
+import com.flipkart.dao.CustomerDAOImplementation;
 import com.flipkart.bean.TimeSlot;
 /**
  * @author karan.k2
@@ -25,7 +25,7 @@ public class CustomerServiceOperation implements CustomerServiceInterface {
 	}
 	@Override
 	public Customer viewProfile(User user) {
-		return CutomerDAOImplementation.getInstance().viewProfile(user.getUserName(), user.getPassword());
+		return CustomerDAOImplementation.getInstance().viewProfile(user.getUserName(), user.getPassword());
 	}
 	@Override
 	public boolean bookSlot(int gymID, int slotHour, int customerID) {

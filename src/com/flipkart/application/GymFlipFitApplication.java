@@ -180,6 +180,8 @@ public class GymFlipFitApplication {
 			} else {
 				System.out.println("Please try again!!");
 			}
+		} else {
+			System.out.println("Invalid Credentials Please try again!!");
 		}
 	}
 

@@ -3,8 +3,6 @@
  */
 package com.flipkart.dao;
 
-import java.time.LocalDate;
-
 import com.flipkart.bean.TimeSlot;
 
 /**

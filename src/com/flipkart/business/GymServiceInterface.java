@@ -6,7 +6,7 @@ import com.flipkart.bean.Gym;
 
 public interface GymServiceInterface {
 
-	public Gym viewGym();
+	public Gym viewGym(int gymId);
 
 	public ArrayList<Gym> viewGymList();
 

@@ -8,11 +8,9 @@ package com.flipkart.business;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
-import com.flipkart.constants.Constants;
-import com.flipkart.dao.CutomerDAOImplementation;
+import com.flipkart.dao.CustomerDAOImplementation;
 import com.flipkart.dao.GymOwnerDAOImplementation;
 import com.flipkart.dao.UserDAOImplementation;
-import com.flipkart.dao.UserDAOInterface;
 
 /**
  * 
@@ -54,7 +52,7 @@ public class UserServiceOperation implements UserServiceInterface {
 	@Override
 	public boolean customerRegistration(Customer customer) {
 		// TODO Auto-generated method stub
-		return CutomerDAOImplementation.getInstance().register(customer);
+		return CustomerDAOImplementation.getInstance().register(customer);
 	}
 
 	@Override

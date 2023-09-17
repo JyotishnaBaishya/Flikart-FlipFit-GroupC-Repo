@@ -7,13 +7,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
-import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
-import com.flipkart.business.UserServiceInterface;
-import com.flipkart.business.UserServiceOperation;
 import com.flipkart.constants.Constants;
 import com.flipkart.constants.SqlConstants;
 import com.flipkart.utils.DBConnection;
@@ -101,7 +99,9 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.INSERT_GYM_OWNER);
 				prepareStatement(preparedStatement, gymOwner);
 				rowsUpdated = preparedStatement.executeUpdate();
-			} catch (SQLException e) {
+			} catch(SQLIntegrityConstraintViolationException ex) {
+				System.out.println("Please enter valid details which are not being used in other accounts!!");
+			}catch (SQLException e) {
 				e.printStackTrace();
 			}
 
@@ -227,20 +227,6 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 			}
 		}
 		return pendingGymOwnerList;
-	}
-
-	// Driver
-	public static void main(String args[]) {
-		GymOwnerDAOInterface gymDAO = GymOwnerDAOImplementation.getInstance();
-//		GymOwner gymOwner = new GymOwner();
-//		gymOwner.setUserName("GymOwner2");
-//		gymOwner.setPassword("pass2");
-//		gymOwner.setAadharCard("1234-2345-1233");
-//		gymOwner.setGstIN("22AAAAA0000A1Z6");
-		
-		GymOwner obj = gymDAO.viewProfile("gymowner1", "password");
-		System.out.println(obj.getPanCard());
-
 	}
 
 }

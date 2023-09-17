@@ -8,13 +8,11 @@ import java.util.Scanner;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Notification;
-import com.flipkart.bean.TimeSlot;
 import com.flipkart.bean.User;
 import com.flipkart.business.GymOwnerServiceInterface;
 import com.flipkart.business.GymOwnerServiceOperation;
 import com.flipkart.business.NotificationServiceInterface;
 import com.flipkart.business.NotificationServiceOperation;
-import com.flipkart.business.TimeSlotOperation;
 import com.flipkart.constants.Constants;
 
 /**
@@ -55,13 +53,13 @@ public class GymFlipFitGymOwnerMenu {
 			case 2:
 				ArrayList<Gym> registeredGyms = gymOwnerService.getRegisteredGyms(user.getUserID());
 				int n = registeredGyms.size();
-				
 				if (n > 0) {
 					System.out.println("\n\n ------ Your Registered GYMS ------ ");
+					System.out.println("GymID\tGymName\t\tLocation\tNoOfSeats");
+					System.out.println("-----------------------------------------------------------");
 					for (Gym gym : registeredGyms) {
-						System.out.println("\n\nGymID. " + gym.getGymID() + "\n\nGymOwnerId. " + gym.getGymOwnerID() + "\n\nGym Name. " + gym.getGymName() + "\n\nGym Location. " + gym.getLocation() + "\n\nNumber of Seats "
-								+ gym.getNoOfSeats());
-						;
+						System.out.println(gym.getGymID() + "\t" + gym.getGymName() + "\t\t"
+								+ gym.getLocation()+"\t\t"+gym.getNoOfSeats());
 					}
 				} else {
 					System.out.println("No Gyms added/approved yet");
@@ -98,11 +96,5 @@ public class GymFlipFitGymOwnerMenu {
 				 System.out.println("  - " + notification.getContent());
 			 }
 		 }		
-	}
-	
-	public static void main(String args[]) {
-		User u = new User();
-		u.setUserID(1);
-		new  GymFlipFitGymOwnerMenu().displayNotifications(u);
 	}
 }

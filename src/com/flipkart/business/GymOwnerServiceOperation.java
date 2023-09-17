@@ -8,14 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
-import com.flipkart.constants.Constants;
-import com.flipkart.dao.CutomerDAOImplementation;
 import com.flipkart.dao.GymDAOImplementation;
-import com.flipkart.dao.GymDAOInterface;
 import com.flipkart.dao.GymOwnerDAOImplementation;
 
 public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
@@ -68,52 +64,25 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
 			System.out.println("Add the number of slots to be added");
 			int numberOfSlots = sc.nextInt();
 			TimeSlotOperation service = new TimeSlotOperation();
-			while(numberOfSlots > 0) {
-				System.out.println("\nEnter the slot hour ");
+			for(int i=1; i<=numberOfSlots; i++) {
+				System.out.println("\nEnter the start hour of slot in 24hrs format ("+i+"/"+numberOfSlots+")");
 				int slotHour = sc.nextInt();
 				boolean isAdded = service.addSlot(slotHour, gym.getGymID(), gym.getNoOfSeats());
 				if(isAdded) {
-					System.out.println("\nSlot Added Successfully");
+					System.out.println(i+"th Slot Added Successfully");
 				}
-				numberOfSlots--;
 			}
 		}else {
 			System.out.println("Gym not found");
 		}
 		
-		System.out.println("Exiting slot adding menu");
+		System.out.println("\nExiting slot adding menu");
 		
 	}
 	
 	@Override
 	public GymOwner viewProfile(User user) {
 		return GymOwnerDAOImplementation.getInstance().viewProfile(user.getUserName(), user.getPassword());
-	}
-
-	public static void main(String[] args) {
-
-		Gym currGym = new Gym();
-		currGym.setGymID(1);
-		currGym.setApprovalStatus(Constants.APPROVED);
-		currGym.setGymOwnerID(2);
-		currGym.setLocation("korea");
-		currGym.setNoOfSeats(40);
-		GymOwnerServiceOperation service = new GymOwnerServiceOperation();
-		service.addGymCentre(currGym);
-		ArrayList<Gym> registeredGyms = service.getRegisteredGyms(2);
-		int n = registeredGyms.size();
-		if (n > 0) {
-			System.out.println("Displaying registered gyms ");
-			for (Gym gym : registeredGyms) {
-				if (gym != null) {
-					System.out.println(gym.getGymID() + " " + gym.getGymOwnerID() + " " + gym.getLocation() + " "
-							+ gym.getNoOfSeats());
-				}
-
-			}
-		} else {
-			System.out.println("No Gyms registered");
-		}
 	}
 
 }

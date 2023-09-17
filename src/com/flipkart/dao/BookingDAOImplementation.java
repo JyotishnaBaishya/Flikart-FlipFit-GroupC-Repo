@@ -4,15 +4,12 @@
 package com.flipkart.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.flipkart.bean.Booking;
-import com.flipkart.bean.GymOwner;
-import com.flipkart.constants.Constants;
 import com.flipkart.constants.SqlConstants;
 
 /**
@@ -55,7 +52,6 @@ public class BookingDAOImplementation implements BookingDAOInterface {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("# of DB Rows successfully updated: " + rowsUpdated);
 		return false;
 	}
 	
@@ -83,7 +79,6 @@ public class BookingDAOImplementation implements BookingDAOInterface {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("# of DB Rows successfully deleted: " + rowsUpdated);
 		return false;
 	}
 	
@@ -97,7 +92,7 @@ public class BookingDAOImplementation implements BookingDAOInterface {
 		if (connection != null) {
 			try {
 				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.SELECT_BOOKING);
-				preparedStatement.setInt(1, 1);
+				preparedStatement.setInt(1, customerID);
 				resultSet = DBConnection.executeQuery(preparedStatement);
 				if (resultSet != null) {
 
@@ -125,29 +120,6 @@ public class BookingDAOImplementation implements BookingDAOInterface {
 			}
 		}
 		return bookingList;
-	}
-	
-	// Driver
-	public static void main(String args[]) {
-		
-		BookingDAOInterface bookingDAO = new BookingDAOImplementation();
-		
-		Booking booking = new Booking();
-		
-		booking.setCustomerID(100);
-		booking.setSlotID(200);
-//		System.out.println(bookingDAO.viewBookings(1).size());
-		bookingDAO.insertBooking(booking);
-		
-//		ArrayList<Booking> bL = bookingDAO.viewBookings(1);
-//		System.out.println(bL.size());
-//		
-//		for(Booking booking : bL) {
-//			System.out.println(booking.getBookingID());
-//			System.out.println(booking.getCustomerID());
-//			System.out.println(booking.getSlotID());
-//		}
-		
 	}
 	
 }

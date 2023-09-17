@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 import com.flipkart.bean.User;
-import com.flipkart.constants.Constants;
 import com.flipkart.constants.SqlConstants;
 import com.flipkart.utils.DBConnection;
 

@@ -8,10 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.flipkart.bean.Gym;
-import com.flipkart.bean.GymOwner;
 import com.flipkart.constants.Constants;
 import com.flipkart.constants.SqlConstants;
 import com.flipkart.utils.DBConnection;
@@ -72,13 +70,15 @@ public class GymDAOImplementation implements GymDAOInterface {
 				while (output.next()) {
 					int ID = output.getInt(1);
 					String name = output.getString(2);
-					String location = output.getString(3);
-					int numberOfSeats = output.getInt(4);
-					int isApproved = output.getInt(5);
+					int gymOwnerId = output.getInt(3);
+					String location = output.getString(4);
+					int numberOfSeats = output.getInt(5);
+					int isApproved = output.getInt(6);
 					if (isApproved == Constants.APPROVED) {
 						Gym currGym = new Gym();
 						currGym.setGymID(ID);
 						currGym.setGymName(name);
+						currGym.setGymOwnerID(gymOwnerId);
 						currGym.setApprovalStatus(isApproved);
 						currGym.setLocation(location);
 						currGym.setNoOfSeats(numberOfSeats);
@@ -281,18 +281,6 @@ public class GymDAOImplementation implements GymDAOInterface {
 		}
 
 		return gym;
-	}
-
-	// Driver
-	public static void main(String args[]) {
-		GymDAOInterface gymDAO = new GymDAOImplementation();
-		Gym gym = new Gym();
-		gym.setGymOwnerID(55);
-		gym.setLocation("loc5");
-		gym.setNoOfSeats(20);
-		gym.setApprovalStatus(1);
-		gymDAO.addGymCentre(gym);
-
 	}
 
 }

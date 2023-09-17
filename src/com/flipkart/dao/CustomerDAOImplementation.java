@@ -6,25 +6,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.flipkart.bean.Customer;
-import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
-import com.flipkart.business.UserServiceInterface;
-import com.flipkart.business.UserServiceOperation;
-import com.flipkart.constants.Constants;
 import com.flipkart.constants.SqlConstants;
 import com.flipkart.utils.DBConnection;
 
-public class CutomerDAOImplementation implements CustomerDAOInterface {
+public class CustomerDAOImplementation implements CustomerDAOInterface {
 	
 
 	private static CustomerDAOInterface customerDaoObj = null;
 
-	private CutomerDAOImplementation() {
+	private CustomerDAOImplementation() {
 	}
 
 	public static synchronized CustomerDAOInterface getInstance() {
 		if (customerDaoObj == null)
-			customerDaoObj = new CutomerDAOImplementation();
+			customerDaoObj = new CustomerDAOImplementation();
 
 		return customerDaoObj;
 	}
@@ -133,17 +129,5 @@ public class CutomerDAOImplementation implements CustomerDAOInterface {
 		}
 
 	}
-
-	// Driver
-	public static void main(String args[]) {
-		CustomerDAOInterface custDAO = new CutomerDAOImplementation();
-		Customer customer = new Customer();
-		customer.setUserName("customer4");
-		customer.setPassword("pass");
-		customer.setRole(Constants.ROLE_CUSTOMER);
-		
-		custDAO.insert(customer);
-	}
-
 
 }

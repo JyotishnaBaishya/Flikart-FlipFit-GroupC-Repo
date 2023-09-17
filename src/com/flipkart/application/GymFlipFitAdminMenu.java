@@ -26,8 +26,8 @@ public class GymFlipFitAdminMenu {
 
 	public void displayMenu(User user, Scanner in) {
 		int menuOption = 1;
-		ArrayList<GymOwner> gymOwnerList = new ArrayList();
-		ArrayList<Gym> gymList = new ArrayList();
+		List<GymOwner> gymOwnerList = new ArrayList<GymOwner>();
+		List<Gym> gymList = new ArrayList<Gym>();
 		do {
 			System.out.println("\n\n \033[1m  --------------- Admin Menu Options ---------------\033[0m "
 					+ "\nGym Owner Options:\n\t1. View Pending Registration Request" + "\n\t2. Approve/Reject Registration"

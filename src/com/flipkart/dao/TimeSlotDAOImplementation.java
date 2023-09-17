@@ -137,12 +137,4 @@ public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 		
 	}
 	
-	// Driver
-		public static void main(String args[]) {
-			TimeSlotDAOInterface timeSlotDAO = new TimeSlotDAOImplementation();
-			
-			TimeSlot slot = timeSlotDAO.findSlot(2, 1);
-			System.out.println(slot.getSlotID());
-		}
-	
 }

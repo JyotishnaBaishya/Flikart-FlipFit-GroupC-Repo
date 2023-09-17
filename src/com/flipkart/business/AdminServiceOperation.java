@@ -4,11 +4,9 @@
 package com.flipkart.business;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
-import com.flipkart.dao.AdminDAOImplementation;
 import com.flipkart.dao.GymDAOImplementation;
 import com.flipkart.dao.GymOwnerDAOImplementation;
 
@@ -39,7 +37,7 @@ public class AdminServiceOperation implements AdminServiceInterface {
 				} else {
 					System.out.println("Gym Owner ID " + gymOwnerId + " could not be udpated!");
 				}
-				break;
+				return;
 			}
 		}
 		System.out.println("Gym Owner ID " + gymOwnerId + " could not be found!");

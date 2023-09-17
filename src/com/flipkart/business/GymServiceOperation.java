@@ -3,7 +3,7 @@ package com.flipkart.business;
 import java.util.ArrayList;
 
 import com.flipkart.bean.Gym;
-import com.flipkart.bean.TimeSlot;
+import com.flipkart.dao.GymDAOImplementation;
 
 public class GymServiceOperation implements GymServiceInterface {
 
@@ -20,7 +20,7 @@ public class GymServiceOperation implements GymServiceInterface {
 	}
 
 	@Override
-	public Gym viewGym() {
+	public Gym viewGym(int gymID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -28,7 +28,7 @@ public class GymServiceOperation implements GymServiceInterface {
 	@Override
 	public ArrayList<Gym> viewGymList() {
 		// TODO Auto-generated method stub
-		return null;
+		return GymDAOImplementation.getInstance().getApprovedGymsList();
 	}
 
 }
