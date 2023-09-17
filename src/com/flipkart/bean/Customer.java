@@ -24,7 +24,8 @@ public class Customer extends User{
 	}
 	public void display() {
 		System.out.println("~~~~~~~~~~~~~~Customer Profile~~~~~~~~~~~~~~");
-		System.out.println("Name : "+this.name);
+		System.out.println("Username: "+this.getUserName());
+		System.out.println("Name: "+this.name);
 		System.out.println("Age: "+this.age);
 		System.out.println("Location: "+this.location);
 	}

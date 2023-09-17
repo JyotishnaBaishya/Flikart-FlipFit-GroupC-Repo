@@ -110,12 +110,18 @@ public class GymDAOImplementation implements GymDAOInterface {
 				preparedStatement.setInt(1, gymOwnerID);
 				ResultSet output = preparedStatement.executeQuery();
 				while (output.next()) {
+
 					
 					int ID = output.getInt(1);
 					String gymName = output.getString(2); 
 					String location = output.getString(4);
 					int numberOfSeats = output.getInt(5);
 					int isApproved = output.getInt(6);
+					int ID = output.getInt(1);
+					String gymName = output.getString(2);
+					String location = output.getString(4);
+					int numberOfSeats = output.getInt(5);
+					int isApproved = output.getInt(5);
 					if (isApproved == Constants.APPROVED) {
 						
 						Gym currGym = new Gym();

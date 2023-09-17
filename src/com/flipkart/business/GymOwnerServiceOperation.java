@@ -8,10 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
+import com.flipkart.bean.GymOwner;
+import com.flipkart.bean.User;
 import com.flipkart.constants.Constants;
+import com.flipkart.dao.CutomerDAOImplementation;
 import com.flipkart.dao.GymDAOImplementation;
 import com.flipkart.dao.GymDAOInterface;
+import com.flipkart.dao.GymOwnerDAOImplementation;
 
 public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
 
@@ -78,6 +83,11 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
 		
 		System.out.println("\n\n ------ Exiting slot adding menu ------- ");
 		
+	}
+	
+	@Override
+	public GymOwner viewProfile(User user) {
+		return GymOwnerDAOImplementation.getInstance().viewProfile(user.getUserName(), user.getPassword());
 	}
 
 	public static void main(String[] args) {

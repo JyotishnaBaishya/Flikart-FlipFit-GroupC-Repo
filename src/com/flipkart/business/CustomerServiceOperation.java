@@ -3,6 +3,9 @@ package com.flipkart.business;
 import java.util.ArrayList;
 
 import com.flipkart.bean.Booking;
+import com.flipkart.bean.Customer;
+import com.flipkart.bean.User;
+import com.flipkart.dao.CutomerDAOImplementation;
 
 /**
  * @author karan.k2
@@ -20,7 +23,10 @@ public class CustomerServiceOperation implements CustomerServiceInterface {
 
 		return customerServiceObj;
 	}
-
+	@Override
+	public Customer viewProfile(User user) {
+		return CutomerDAOImplementation.getInstance().viewProfile(user.getUserName(), user.getPassword());
+	}
 	@Override
 	public boolean bookSlot(String gymID, String slotID) {
 		// TODO Auto-generated method stub

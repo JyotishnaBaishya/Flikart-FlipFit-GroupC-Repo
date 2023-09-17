@@ -50,5 +50,12 @@ public class GymOwner extends User {
 	public void setApprovalStatus(int status) {
 		this.approvalStatus = status;
 	}
-
+	
+	public void display() {
+		System.out.println("~~~~~~~~~~~~~~GymOwner Profile~~~~~~~~~~~~~~");
+		System.out.println("Username: "+this.getUserName());
+		System.out.println("Aadhar Card: "+this.aadharCard);
+		System.out.println("Pan Card: "+this.panCard);
+		System.out.println("GSTIN: "+this.gstIN);
+	}
 }

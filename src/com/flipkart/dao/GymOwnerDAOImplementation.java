@@ -196,7 +196,7 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 		if (connection != null) {
 			try {
 				PreparedStatement preparedStatement = connection
-						.prepareStatement(SqlConstants.SELECT_GYM_OWNER + SqlConstants.WHERE_PENDING_APPROVAL_FALSE);
+						.prepareStatement(SqlConstants.JOIN_GYM_OWNER_USER + SqlConstants.WHERE_PENDING_APPROVAL_FALSE);
 				resultSet = preparedStatement.executeQuery();
 				if (resultSet != null) {
 
@@ -205,8 +205,8 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 							GymOwner gymOwner = new GymOwner();
 							gymOwner.setUserID(resultSet.getInt(1));
 							gymOwner.setUserName(resultSet.getString(2));
-							gymOwner.setPassword(resultSet.getString(3));
-							gymOwner.setAadharCard(resultSet.getString(4));
+							gymOwner.setAadharCard(resultSet.getString(3));
+							gymOwner.setPanCard(resultSet.getString(4));
 							gymOwner.setGstIN(resultSet.getString(5));
 							gymOwner.setApprovalStatus(resultSet.getInt(6));
 							gymOwner.setRole(Constants.ROLE_GYMOWNER);
