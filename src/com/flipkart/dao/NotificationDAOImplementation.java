@@ -14,7 +14,7 @@ import com.flipkart.constants.SqlConstants;
 import com.flipkart.utils.DBConnection;
 
 /**
- * 
+ * @author avantika
  */
 public class NotificationDAOImplementation implements NotificationDAOInterface {
 

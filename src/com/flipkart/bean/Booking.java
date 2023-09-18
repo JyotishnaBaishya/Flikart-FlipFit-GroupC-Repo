@@ -1,5 +1,8 @@
 package com.flipkart.bean;
-
+/**
+ * @author jyotishna
+ * 
+ **/
 public class Booking {
 	private int bookingID;
 	private int customerID;

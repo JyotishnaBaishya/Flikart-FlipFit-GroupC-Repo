@@ -1,7 +1,9 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.Customer;
-
+/**
+ * @author rohit.r10
+ */
 public interface CustomerDAOInterface {
 
 

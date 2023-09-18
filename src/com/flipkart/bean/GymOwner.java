@@ -1,5 +1,7 @@
 package com.flipkart.bean;
-
+/**
+ * @author rohit.r10
+ */
 import java.util.ArrayList;
 
 import com.flipkart.constants.Constants;

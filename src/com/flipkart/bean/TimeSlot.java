@@ -1,7 +1,10 @@
 package com.flipkart.bean;
 
 import java.time.LocalDate;
-
+/**
+ * @author jyotishna
+ * 
+ **/
 public class TimeSlot {
 	private int slotID;
 	private int slotHour;

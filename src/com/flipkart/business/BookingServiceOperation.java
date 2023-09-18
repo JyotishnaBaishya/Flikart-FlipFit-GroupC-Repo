@@ -10,8 +10,9 @@ import com.flipkart.bean.TimeSlot;
 import com.flipkart.dao.BookingDAOImplementation;
 import com.flipkart.dao.TimeSlotDAOImplementation;
 /**
+ * @author jyotishna
  * 
- */
+ **/
 public class BookingServiceOperation implements BookingServiceInterface {
 
 	private static BookingServiceInterface bookingServiceObj = null;

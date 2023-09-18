@@ -4,7 +4,7 @@
 package com.flipkart.bean;
 
 /**
- * 
+ * @author rohit.r10
  */
 public class User {
 	private int userID;

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import com.flipkart.bean.Gym;
 
 /**
- * 
+ * @author rohit.r10
  */
 public interface GymDAOInterface {
 	public boolean addGymCentre(Gym gym);

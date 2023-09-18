@@ -6,7 +6,7 @@ package com.flipkart.bean;
 import java.util.Date;
 
 /**
- * 
+ * @author avantika
  */
 public class Notification {
 	String notifID;

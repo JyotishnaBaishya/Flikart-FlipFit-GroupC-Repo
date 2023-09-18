@@ -13,7 +13,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * 
+ * @author avantika
  */
 public class DBConnection {
 	private static Connection connection = null;

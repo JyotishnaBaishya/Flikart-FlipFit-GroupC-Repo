@@ -14,8 +14,9 @@ import com.flipkart.constants.SqlConstants;
 import com.flipkart.utils.DBConnection;
 
 /**
+ * @author jyotishna
  * 
- */
+ **/
 public class BookingDAOImplementation implements BookingDAOInterface {
 
 	private static BookingDAOInterface bookingDaoObj = null;

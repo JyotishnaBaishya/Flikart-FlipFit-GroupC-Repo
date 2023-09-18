@@ -9,7 +9,7 @@ import com.flipkart.bean.Notification;
 import com.flipkart.bean.User;
 
 /**
- * 
+ * @author avantika
  */
 public interface NotificationServiceInterface {
 

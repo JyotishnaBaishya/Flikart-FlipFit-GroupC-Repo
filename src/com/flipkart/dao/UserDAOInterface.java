@@ -6,7 +6,7 @@ package com.flipkart.dao;
 import com.flipkart.bean.User;
 
 /**
- * 
+ * @author rohit.r10
  */
 public interface UserDAOInterface {
 	public int register(User user);

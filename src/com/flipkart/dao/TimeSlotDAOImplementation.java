@@ -1,6 +1,3 @@
-/**
- * jyotishna.baishya
- */
 package com.flipkart.dao;
 
 import java.sql.Connection;
@@ -15,8 +12,9 @@ import com.flipkart.constants.SqlConstants;
 import com.flipkart.utils.DBConnection;
 
 /**
+ * @author jyotishna
  * 
- */
+ **/
 public class TimeSlotDAOImplementation implements TimeSlotDAOInterface {
 
 

@@ -3,7 +3,10 @@ package com.flipkart.dao;
 import java.util.ArrayList;
 
 import com.flipkart.bean.GymOwner;
-
+/**
+ * @author avantika
+ * 
+ **/
 public interface AdminDAOInterface {
 
 	public boolean approveGymOwner();

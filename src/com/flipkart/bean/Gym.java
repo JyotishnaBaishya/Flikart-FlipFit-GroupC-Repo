@@ -1,5 +1,8 @@
 package com.flipkart.bean;
-
+/**
+ * @author jyotishna
+ * 
+ **/
 import com.flipkart.constants.Constants;
 
 public class Gym {

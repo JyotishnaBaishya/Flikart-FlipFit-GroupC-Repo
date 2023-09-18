@@ -1,6 +1,3 @@
-/**
- * jyotishna.baishya
- */
 package com.flipkart.dao;
 
 import java.util.ArrayList;
@@ -8,8 +5,9 @@ import java.util.ArrayList;
 import com.flipkart.bean.TimeSlot;
 
 /**
+ * @author jyotishna
  * 
- */
+ **/
 public interface TimeSlotDAOInterface {
 	public boolean insertSlot(TimeSlot slot);
 	public TimeSlot findSlot(int slotHour, int gymID);

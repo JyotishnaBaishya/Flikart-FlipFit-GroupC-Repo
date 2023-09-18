@@ -5,14 +5,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+/**
+ * @author: avantika
+ */
 public class DBConnection {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost/Flipfit";
 
 	static final String USER = "root";
 
-	static final String PASS = "jyotishna";
+	static final String PASS = "";
 	
 	public static int executeDMLQuery(PreparedStatement statement) {
 		if(statement != null) {

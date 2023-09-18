@@ -9,7 +9,10 @@ import com.flipkart.bean.Customer;
 import com.flipkart.bean.User;
 import com.flipkart.constants.SqlConstants;
 import com.flipkart.utils.DBConnection;
-
+/**
+ * @author rohit.r10
+ * 
+ **/
 public class CustomerDAOImplementation implements CustomerDAOInterface {
 	
 

@@ -3,7 +3,9 @@ package com.flipkart.business;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
-
+/**
+ * @author rohit.r10
+ */
 public interface UserServiceInterface {
 	public boolean customerRegistration(Customer customer);
 	

@@ -1,5 +1,8 @@
 package com.flipkart.constants;
-
+/**
+ * @author avantika
+ * 
+ **/
 public class SqlConstants {
 
 	// Customer

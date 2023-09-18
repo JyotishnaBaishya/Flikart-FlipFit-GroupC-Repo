@@ -4,7 +4,7 @@
 package com.flipkart.exception;
 
 /**
- * 
+ * @author rohit.r10
  */
 public class UsernameAlreadyExistsException extends Exception {
 	public UsernameAlreadyExistsException() {

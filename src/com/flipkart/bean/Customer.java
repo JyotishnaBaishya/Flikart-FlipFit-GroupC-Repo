@@ -1,5 +1,7 @@
 package com.flipkart.bean;
-
+/**
+ * @author rohit.r10
+ */
 public class Customer extends User{
 	private String name;
 	private int age;

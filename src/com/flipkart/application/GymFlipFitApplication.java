@@ -16,7 +16,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * 
+ * @author rohit.r10
  */
 public class GymFlipFitApplication {
 

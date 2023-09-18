@@ -1,5 +1,8 @@
 package com.flipkart.constants;
-
+/**
+ * @author avantika
+ * 
+ **/
 public class Constants {
 	public static final String ROLE_ADMIN = "Admin";
 	public static final String ROLE_CUSTOMER = "Customer";

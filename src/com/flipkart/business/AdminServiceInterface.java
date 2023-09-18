@@ -9,7 +9,7 @@ import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 
 /**
- * @author rohit.r10
+ * @author avantika
  */
 public interface AdminServiceInterface {
 
