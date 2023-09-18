@@ -11,6 +11,8 @@ import com.flipkart.business.GymOwnerServiceOperation;
 import com.flipkart.business.UserServiceInterface;
 import com.flipkart.business.UserServiceOperation;
 import com.flipkart.constants.Constants;
+import com.flipkart.exception.InvalidCredentialsException;
+import com.flipkart.validator.GymOwnerValidator;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -35,13 +37,21 @@ public class GymFlipFitApplication {
 
 				switch (menuOption) {
 				case 1:
-					new GymFlipFitApplication().login(in);
+					try {
+						new GymFlipFitApplication().login(in);
+					}catch(InvalidCredentialsException ex) {
+						System.out.println(ex.getMessage());
+					}
 					break;
 				case 2:
 					new GymFlipFitApplication().register(in);
 					break;
 				case 3:
-					new GymFlipFitApplication().updatePassword(in);
+					try {
+						new GymFlipFitApplication().updatePassword(in);
+					} catch (InvalidCredentialsException ex) {
+						System.out.println(ex.getMessage());
+					}
 					break;
 				case 4:
 					System.out.println("\033[1mExiting Application\033[0m");
@@ -62,7 +72,7 @@ public class GymFlipFitApplication {
 
 	}
 
-	void login(Scanner in) {
+	void login(Scanner in) throws InvalidCredentialsException{
 
 		System.out.println("Please Enter the username");
 		String userName = in.next();
@@ -96,7 +106,7 @@ public class GymFlipFitApplication {
 	
 			}
 		} else {
-			System.out.println("\033[1mCouldn't login please try again!!\033[0m");
+			throw new InvalidCredentialsException();
 		}
 		System.out.println("\033[1mExiting login Menu..\\033[0m");
 	}
@@ -143,15 +153,25 @@ public class GymFlipFitApplication {
 				newGymOwner.setUserName(userName);
 				newGymOwner.setPassword(password);
 				newGymOwner.setRole(Constants.ROLE_GYMOWNER);
-				System.out.println("Please Enter your panCard number");
-				String panCard = in.next();
-				newGymOwner.setPanCard(panCard);
-				System.out.println("Please Enter your aadharCard number");
-				String aadharCard = in.next();
-				newGymOwner.setAadharCard(aadharCard);
-				System.out.println("Please Enter your GstIn number");
-				String GstIn = in.next();
-				newGymOwner.setGstIN(GstIn);
+				String panCard,aadharCard,GstIn;
+				do {
+					System.out.println("Please Enter your panCard number. For ex - ABCTY1234D");
+					panCard = in.next();
+					newGymOwner.setPanCard(panCard);
+				} while(!GymOwnerValidator.isPanCardValid(panCard));
+				
+				do {
+					System.out.println("Please Enter your aadharCard number. For ex - 1234-1234-1234");
+					aadharCard = in.next();
+					newGymOwner.setAadharCard(aadharCard);
+				} while(!GymOwnerValidator.isAadharCardValid(aadharCard));
+				
+				do {
+					System.out.println("Please Enter your GstIn number. For ex - 22AAAAA0000A1Z5");
+					GstIn = in.next();
+					newGymOwner.setGstIN(GstIn);
+					} while(!GymOwnerValidator.isGstInValid(GstIn));
+				
 				if (userService.gymOwnerRegistration(newGymOwner)) {
 					System.out.println("Registration complete");
 				} else {
@@ -164,7 +184,7 @@ public class GymFlipFitApplication {
 
 	}
 
-	void updatePassword(Scanner in) {
+	void updatePassword(Scanner in) throws InvalidCredentialsException {
 		System.out.println("Please enter the username!!");
 		String userName = in.next();
 		System.out.println("Please enter your old password");
@@ -180,7 +200,7 @@ public class GymFlipFitApplication {
 				System.out.println("Please try again!!");
 			}
 		} else {
-			System.out.println("\033[1mInvalid Credentials Please try again!!\033[0m");
+			throw new InvalidCredentialsException();
 		}
 	}
 
