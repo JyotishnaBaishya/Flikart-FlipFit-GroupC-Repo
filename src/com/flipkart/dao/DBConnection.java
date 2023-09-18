@@ -16,6 +16,12 @@ public class DBConnection {
 
 	static final String PASS = "";
 	
+	/**
+	 * Execute the given Update/Delete/Insert Query
+	 * @param statement
+	 * @return
+	 */
+	
 	public static int executeDMLQuery(PreparedStatement statement) {
 		if(statement != null) {
 			try {
@@ -29,6 +35,12 @@ public class DBConnection {
 		return 0;
 	}
 	
+	/**
+	 * Execute the given fetch query
+	 * @param statement
+	 * @return result from the execution
+	 */
+	
 	public static ResultSet executeQuery(PreparedStatement statement) {
 		ResultSet rs=null;
 		try {
@@ -40,7 +52,12 @@ public class DBConnection {
 		
 		return rs;
 	}
-
+	
+	/**
+	 * Create connection 
+	 * @return Connection object
+	 */
+	
 	public static Connection getConnection() {
 		Connection conn = null;
 		try {
