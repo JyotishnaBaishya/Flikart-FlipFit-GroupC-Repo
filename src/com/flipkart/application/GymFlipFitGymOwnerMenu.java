@@ -26,8 +26,8 @@ public class GymFlipFitGymOwnerMenu {
 		displayNotifications(user);
 		int menuOption = 1;
 		do {
-			System.out.println("\n\n ------ Gym Owner Menu Options ------ " + "\n1. Add a new gym Centre"
-					+ "\n2. View Registered Gyms " + "\n3. Register Time Slots " + "\n4. View Profile" +"\n5. Quit");
+			System.out.println("\n\n ------ Gym Owner Menu Options ------ " + "\nPress 1. Add a new gym Centre"
+					+ "\nPress 2. View Registered Gyms " + "\nPress 3. Register Time Slots " + "\nPress 4. View Profile" +"\nPress 5. Quit");
 			menuOption = in.nextInt();
 			switch (menuOption) {
 			case 1:
@@ -45,9 +45,9 @@ public class GymFlipFitGymOwnerMenu {
 				newGym.setGymOwnerID(user.getUserID());
 				boolean res = gymOwnerService.addGymCentre(newGym);
 				if (res) {
-					System.out.println("Gym Request Successfully submitted");
+					System.out.println("\033[1mGym Request Successfully submitted\033[0m");
 				} else {
-					System.out.println("Gym Request failed");
+					System.out.println("\033[1mGym Request failed\033[0m");
 				}
 				break;
 			case 2:
@@ -62,7 +62,7 @@ public class GymFlipFitGymOwnerMenu {
 								+ gym.getLocation()+"\t\t"+gym.getNoOfSeats());
 					}
 				} else {
-					System.out.println("No Gyms added/approved yet");
+					System.out.println("\033[1mNo Gyms added/approved yet\033[0m");
 				}
 
 				break;
@@ -74,10 +74,10 @@ public class GymFlipFitGymOwnerMenu {
 				gymOwnerService.viewProfile(user).display();
 				break;
 			case 5 :
-				System.out.println("You have exited the gymOwner menu");
+				System.out.println("\033[1mYou have exited the gymOwner menu\033[0m");
 				break;
 			default:
-				System.out.println("You have selected invalid option please try again!!");
+				System.out.println("\033[1mYou have selected invalid option please try again!!\033[0m");
 				break;
 
 			}

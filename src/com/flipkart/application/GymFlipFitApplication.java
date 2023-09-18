@@ -29,8 +29,7 @@ public class GymFlipFitApplication {
 		do {
 			System.out.println(
 					"\n\n\033[1m***************** Welcome to FlipFit Gym Slot Booking Application *****************\033[0m");
-			System.out.println("Menu Options: \n1. Login \n2. Register \n3. Update Password \n4. Exit");
-			System.out.println("\nEnter number between 1-4");
+			System.out.println("Menu Options: \nPress 1. Login \nPress 2. Register \nPress 3. Update Password \nPress 4. Exit");
 			try {
 				menuOption = in.nextInt();
 
@@ -45,10 +44,10 @@ public class GymFlipFitApplication {
 					new GymFlipFitApplication().updatePassword(in);
 					break;
 				case 4:
-					System.out.println("Exiting Application");
+					System.out.println("\033[1mExiting Application\033[0m");
 					break;
 				default:
-					System.out.println("Invalid Option Please try again!!");
+					System.out.println("\\033[1mInvalid Option Please try again!!\\033[0m");
 					break;
 
 				}
@@ -86,7 +85,7 @@ public class GymFlipFitApplication {
 					if(isApproved == Constants.APPROVED) {
 						new GymFlipFitGymOwnerMenu().displayMenu(loggedInUser, in);
 					}else {
-						System.out.println("Gym Owner not Approved");
+						System.out.println("\033[1mGym Owner not Approved\033[0m");
 					}
 					
 					break;
@@ -97,18 +96,18 @@ public class GymFlipFitApplication {
 	
 			}
 		} else {
-			System.out.println("Couldn't login please try again!!");
+			System.out.println("\033[1mCouldn't login please try again!!\033[0m");
 		}
-		System.out.println("Exiting login Menu..");
+		System.out.println("\033[1mExiting login Menu..\\033[0m");
 	}
 
 	void register(Scanner in) {
 		System.out.println("\n\n ---------- Please enter the type of user ---------- ");
-		System.out.println("1. Customer \n2. GymOwner" + "\nEnter number between 1-2");
+		System.out.println("Press 1. Customer \nPress 2. GymOwner");
 
 		int userRole = in.nextInt();
 		while (userRole < 1 || userRole > 2) {
-			System.out.println("Invalid type please try again!!");
+			System.out.println("\033[1mInvalid type please try again!!\033[0m");
 			userRole = in.nextInt();
 		}
 		System.out.println("Please Enter the username");
@@ -161,7 +160,7 @@ public class GymFlipFitApplication {
 				break;
 		}
 		
-		System.out.println("Exiting register menu");
+		System.out.println("\033[1mExiting register menu\033[0m");
 
 	}
 
@@ -176,12 +175,12 @@ public class GymFlipFitApplication {
 			System.out.println("Please enter your new Password!!");
 			String newPassword = in.next();
 			if (userService.updatePassword(oldUser, newPassword) != 0) {
-				System.out.println("Password Updated successfully!!");
+				System.out.println("\033[1mPassword Updated successfully!!\033[0m");
 			} else {
 				System.out.println("Please try again!!");
 			}
 		} else {
-			System.out.println("Invalid Credentials Please try again!!");
+			System.out.println("\033[1mInvalid Credentials Please try again!!\033[0m");
 		}
 	}
 

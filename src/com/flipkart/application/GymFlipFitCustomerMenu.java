@@ -26,8 +26,8 @@ public class GymFlipFitCustomerMenu {
 	public void displayMenu(User user, Scanner in) {
 		int menuOption = 1;
 		do {
-			System.out.println("\n\n ------ Customer Menu Options ------ " +"\n1. View available gyms"+"\n2. Book a slot" + "\n3. Cancel Booking "
-					+ "\n4. View my bookings" +"\n5. View Profile" +"\n6. Quit" + "\nEnter number between 1-6");
+			System.out.println("\n\n ------ Customer Menu Options ------ " +"\nPress 1. View available gyms"+"\nPress 2. Book a slot" + "\nPress 3. Cancel Booking "
+					+ "\nPress 4. View my bookings" +"\nPress 5. View Profile" +"\nPress 6. Quit");
 			menuOption = in.nextInt();
 			switch (menuOption) {
 				case 1:
@@ -86,10 +86,10 @@ public class GymFlipFitCustomerMenu {
 					customerService.viewProfile(user).display();
 					break;
 				case 6:
-					System.out.println("You have exited the customer menu");
+					System.out.println("\033[1mYou have exited the customer menu\033[0m");
 					break;
 				default:
-					System.out.println("You have selected invalid option please try again!!");
+					System.out.println("\033[1mYou have selected invalid option please try again!!\\033[0m");
 					break;
 			}
 		} while (menuOption != 6);
