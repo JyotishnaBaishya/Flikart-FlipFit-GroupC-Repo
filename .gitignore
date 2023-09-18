@@ -26,5 +26,8 @@ tmp/
 local.properties
 .loadpath
 .factorypath
-*.DS_Store
 .classpath
+
+# Mac
+.DS_Store
+*.DS_Store
