@@ -70,7 +70,7 @@ public class GymFlipFitCustomerMenu {
 					if(bookingIndex < index)
 						customerService.cancelSlot(bookedSlots.get(bookingIndex-1).getGymID(), bookedSlots.get(bookingIndex-1).getSlotHour(), user.getUserID());
 					else
-						System.out.println("No such booking number exists!");
+						System.out.println("\033[1mNo such booking number exists!\033[0m");
 					break;
 				case 4:
 					bookedSlots = BookingServiceOperation.getInstance().viewBookings(user.getUserID());

@@ -16,7 +16,7 @@ public class SqlConstants {
 	public static final String SELECT_GYM_OWNER = "SELECT * FROM " + TABLE_GYM_OWNER;
 	public static final String UPDATE_APPROVE_OR_REJECT_GYM_OWNER = "UPDATE " + TABLE_GYM_OWNER + " SET ISAPPROVED = ? ";
 	public static final String INSERT_GYM_OWNER = "INSERT INTO " + TABLE_GYM_OWNER
-			+ " (ID, AADHARCARD, PANCARD, GSTIN, ISAPPROVED) " + " VALUES (?, ?, ?, ?, ?)";
+			+ " (ID, AADHARCARD, PANCARD, GSTIN, ISAPPROVED, NAME, ADDRESS, PINCODE) " + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	public static final String JOIN_GYM_OWNER_USER = "SELECT GymOwner.ID, username, aadharcard, pancard, gstin, isApproved\n"
 			+ "FROM GymOwner\n"
 			+ "JOIN User\n"

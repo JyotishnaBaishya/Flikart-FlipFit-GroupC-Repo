@@ -85,11 +85,11 @@ public class GymFlipFitApplication {
 			String userRole = loggedInUser.getRole();
 			switch (userRole) {
 				case Constants.ROLE_ADMIN:
-					System.out.println("Logged In Successfully!!");
+					System.out.println("\033[1mLogged In Successfully!!\033[0m");
 					new GymFlipFitAdminMenu().displayMenu(loggedInUser, in);
 					break;
 				case Constants.ROLE_GYMOWNER:
-					System.out.println("Logged In Successfully!!");
+					System.out.println("\033[1mLogged In Successfully!!\033[0m");
 					GymOwnerServiceInterface gymOwnerServiceOperation = GymOwnerServiceOperation.getInstance();
 					int isApproved = gymOwnerServiceOperation.viewProfile(loggedInUser).getApprovalStatus();
 					if(isApproved == Constants.APPROVED) {
@@ -100,15 +100,15 @@ public class GymFlipFitApplication {
 					
 					break;
 				case Constants.ROLE_CUSTOMER:
-					System.out.println("Logged In Successfully!!");
+					System.out.println("\033[1mLogged In Successfully!!\033[0m");
 					new GymFlipFitCustomerMenu().displayMenu(loggedInUser, in);
 					break;
 	
 			}
 		} else {
 			throw new InvalidCredentialsException();
-		}
-		System.out.println("\033[1mExiting login Menu..\\033[0m");
+		} 
+		System.out.println("\033[1mExiting login Menu..\033[0m");
 	}
 
 	void register(Scanner in) {
@@ -142,7 +142,7 @@ public class GymFlipFitApplication {
 				String location = in.next();
 				customer.setLocation(location);
 				if(userService.customerRegistration(customer)) {
-					System.out.println("Registration complete");
+					System.out.println("\033[1mRegistration complete\033[0m");
 				} else {
 					System.out.println("Please try again!!");
 				}
@@ -153,6 +153,15 @@ public class GymFlipFitApplication {
 				newGymOwner.setUserName(userName);
 				newGymOwner.setPassword(password);
 				newGymOwner.setRole(Constants.ROLE_GYMOWNER);
+				System.out.println("Please enter your name");
+				name = in.next();
+				newGymOwner.setName(name);
+				System.out.println("Please enter your address");
+				String address = in.next();
+				newGymOwner.setAddress(address);
+				System.out.println("Please enter your PIN code");
+				String pinCode = in.next();
+				newGymOwner.setPINCode(pinCode);
 				String panCard,aadharCard,GstIn;
 				do {
 					System.out.println("Please Enter your panCard number. For ex - ABCTY1234D");
@@ -171,9 +180,8 @@ public class GymFlipFitApplication {
 					GstIn = in.next();
 					newGymOwner.setGstIN(GstIn);
 					} while(!GymOwnerValidator.isGstInValid(GstIn));
-				
 				if (userService.gymOwnerRegistration(newGymOwner)) {
-					System.out.println("Registration complete");
+					System.out.println("\033[1mRegistration complete\033[0m");
 				} else {
 					System.out.println("Please try again!!");
 				}

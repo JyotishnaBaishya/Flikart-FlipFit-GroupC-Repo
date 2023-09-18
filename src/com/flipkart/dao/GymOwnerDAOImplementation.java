@@ -74,6 +74,12 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 						 gymOwner.setGstIN(gstIn);
 						 int isApproved = rs.getInt("isApproved");
 						 gymOwner.setApprovalStatus(isApproved);
+						 String name = rs.getString("name");
+						 gymOwner.setName(name);
+						 String address = rs.getString("address");
+						 gymOwner.setAddress(address);
+						 String pinCode = rs.getString("pincode");
+						 gymOwner.setPINCode(pinCode);
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -121,6 +127,9 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 			preparedStatement.setString(3, gymOwner.getPanCard());
 			preparedStatement.setString(4, gymOwner.getGstIN());
 			preparedStatement.setInt(5, 0);
+			preparedStatement.setString(6,gymOwner.getName());
+			preparedStatement.setString(7,gymOwner.getAddress());
+			preparedStatement.setString(8,gymOwner.getPINCode());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

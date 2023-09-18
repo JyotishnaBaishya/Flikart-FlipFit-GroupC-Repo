@@ -23,7 +23,7 @@ public class GymFlipFitAdminMenu {
 	AdminServiceInterface adminService = AdminServiceOperation.getInstance();
 	NotificationServiceInterface notificationService = NotificationServiceOperation.getInstance();
 	List<GymOwner> pendingGymOwnerApprovals = new ArrayList<GymOwner>();
-
+	
 	public void displayMenu(User user, Scanner in) {
 		int menuOption = 1;
 		List<GymOwner> gymOwnerList = new ArrayList<GymOwner>();
@@ -87,7 +87,7 @@ public class GymFlipFitAdminMenu {
 				break;
 
 			case 7:
-				System.out.println("\\033[1m Exiting Admin Menu.. \\033[0m");
+				System.out.println("\033[1m Exiting Admin Menu.. \033[0m");
 				break;
 			default:
 				System.out.println("You have selected invalid option please try again!!");

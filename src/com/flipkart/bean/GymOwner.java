@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import com.flipkart.constants.Constants;
 
 public class GymOwner extends User {
+	private String name;
+	private String pinCode;
+	private String address;
 	private String aadharCard;
 	private String panCard;
 	private String gstIN;
@@ -56,8 +59,35 @@ public class GymOwner extends User {
 	public void display() {
 		System.out.println("~~~~~~~~~~~~~~GymOwner Profile~~~~~~~~~~~~~~");
 		System.out.println("Username: "+this.getUserName());
+		System.out.println("Name: "+this.getName());
+		System.out.println("Address: "+this.getAddress());
+		System.out.println("PIN Code: "+this.getPINCode());
 		System.out.println("Aadhar Card: "+this.aadharCard);
 		System.out.println("Pan Card: "+this.panCard);
 		System.out.println("GSTIN: "+this.gstIN);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPINCode() {
+		return pinCode;
+	}
+
+	public void setPINCode(String pinCode) {
+		this.pinCode = pinCode;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }

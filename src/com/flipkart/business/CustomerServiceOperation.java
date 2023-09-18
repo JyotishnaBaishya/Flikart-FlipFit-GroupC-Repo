@@ -35,10 +35,10 @@ public class CustomerServiceOperation implements CustomerServiceInterface {
 				TimeSlotOperation.getInstance().updateSlot(slotHour, gymID, -1);
 			}
 			BookingServiceOperation.getInstance().addBooking(slot.getSlotID(), customerID);
-			System.out.println("You have succesfully booked your slot.");
+			System.out.println("\033[1mYou have succesfully booked your slot.\033[0m");
 			return true;
 		}
-		System.out.println("Slot Unavailable!");
+		System.out.println("\033[1mSlot Unavailable!\033[0m");
 		return false;
 	}
 
@@ -49,11 +49,11 @@ public class CustomerServiceOperation implements CustomerServiceInterface {
 		if(slot!=null) {
 			if(BookingServiceOperation.getInstance().removeBooking(slot.getSlotID(), customerID)) {
 				TimeSlotOperation.getInstance().updateSlot(slotHour, gymID, 1);
-				System.out.println("You have succesfully cancelled your booking.");
+				System.out.println("\033[1mYou have succesfully cancelled your booking.\033[0m");
 				return true;
 			}
 			else {
-				System.out.println("Booking not found.");
+				System.out.println("\033[1mBooking not found.\033[0m");
 				return false;
 			}
 		}
