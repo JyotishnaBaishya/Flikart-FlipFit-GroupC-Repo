@@ -40,10 +40,8 @@ public class GymFlipFitAdminMenu {
 				gymOwnerList = adminService.getPendingGymOwnerApprovals();
 				System.out.println("UserID\tUsername\tAadhar Card #\tGSTIN#");
 				System.out.println("-----------------------------------------------------------");
-				for (GymOwner gymOwner : gymOwnerList) {
-					System.out.println(gymOwner.getUserID() + "\t" + gymOwner.getUserName() + "\t\t"
-							+ gymOwner.getAadharCard() + "\t" + gymOwner.getGstIN());
-				}
+				gymOwnerList.forEach(gymOwner -> System.out.println(gymOwner.getUserID() + "\t" + gymOwner.getUserName() + "\t\t"
+						+ gymOwner.getAadharCard() + "\t" + gymOwner.getGstIN()));
 
 				break;
 			case 2:
@@ -60,9 +58,8 @@ public class GymFlipFitAdminMenu {
 				gymList = adminService.getPendingGymRegistrationRequests();
 				System.out.println("GymID\tName\tLocation\t# of seats");
 				System.out.println("-----------------------------------------------------------");
-				for (Gym gym : gymList) {
-					System.out.println(gym.getGymID() + "\t" + gym.getGymName()+ "\t" + gym.getLocation() + "\t\t" + gym.getNoOfSeats());
-				}
+				gymList.forEach(gym -> System.out.println(gym.getGymID() + "\t" + gym.getGymName()+ "\t" + gym.getLocation() + "\t\t" + gym.getNoOfSeats()));
+
 				break;
 			case 5:
 				System.out.println("Enter gym id");

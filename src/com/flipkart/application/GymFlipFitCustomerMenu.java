@@ -4,6 +4,7 @@
 package com.flipkart.application;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.flipkart.bean.Gym;
@@ -33,16 +34,21 @@ public class GymFlipFitCustomerMenu {
 				case 1:
 					System.out.println("GymID\tGymName\t\tLocation");
 					System.out.println("-----------------------------------------------------------");
-					for (Gym gym : gymService.viewGymList()) {
-						System.out.println(gym.getGymID() + "\t" + gym.getGymName() + "\t\t"
-								+ gym.getLocation());
-					}
+					
+					gymService.viewGymList().forEach(gym -> System.out.println(gym.getGymID() + "\t" + gym.getGymName() + "\t\t"
+								+ gym.getLocation()));
+					
+//					for (Gym gym : gymService.viewGymList()) {
+//						System.out.println(gym.getGymID() + "\t" + gym.getGymName() + "\t\t"
+//								+ gym.getLocation());
+//					}
 					break;
 				case 2:
 					ArrayList<TimeSlot> slots = TimeSlotOperation.getInstance().getAllAvailableSlots();
 					System.out.println("\n********************* Available Slots ****************\n");
 					System.out.println("Slot No.\tTimings(24hrs)\t\tGymID\n------------------------------------------------------");
 					int index = 1;
+										
 					for(TimeSlot slot: slots) {
 						System.out.println(index+"\t\t"+slot.getSlotHour()+":00-"+(slot.getSlotHour()+1)+":00"+"\t\t"+slot.getGymID());
 						index++;
@@ -61,6 +67,7 @@ public class GymFlipFitCustomerMenu {
 					System.out.println("\n********************* Your Bookings ****************\n");
 					System.out.println("Booking No.\tTimings(24hrs)\t\tGymID\n------------------------------------------------------");
 					index = 1;
+//					bookedSlots.forEach();
 					for(TimeSlot slot: bookedSlots) {
 						System.out.println(index+"\t\t"+slot.getSlotHour()+":00-"+(slot.getSlotHour()+1)+":00"+"\t\t"+slot.getGymID());
 						index++;

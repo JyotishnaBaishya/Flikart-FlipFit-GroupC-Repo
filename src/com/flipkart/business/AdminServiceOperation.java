@@ -29,18 +29,20 @@ public class AdminServiceOperation implements AdminServiceInterface {
 
 	@Override
 	public void handleGymOwnerRequest(int gymOwnerId, int status) {
-		for (GymOwner owner : getPendingGymOwnerApprovals()) {
-			if (owner.getUserID() == gymOwnerId) {
-				int flag = GymOwnerDAOImplementation.getInstance().handleGymOwnerRequest(gymOwnerId, status);
-				if (flag > 0) {
-					System.out.println("Gym Owner ID " + gymOwnerId + " updated!");
-				} else {
-					System.out.println("Gym Owner ID " + gymOwnerId + " could not be udpated!");
-				}
-				return;
-			}
+		
+		boolean gymIdExists = false;
+		
+		gymIdExists = getPendingGymOwnerApprovals().stream().filter(owner -> owner.getUserID() == (gymOwnerId)).count() > 0;
+		
+		if(!gymIdExists) { System.out.println("Gym Owner ID " + gymOwnerId + " could not be found!") ; return;}
+			
+		int flag = GymOwnerDAOImplementation.getInstance().handleGymOwnerRequest(gymOwnerId, status);
+		
+		if (flag > 0) {
+			System.out.println("Gym Owner ID " + gymOwnerId + " updated!");
+		} else {
+			System.out.println("Gym Owner ID " + gymOwnerId + " could not be udpated!");
 		}
-		System.out.println("Gym Owner ID " + gymOwnerId + " could not be found!");
 	}
 
 	@Override
