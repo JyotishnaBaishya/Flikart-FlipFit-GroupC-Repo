@@ -75,7 +75,7 @@ public class GymFlipFitCustomerMenu {
 				case 4:
 					bookedSlots = BookingServiceOperation.getInstance().viewBookings(user.getUserID());
 					System.out.println("\n********************* Your Bookings ****************\n");
-					System.out.println("Slot No.\tTimings(24hrs)\t\tGymID\n------------------------------------------------------");
+					System.out.println("Booking No.\tTimings(24hrs)\t\tGymID\n------------------------------------------------------");
 					index = 1;
 					for(TimeSlot slot: bookedSlots) {
 						System.out.println(index+"\t\t"+slot.getSlotHour()+":00-"+(slot.getSlotHour()+1)+":00"+"\t\t"+slot.getGymID());
