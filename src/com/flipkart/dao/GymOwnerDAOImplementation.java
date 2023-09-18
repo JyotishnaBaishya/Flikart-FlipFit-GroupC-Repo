@@ -218,6 +218,9 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface {
 							gymOwner.setPanCard(resultSet.getString(4));
 							gymOwner.setGstIN(resultSet.getString(5));
 							gymOwner.setApprovalStatus(resultSet.getInt(6));
+							gymOwner.setName(resultSet.getString(7));
+							gymOwner.setAddress(resultSet.getString(8));
+							gymOwner.setPINCode(resultSet.getString(9));
 							gymOwner.setRole(Constants.ROLE_GYMOWNER);
 							pendingGymOwnerList.add(gymOwner);
 						}

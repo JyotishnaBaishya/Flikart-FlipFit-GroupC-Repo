@@ -38,10 +38,12 @@ public class GymFlipFitAdminMenu {
 			switch (menuOption) {
 			case 1:
 				gymOwnerList = adminService.getPendingGymOwnerApprovals();
-				System.out.println("UserID\tUsername\tAadhar Card #\tGSTIN#");
-				System.out.println("-----------------------------------------------------------");
+				System.out.println("UserID\tUsername\tName\tAadhar Card #\tGSTIN#\t\t\tPAN Card\tAddress\t\tPincode");
+				System.out.println("---------------------------------------------------------------------------------------------------");
 				gymOwnerList.forEach(gymOwner -> System.out.println(gymOwner.getUserID() + "\t" + gymOwner.getUserName() + "\t\t"
-						+ gymOwner.getAadharCard() + "\t" + gymOwner.getGstIN()));
+							+gymOwner.getName() + "\t" + gymOwner.getAadharCard() + "\t" + gymOwner.getGstIN()
+							+ "\t\t" + gymOwner.getPanCard()+ "\t" + gymOwner.getAddress()
+							+ "\t" + gymOwner.getPINCode()));
 
 				break;
 			case 2:
