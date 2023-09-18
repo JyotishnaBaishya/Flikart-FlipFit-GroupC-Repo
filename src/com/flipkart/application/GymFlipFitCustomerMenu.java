@@ -6,7 +6,6 @@ package com.flipkart.application;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.flipkart.bean.Booking;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.TimeSlot;
 import com.flipkart.bean.User;
@@ -41,13 +40,15 @@ public class GymFlipFitCustomerMenu {
 					break;
 				case 2:
 					ArrayList<TimeSlot> slots = TimeSlotOperation.getInstance().getAllAvailableSlots();
-					System.out.println("Slot No.\t\tSlotHour\t\tGymID\n-----------------------------------");
+					System.out.println("\n********************* Available Slots ****************\n");
+					System.out.println("Slot No.\tSlotHour\t\tGymID");
+					System.out.println("-----------------------------------------------------------\n");
 					int index = 1;
 					for(TimeSlot slot: slots) {
 						System.out.println(index+"\t\t"+slot.getSlotHour()+"\t\t"+slot.getGymID());
 						index++;
 					}
-					System.out.println("Please enter the slot number you want to book");
+					System.out.println("\nPlease enter the slot number you want to book");
 					int slotIndex = in.nextInt();
 					if(slotIndex < index) {
 						customerService.bookSlot(slots.get(slotIndex-1).getGymID(), slots.get(slotIndex-1).getSlotHour(), user.getUserID());
@@ -58,13 +59,15 @@ public class GymFlipFitCustomerMenu {
 					break;
 				case 3:
 					ArrayList<TimeSlot> bookedSlots = BookingServiceOperation.getInstance().viewBookings(user.getUserID());
-					System.out.println("Slot No.\t\tSlotHour\t\tGymID\n-----------------------------------");
+					System.out.println("\n********************* Your Bookings ****************\n");
+					System.out.println("Booking No.\tSlotHour\t\tGymID");
+					System.out.println("-----------------------------------------------------------\n");
 					index=1;
 					for(TimeSlot slot: bookedSlots) {
 						System.out.println(index+"\t\t"+slot.getSlotHour()+"\t\t"+slot.getGymID());
 						index++;
 					}
-					System.out.println("Please enter the booking to be cancelled");
+					System.out.println("\nPlease enter the booking to be cancelled");
 					int bookingIndex = in.nextInt();
 					if(bookingIndex < index)
 						customerService.cancelSlot(bookedSlots.get(bookingIndex-1).getGymID(), bookedSlots.get(bookingIndex-1).getSlotHour(), user.getUserID());
@@ -73,8 +76,9 @@ public class GymFlipFitCustomerMenu {
 					break;
 				case 4:
 					bookedSlots = BookingServiceOperation.getInstance().viewBookings(user.getUserID());
-					System.out.println(bookedSlots.size());
-					System.out.println("Slot No.\t\tSlotHour\t\tGymID\n-----------------------------------");
+					System.out.println("\n********************* Your Bookings ****************\n");
+					System.out.println("Booking No.\tSlotHour\t\tGymID");
+					System.out.println("-----------------------------------------------------------\n");
 					index=1;
 					for(TimeSlot slot: bookedSlots) {
 						System.out.println(index+"\t\t"+slot.getSlotHour()+"\t\t"+slot.getGymID());

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import com.flipkart.bean.Booking;
 import com.flipkart.constants.SqlConstants;
+import com.flipkart.utils.DBConnection;
 
 /**
  * 
@@ -40,7 +41,7 @@ public class BookingDAOImplementation implements BookingDAOInterface {
 				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.INSERT_BOOKING);
 				preparedStatement.setInt(1, booking.getSlotID());
 				preparedStatement.setInt(2, booking.getCustomerID());
-				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
+				rowsUpdated = preparedStatement.executeUpdate();
 				if (rowsUpdated > 0) return true;
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -67,7 +68,7 @@ public class BookingDAOImplementation implements BookingDAOInterface {
 				preparedStatement.setInt(1, slotID);
 				preparedStatement.setInt(2, customerID);
 				
-				rowsUpdated = DBConnection.executeDMLQuery(preparedStatement);
+				rowsUpdated = preparedStatement.executeUpdate();
 				if(rowsUpdated > 0) return true;
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -93,7 +94,7 @@ public class BookingDAOImplementation implements BookingDAOInterface {
 			try {
 				PreparedStatement preparedStatement = connection.prepareStatement(SqlConstants.SELECT_BOOKING);
 				preparedStatement.setInt(1, customerID);
-				resultSet = DBConnection.executeQuery(preparedStatement);
+				resultSet = preparedStatement.executeQuery();
 				if (resultSet != null) {
 
 					try {
