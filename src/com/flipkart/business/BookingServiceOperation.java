@@ -43,6 +43,7 @@ public class BookingServiceOperation implements BookingServiceInterface {
 		// TODO Auto-generated method stub
 		ArrayList<Booking> bookings = BookingDAOImplementation.getInstance().viewBookings(customerID);
 		ArrayList<TimeSlot> slots = new ArrayList<TimeSlot>();
+		
 		for(Booking booking: bookings) {
 			TimeSlot slot = TimeSlotDAOImplementation.getInstance().getSlotByID(booking.getSlotID());
 			slots.add(slot);

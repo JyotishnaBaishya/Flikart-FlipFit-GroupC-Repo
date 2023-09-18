@@ -51,15 +51,18 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface {
 	@Override
 	public void addGymSlot(int gymOwnerID, Scanner sc) {
 		ArrayList<Gym> registeredGyms = getRegisteredGyms(gymOwnerID);
-		Gym gym  = null;
 		System.out.println("Enter the GymID where to want to register slots");
 		int gymID = sc.nextInt();
-		for(Gym curr : registeredGyms) {
-			if(curr.getGymID() == gymID) {
-				gym = curr;
-				break;
-			}
-		}
+		Gym gym = registeredGyms.stream().filter(curr -> curr.getGymID() == gymID).findAny().orElse(null);
+
+//		for(Gym curr : registeredGyms) {
+//			if(curr.getGymID() == gymID) {
+//				gym = curr;
+//				break;
+//			}
+//		}
+		
+		
 		if(gym != null) {
 			System.out.println("Add the number of slots to be added");
 			int numberOfSlots = sc.nextInt();

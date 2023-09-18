@@ -57,10 +57,12 @@ public class GymFlipFitGymOwnerMenu {
 					System.out.println("\n\n ------ Your Registered GYMS ------ ");
 					System.out.println("GymID\tGymName\t\tLocation\tNoOfSeats");
 					System.out.println("-----------------------------------------------------------");
-					for (Gym gym : registeredGyms) {
-						System.out.println(gym.getGymID() + "\t" + gym.getGymName() + "\t\t"
-								+ gym.getLocation()+"\t\t"+gym.getNoOfSeats());
-					}
+					registeredGyms.forEach(gym -> System.out.println(gym.getGymID() + "\t" + gym.getGymName() + "\t\t"
+								+ gym.getLocation()+"\t\t"+gym.getNoOfSeats()));
+//					for (Gym gym : registeredGyms) {
+//						System.out.println(gym.getGymID() + "\t" + gym.getGymName() + "\t\t"
+//								+ gym.getLocation()+"\t\t"+gym.getNoOfSeats());
+//					}
 				} else {
 					System.out.println("\033[1mNo Gyms added/approved yet\033[0m");
 				}
@@ -92,9 +94,10 @@ public class GymFlipFitGymOwnerMenu {
 		 if(notificationList != null && !notificationList.isEmpty()) {
 			 System.out.println(
 						"\n\n\033[1m\t~~~~~~~~ You have " + notificationList.size() + " new notification(s) ~~~~~~~~ \033[0m");
-			 for(Notification notification : notificationList) {
-				 System.out.println("  - " + notification.getContent());
-			 }
+			 notificationList.forEach(notification -> System.out.println("  - " + notification.getContent()));
+//			 for(Notification notification : notificationList) {
+//				 ;
+//			 }
 		 }		
 	}
 }
